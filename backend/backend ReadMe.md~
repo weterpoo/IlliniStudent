@@ -3,12 +3,4 @@ To do:
     1. Implement mysql to python (find a way to read/write to a mysql database)
     2. Implement flask to be able to spit out an api.
     3. Figure out a way to parse webpages to obtain information.
-Required modules:
-    1. To be able to contribute you need to install
-        - python-mysqldb
-        - mysql-server
-	- flask
-	- virtualenv
-	- nosetests
-    2. Python 2.7.9
 
