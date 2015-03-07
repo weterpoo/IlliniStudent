@@ -10,7 +10,7 @@
        - python-mysqldb
        - nose (aka nosetests)
        - flask
-       * Note: You might only need to install virtualenv, mysql-server. Try to activate         the venv in the backend directory, then install packages. 
+       * Note: You might only need to install virtualenv, mysql-server. Try to activate the venv in the backend directory, then install packages. 
     2. Python 2.7.x
 
 #To start developing:
