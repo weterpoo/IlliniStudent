@@ -1,6 +1,0 @@
-# IlliniStudent Backend
-To do:
-    1. Implement mysql to python (find a way to read/write to a mysql database)
-    2. Implement flask to be able to spit out an api.
-    3. Figure out a way to parse webpages to obtain information.
-
