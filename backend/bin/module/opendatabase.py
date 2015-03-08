@@ -32,3 +32,14 @@ class ManageTable(object):
             for elements in val:
                 command = "INSERT INTO %s(%s) VALUES(%s)" % (tbl, var, elements)
                 cur.execute(command)
+
+    def retrieve(self, tbl):
+        """Obtains data from database as a dictionary format"""
+        with self.con:
+            cur = self.con.cursor(mdb.cursors.DictCursor)
+
+            cur.execute('SELECT * FROM %s' % (tbl))
+            datadict = cur.fetchall()
+            
+            return datadict
+            
