@@ -1,0 +1,6 @@
+To get MySQLdb to work...
+$ sudo apt-get install python-dev
+$ sudo apt-get install libmysqlclient-dev
+$ pip install mysql-python
+
+
