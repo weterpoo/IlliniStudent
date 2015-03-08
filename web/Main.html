@@ -28,10 +28,24 @@
 
     $('#calendar').fullCalendar({
         // put your options and callbacks here
+        events:[
+            {
+                title:'CS125 MP4',
+                start:'2015-03-09'
+            }
+        ]
+        
+        
     })
 
     });
     </script>
+    <script src="js/todoList.js"></script>
+    
+    
+
+   
+   
     
     
 </head>
@@ -57,10 +71,18 @@
     
     <div id='calendar'></div>
     
+      
+    
     <div class="page-header">
     <h2 align="middle">Tasks</h2>
      </div>
     <div class="container"></div>
+     
+<div id="demo" class="col-sm-4 col-sm-offset-4" style="font-size:18px"></div>
+ <script type="text/javascript">
+    $("#demo").todoList({
+  
+    });</script>
     <br><br><br><br><br>
     <br><br><br><br><br>
     <br><br><br><br><br>
