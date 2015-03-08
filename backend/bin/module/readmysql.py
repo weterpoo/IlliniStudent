@@ -56,18 +56,60 @@ def retrieve_data_row():
             row = cur.fetchone()
             print row[0], row[1]
         
+def dictionary_cursor():
+    con = mdb.connect('localhost', 'testuser', 'test623', 'testdb')
+
+    with con:
+
+        cur = con.cursor(mdb.cursors.DictCursor)
+        cur.execute('SELECT * FROM Writers LIMIT 4')
+
+        rows = cur.fetchall()
+
+        for row in rows:
+            # print row["Id"], row["Name"]
+            # Just in case there is an error...
+            print row.get('Id'), row.get('Name')
+
+def column_headers():
+    con = mdb.connect('localhost', 'testuser', 'test623', 'testdb')
+
+    with con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM Writers LIMIT 5")
+
+        rows = cur.fetchall()
+
+        desc = cur.description
+
+        print "%s %3s" % (desc[0][0], desc[1][0])
+
+        for row in rows:
+            print "%2s %3s" % row
+
+def print_newline():
+    print "\n"
+            
 if __name__ == '__main__':
     print "Retriving Version....\n"
     obtain_version()
-    print "\n"
+    print_newline()
 
     print "Filling MySQL Database with sample data...\n"
     fill_sample_data()
 
     print "Now retrieving ALL of the data at once... \n"
     retrieve_data_all()
-    print "\n"
+    print_newline()
 
     print "Now retrieving the data ONE BY ONE...\n"
     retrieve_data_row()
-    print "\n"
+    print_newline()
+
+    print "Fetching Data using Dictionaries...\n"
+    dictionary_cursor()
+    print_newline()
+
+    print "Fetching Column Headers...\n"
+    column_headers()
+    print_newline()
