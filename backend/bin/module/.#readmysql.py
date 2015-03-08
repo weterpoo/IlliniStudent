@@ -1,1 +1,0 @@
-shotaro@shotaro-ThinkPad-T400.2292:1425842001
