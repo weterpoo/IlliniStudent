@@ -2,7 +2,6 @@ import MySQLdb as mdb
 
 
 class ManageTable(object):
-    """Creates a test table, only to be used for demo purposes"""
 
     def __init__(self, net_loc, user, password, db):
         """Initialize which user to login as"""
