@@ -19,5 +19,3 @@
        - $ source venv/bin/activate
 
        - to deactivate the venv: $ deactivate
-
-
