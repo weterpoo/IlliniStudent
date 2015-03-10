@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Test Database Output</title>
+  </head>
+  <body>
+    <table style="width=100%">
+      <tr>
+        <th>Number</th>
+        <th>Assignment Name</th>
+        <th>Class</th>
+        <th>Due Date</th>
+        <th>Due Time</th>
+      </tr>
+    {% for num, assign_name, class, dued, duet in output %}
+        <tr>
+          <td>{{ num }}</td>
+          <td>{{ assign_name }}</td>
+          <td>{{ class }}</td>
+          <td>{{ dued }}</td>
+          <td>{{ duet }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+  </body>
+</html>

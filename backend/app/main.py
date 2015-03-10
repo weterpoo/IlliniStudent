@@ -1,4 +1,4 @@
-from module.opendatabase import ManageTable
+from app.module.opendatabase import ManageTable
 
 db = ManageTable('localhost', 'testuser', 'test623', 'testdb')
 
@@ -16,6 +16,8 @@ def initialize():
 
 def main():
     initialize()
+    return db.retrieve('IlliniTest')
+
 
 if __name__ == '__main__':
     main()
