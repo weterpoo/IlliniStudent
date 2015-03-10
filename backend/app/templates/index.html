@@ -11,9 +11,8 @@
         <th>Due Date</th>
         <th>Due Time</th>
       </tr>
-    {% for num, assign_name, class, dued, duet in output %}
+    {% for assign_name, class, dued, duet in output %}
         <tr>
-          <td>{{ num }}</td>
           <td>{{ assign_name }}</td>
           <td>{{ class }}</td>
           <td>{{ dued }}</td>

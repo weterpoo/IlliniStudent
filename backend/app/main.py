@@ -16,7 +16,7 @@ def initialize():
 
 def main():
     initialize()
-    output = enumerate(db.retrieve('IlliniTest')
+    output = db.retrieve('IlliniTest')
     return output
 
 
