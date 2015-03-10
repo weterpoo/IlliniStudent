@@ -16,7 +16,8 @@ def initialize():
 
 def main():
     initialize()
-    return db.retrieve('IlliniTest')
+    output = enumerate(db.retrieve('IlliniTest')
+    return output
 
 
 if __name__ == '__main__':
