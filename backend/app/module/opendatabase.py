@@ -11,6 +11,7 @@ class ManageTable(object):
         """Initialize a table with certain elements"""
         with self.con:
 
+            # Edit it so that it doesn't delete the table
             cur = self.con.cursor()
             command = "DROP TABLE IF EXISTS %s;" % (tbl_name)
             cur.execute(command)
@@ -57,3 +58,7 @@ class ManageTable(object):
             datatpl = cur.fetchall()
 
             return datatpl
+
+# TODO: delete(), update()
+# delete(): it will delete an element specified an element
+# update(): it will check which assignments are completed, then deletes them
