@@ -1,8 +1,5 @@
-<html>
-  <head>
-    <title>Test Database Output</title>
-  </head>
-  <body>
+{% extends "uibar.html" %}
+{% block content %}
     <table style="width=100%">
       <tr>
         <th>Assignment Name</th>
@@ -18,6 +15,4 @@
           <td>{{ duet }}</td>
         </tr>
     {% endfor %}
-    </table>
-  </body>
-</html>
+{% endblock %}
