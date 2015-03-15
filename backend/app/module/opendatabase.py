@@ -1,11 +1,33 @@
 import MySQLdb as mdb
-
+import time
 
 class ManageTable(object):
 
     def __init__(self, net_loc, user, password, db):
         """Initialize which user to login as"""
         self.con = mdb.connect(net_loc, user, password, db)
+        self.curr_date = time.strftime("%Y-%m-%d")
+        self.curr_time = time.strftime("%I:%M:%S%p")
+
+    def create_new(self, tbl_name, *args):
+        """Initializes a table with certain elements.
+        overwrites existing tables."""
+
+        with self.con:
+            cur = self.con.cursor()
+            command = "DROP TABLE IF EXISTS %s" % (tbl_name)
+            cur.execute(command)
+            
+            tbl_args = ""
+            for key, value in args:
+                tbl_args += " %s %s," % (key, value)
+
+            tbl_args = tbl_args.rstrip(",")   # remove the last comma
+
+            command = "CREATE TABLE IF NOT EXISTS %s(%s)" % (tbl_name, tbl_args)
+            cur.execute(command)
+        self.set_time()
+        return tbl_name
 
     def create(self, tbl_name, *args):
         """Initialize a table with certain elements"""
@@ -19,6 +41,7 @@ class ManageTable(object):
 
             command = "CREATE TABLE IF NOT EXISTS %s(%s)" % (tbl_name, tbl_args)
             cur.execute(command)
+        self.set_time()
         return tbl_name
 
     def describe(self, tbl):
@@ -43,6 +66,7 @@ class ManageTable(object):
             command = "INSERT INTO %s VALUES(%s)" % (
                 tbl, values)
             cur.execute(command)
+        self.set_time()
 
     def retrieve(self, tbl):
         """Obtains data from database as a Tuple"""
@@ -53,6 +77,28 @@ class ManageTable(object):
             datatpl = cur.fetchall()
 
             return datatpl
+
+    def generate_api(self, tbl):
+        """Generates a dictionary which can be converted to json
+        file"""
+        with self.con:
+            cur = self.con.cursor(mdb.cursors.DictCursor)
+            cur.execute('SELECT * FROM Writers')
+            return_tupl = cur.fetchall()
+        self.set_time()
+        other_append = ({"DATE": self.get_date()}, {"TIME": self.get_time()})
+        return_tupl += other_append
+        return return_tupl
+
+    def set_time(self):
+        self.curr_date = time.strftime("%Y-%m-%d")
+        self.curr_time = time.strftime("%I:%M:%S%p")
+
+    def get_date(self):
+        return self.curr_date
+
+    def get_time(self):
+        return self.curr_time
 
 # TODO: delete(), update()
 # delete(): it will delete an element specified an element

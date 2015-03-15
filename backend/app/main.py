@@ -5,7 +5,7 @@ db = ManageTable('localhost', 'testuser', 'test623', 'testdb')
 
 def initialize():
     print "creating database IlliniTest..."
-    tbl = db.create('IlliniTest', ('assign_name', 'VARCHAR(30)'),
+    tbl = db.create_new('IlliniTest', ('assign_name', 'VARCHAR(30)'),
                     ('class', 'VARCHAR(20)'), ('due_date', 'DATE'),
                     ('due_time', 'TIME'))
     print "writing testcases"
@@ -18,6 +18,16 @@ def main():
     initialize()
     output = db.retrieve('IlliniTest')
     return output
+
+def getapi():
+    output = db.generate_api('IlliniTest')
+    return output
+
+def get_date():
+    return db.get_date()
+
+def get_time():
+    return db.get_time()
 
 
 if __name__ == '__main__':

@@ -3,12 +3,13 @@
     <title>IlliniStudent - WebAPI</title>
   </head>
   <body>
-    <link rel="stylesheet" type="text/css" href="apistyle.css">
-    <div>IlliniStudent: <a href="/table">Table Output</a> <a href="/webapi">API Output</a></div>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="apistyle.css") }}">
+    <div>IlliniStudent: <a href="/">Table Output</a> <a href="/webapi">API Output</a></div>
     <hr>
-    {% block content%}{% endblock % }
+    {% block content %}
+    {% endblock %}
     <hr>
-      <div class="about">IlliniStudent Web API server. LAST UPDATED (DATE)</div>
+    <div id="about">IlliniStudent Web API server. LAST UPDATED {{ DATE }} @ {{ TIME }}</div>
       <!-- Make sure to add a DATE for flask...-->
   </body>
 </html>
