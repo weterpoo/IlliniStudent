@@ -10,19 +10,14 @@ class ManageTable(object):
     def create(self, tbl_name, *args):
         """Initialize a table with certain elements"""
         with self.con:
-
-            # Edit it so that it doesn't delete the table
             cur = self.con.cursor()
-            command = "DROP TABLE IF EXISTS %s;" % (tbl_name)
-            cur.execute(command)
-
             tbl_args = ""
             for key, value in args:
                 tbl_args += " %s %s," % (key, value)
 
             tbl_args = tbl_args.rstrip(",")   # remove the last comma
 
-            command = "CREATE TABLE %s(%s)" % (tbl_name, tbl_args)
+            command = "CREATE TABLE IF NOT EXISTS %s(%s)" % (tbl_name, tbl_args)
             cur.execute(command)
         return tbl_name
 
