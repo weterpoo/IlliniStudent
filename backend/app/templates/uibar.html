@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>IlliniStudent - WebAPI</title>
+  </head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="apistyle.css") }}">
+    <div>IlliniStudent: <a href="/">Table Output</a> <a href="/webapi">API Output</a></div>
+    <hr>
+    {% block content %}
+    {% endblock %}
+    <hr>
+    <div id="about">IlliniStudent Web API server. LAST UPDATED {{ DATE }} @ {{ TIME }}</div>
+      <!-- Make sure to add a DATE for flask...-->
+  </body>
+</html>
