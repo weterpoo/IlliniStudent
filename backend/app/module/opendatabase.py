@@ -1,5 +1,7 @@
 import MySQLdb as mdb
 import time
+from datetime import datetime
+
 
 class ManageTable(object):
 
@@ -85,13 +87,11 @@ class ManageTable(object):
             cur = self.con.cursor(mdb.cursors.DictCursor)
             cur.execute('SELECT * FROM %s' % (tbl))
             return_tupl = cur.fetchall()
-        self.set_time()
-        #return_dict = {}
-        #for dict_index in range(0, len(return_tupl)):
-        #    return_dict.update({dict_index: return_tupl[dict_index]})
-        #return_dict.update({"TIME": {"DATE" : self.get_date(),
-        #                             "TIME" : self.get_time()}})
-        return return_tupl
+        return_dict = {}
+        return_dict.update({"ASSIGNMENTS": return_tupl,
+                            "TIME": { "UPDATED": datetime.now()}})
+                                       
+        return return_dict
 
     def set_time(self):
         self.curr_date = time.strftime("%Y-%m-%d")
