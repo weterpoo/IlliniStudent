@@ -31,38 +31,38 @@
    $ mysql -u root -p
    ```
    
-   Creates the studentdb database
+   Create the studentdb database
    ```
    $ CREATE DATABASE studentdb;
    ```
    
-   Tells mysql to use the studentdb (need this command to create the table in the right place
+   Tell mysql to use the studentdb (need this command to create the table in the right place
    ```
    USE studentdb;
    ```
    
-   Creates the userinfo table
+   Create the userinfo table
    ```
    $ CREATE TABLE userinfo(username VARCHAR(20) NOT NULL, useremail VARCHAR(40) NOT NULL, userpass VARCHAR(30) NOT NULL, usernetid VARCHAR(25) NOT NULL, usermajor VARCHAR(25), usergrad DATE);
    ```
    
-   Creates the checkuser@localhost user
+   Create the checkuser@localhost user
    ```
    $ CREATE USER 'checkuser'@'localhost' IDENTIFIED BY 'ch3ckEDl0CAL';
    ```
    
-   Creates the authorized@locahost user
+   Create the authorized@locahost user
    ```
    $ CREATE USER 'authorized'@'localhost' IDENTIFIED BY 'aCep0ted0dd';
    ```
    
-   Grants all permissions on everything under studentdb to authorized@localhost
+   Grant all permissions on everything under studentdb to authorized@localhost
    This will be required to have create user specific tables.
    ```
    $ GRANT ALL ON studentdb.* TO 'authorized'@'localhost';
    ```
    
-   Grants all permissions on the userinfo table to checkuser@localhost.
+   Grant all permissions on the userinfo table to checkuser@localhost.
    This is done for security reasons (though it might not matter so much in the end)
    ```
    $ GRANT ALL ON studentdb.userinfo TO 'checkuser'@'localhost';
@@ -83,14 +83,13 @@
    Note that the venv might be different between everyone, it depends on what you called it
    PLEASE PLEASE DO NOT UPLOAD THE VIRTUALENV TO GITHUB! (it causes problems for you too!)
 
-   
-   The flask server will run on your ip address (which can be dangerous so don't keep it running too long!) or you can access it by going to your web browser and typing
+   Run the flask application: 
    ```
    $ python run.py
    ```
-   
-   By default flask servers run on port 5000. See your console for more details on what port it is running at.
+   The flask server will run on your ip address (which can be dangerous so don't keep it running too long!) or you can access it by going to your web browser and typing
    ```
    localhost:5000
    ```
+   By default flask servers run on port 5000. See your console for more details on what port it is running at.
 
