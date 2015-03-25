@@ -70,17 +70,19 @@
 
 3. Now activate the flask server.
 
-   Activate your virtualenv (or not) for me it's:
+   Change your directory to the backend
    ```
    $ cd ~/path/to/IlliniStudent/backend/
    ```
    
-   if you installed all of the python modules without activating the virtual enviroment, ths is not needed
-   Note that the venv might be different between everyone, it depends on what you called it
-   PLEASE PLEASE DO NOT UPLOAD THE VIRTUALENV TO GITHUB! (it causes problems for you too!)
+   Activate your virtualenv (or not) for me it's:
    ```
    $ source venv/bin/activate
    ```
+   if you installed all of the python modules without activating the virtual enviroment, ths is not needed
+   Note that the venv might be different between everyone, it depends on what you called it
+   PLEASE PLEASE DO NOT UPLOAD THE VIRTUALENV TO GITHUB! (it causes problems for you too!)
+
    
    The flask server will run on your ip address (which can be dangerous so don't keep it running too long!) or you can access it by going to your web browser and typing
    ```
