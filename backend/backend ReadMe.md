@@ -19,3 +19,76 @@
        - $ source venv/bin/activate
 
        - to deactivate the venv: $ deactivate
+
+
+
+# Running the backend on your local machine:
+1. You have to have the requirements above fulfilled
+2. Set up mysql as the following:
+
+'''
+$ mysql -u root -p
+'''
+login as root
+
+'''
+$ CREATE DATABASE studentdb;
+'''
+Creates the studentdb database
+
+'''
+USE studentdb;
+'''
+Tells mysql to use the studentdb (need this command to create the table in the right place
+
+'''
+$ CREATE TABLE userinfo(username VARCHAR(20) NOT NULL, useremail VARCHAR(40) NOT NULL, userpass VARCHAR(30) NOT NULL, usernetid VARCHAR(25) NOT NULL, usermajor VARCHAR(25), usergrad DATE);
+'''
+Creates the userinfo table
+
+'''
+$ CREATE USER 'checkuser'@'localhost' IDENTIFIED BY 'ch3ckEDl0CAL';
+'''
+Creates the checkuser@localhost user
+
+'''
+$ CREATE USER 'authorized'@'localhost' IDENTIFIED BY 'aCep0ted0dd';
+'''
+Creates the authorized@locahost user
+
+'''
+$ GRANT ALL ON studentdb.* TO 'authorized'@'localhost';
+'''
+Grants all permissions on everything under studentdb to authorized@localhost
+This will be required to have create user specific tables.
+
+'''
+$ GRANT ALL ON studentdb.userinfo TO 'checkuser'@'localhost';
+'''
+Grants all permissions on the userinfo table to checkuser@localhost.
+This is done for security reasons (though it might not matter so much in the end)
+
+3. Now activate the flask server.
+'''
+$ cd ~/path/to/IlliniStudent/backend/
+'''
+
+Activate your virtualenv (or not) for me it's:
+'''
+$ source venv/bin/activate
+'''
+if you installed all of the python modules without activating the virtual enviroment, ths is not needed
+Note that the venv might be different between everyone, it depends on what you called it
+PLEASE PLEASE DO NOT UPLOAD THE VIRTUALENV TO GITHUB! (it causes problems for you too!)
+
+'''
+$ python run.py
+'''
+
+The flask server will run on your ip address (which can be dangerous so don't keep it running too long!) or you can access it by going to your web browser and typing
+
+'''
+localhost:5000
+'''
+By default flask servers run on port 5000. See your console for more details on what port it is running at.
+
