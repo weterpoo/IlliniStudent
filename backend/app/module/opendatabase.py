@@ -205,7 +205,7 @@ class ManageTable(object):
 
     def find(self, tbl_name, id_name=None, condition=None):
         """
-        Returns specific values based on conditions.
+        Returns the first value based on conditions.
         id_name must be passed on as a tuple.
 
         condition must be passed on as a string of a MYSQL condition statement.
@@ -245,9 +245,61 @@ class ManageTable(object):
             cur = self.con.cursor()
             cur.execute(command)
             return_tupl = cur.fetchall()
-            return return_tupl[0]
+            #only return a tuple if there is something in it
+            if len(return_tupl) == 0:
+                return None
+            else:
+                return return_tupl[0]
         return None
         
+    def findall(self, tbl_name, id_name=None, condition=None):
+        """
+        Returns all specific values based on conditions.
+        id_name must be passed on as a tuple.
+
+        condition must be passed on as a string of a MYSQL condition statement.
+        
+        Example:
+        db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
+        tbl = db.create('TestTable', ('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
+        db.insert(tbl, 'Shotaro', '2015-03-11')
+
+        return db.find(tbl, ('Name'), "Date = '2015-03-11'")
+        >>> Returns ('Name', 'Shotaro')
+        """
+        # Error Checking
+        if not ((type(id_name) == tuple) or (id_name == None)):
+            FormatError('id_name is not a tuple')
+
+        if not ((type(condition) == str) or (condition == None)):
+            FormatError('condition is not a tuple')
+
+        # Preprocessing
+        cond = " WHERE "
+        if condition == None:
+            cond = ";"
+        else:
+            cond += "%s;" % (condition)
+
+        return_id = ""
+        if id_name == None:
+            return_id = "*"
+        else:
+            for item in id_name:
+                return_id += "%s, " % (item)
+            return_id = return_id.rstrip(", ")
+        command = "SELECT %s FROM %s%s" % (return_id, tbl_name,
+                                           cond)
+        with self.con:
+            cur = self.con.cursor()
+            cur.execute(command)
+            return_tupl = cur.fetchall()
+            #only return a tuple if there is something in it
+            if len(return_tupl) == 0:
+                return None
+            else:
+                return return_tupl[0]
+        return None
     def set_time(self):
         """
         Sets the current time. Used internally to figure out

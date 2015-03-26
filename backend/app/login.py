@@ -12,34 +12,32 @@ salt = "not_so_random_salt"
 def login(username, userpass):
     access = mt('localhost', 'checkuser', 'ch3ckEDl0CAL', 'studentdb')
     cond = "username = \'%s\'" % (username)
-    pass_word = access.find("userinfo", ('userpass',), cond)
+    user_inf = access.find("userinfo", ('userpass', 'authid'), cond)
 
-    print pass_word
-
-    if len(pass_word) == 0:
-        return -1
+    if user_inf == None:
+        return "Wrong Username"
     else:
-        checked_pass = pass_word[0]
-        if len(pass_word) > 1:
-            return 2
-        elif not pass_equal(userpass, checked_pass):
-            print "failed"
-            return 1
+        checked_pass = user_inf[0]
+        if not pass_equal(userpass, checked_pass):
+            return "Wrong Password"
         elif pass_equal(userpass, checked_pass):
-            print "success!"
-            return 0
+            return user_inf
         else:
-            return -10
+            return "Error -10: Unknown error. Please email for support."
 
 def login_jquery(other_authid):
     access = mt('localhost', 'checkuser', 'ch3ckEDl0CAL', 'studentdb')
     cond = "authid = \'%s\'" % (other_authid)
 
-    u_info = access.find('userinfo', ('username', 'userpass'), cond)
-    #return_dict = { "username": u_info[0]
+    u_info = access.find('userinfo', ('username', 'authid'), cond)
+    # return a blank dictionary if nothing was found
+    if u_info == None:
+        return {}
+    else:
+        return_dict = { "username": u_info[0], "authid": u_info[1]}
 
-    return u_info
-    
+    return return_dict
+
 def create_login(un, ue, up, uid, um, ug):
     access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
     # Check for optional fields
@@ -98,7 +96,7 @@ def main():
 
     jquery_result = login_jquery("$6$rounds=108441$5IQLSZTA4Q91OAJD$3uTUw53SFsocT5AyQ0YwVxGCkA0PECv9A3DfOcAN9GRiK.EQ6kKK1gC3OxKRZFFjlF4whCtfKGYz0djx97XSw1")
     
-    print "Hello %s! Hope you have a good day!" % (jquery_result[0])
+    print "Hello %s! Hope you have a good day!" % (jquery_result.get("username"))
 
 if __name__ == '__main__':
     main()
