@@ -24,6 +24,10 @@ import time
 from datetime import datetime
 
 
+class FormatError(Exception):
+    pass
+
+
 class ManageTable(object):
 
     def __init__(self, net_loc, user, password, db):
@@ -86,6 +90,10 @@ class ManageTable(object):
         db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
         db.create('TestTable', ('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
         """
+        # Quick Error checking:
+        if not (type(args[0]) == tuple):
+            FormatError('One or more element of args is not a tuple')
+
         with self.con:
             cur = self.con.cursor()
             tbl_args = ""
@@ -148,7 +156,7 @@ class ManageTable(object):
             command = "INSERT INTO %s VALUES(%s)" % (
                 tbl, values)
             cur.execute(command)
-        self.set_time()
+            self.set_time()
 
     def retrieve(self, tbl):
         """
@@ -210,6 +218,13 @@ class ManageTable(object):
         return db.find(tbl, ('Name'), "Date = '2015-03-11'")
         >>> Returns ('Name', 'Shotaro')
         """
+        # Error Checking
+        if not ((type(id_name) == tuple) or (id_name == None)):
+            FormatError('id_name is not a tuple')
+
+        if not ((type(condition) == str) or (condition == None)):
+            FormatError('condition is not a tuple')
+
         # Preprocessing
         cond = " WHERE "
         if condition == None:
