@@ -77,10 +77,6 @@
     ```
 
     ```
-    (venv)$ pip install MySQL-python
-    ```
-
-    ```
     (venv)$ pip install flask
     ```
 
@@ -115,6 +111,15 @@
      <p>(I think it should work for cygwin, provided you install
      the apt-get extension)
 
+   6. Installing Python-MySQL
+      <p>This is a strange module, because installing it within venv does not work. You can try to install it using pip by doing
+      ```
+      $ pip install MySQL-python
+      ```
+      <p>You can also use sudo apt-get to install it
+      ```
+      $ sudo apt-get install python-mysqldb
+      ```
 <p>Congradulations, you are now ready to follow the steps to running the backend!
     
 # Running the backend on your local machine:
