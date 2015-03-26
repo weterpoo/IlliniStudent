@@ -245,7 +245,7 @@ class ManageTable(object):
             cur = self.con.cursor()
             cur.execute(command)
             return_tupl = cur.fetchall()
-            return return_tupl
+            return return_tupl[0]
         return None
         
     def set_time(self):

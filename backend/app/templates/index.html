@@ -1,19 +1,22 @@
 {% extends "uibar.html" %}
 {% block content %}
-    <table style="width=100%">
-      <tr>
-        <th>Assignment Name</th>
-        <th>Class</th>
-        <th>Due Date</th>
-        <th>Due Time</th>
-      </tr>
-    {% for assign_name, class, dued, duet in output %}
-        <tr>
-          <td>{{ assign_name }}</td>
-          <td>{{ class }}</td>
-          <td>{{ dued }}</td>
-          <td>{{ duet }}</td>
-        </tr>
-    {% endfor %}
-    </table>
+<h1>Welcome to IlliniStudent API Login</h1>
+<form action="/index" method="post" name="login">
+  {{ form.hidden_tag()}}
+  <p>
+    User Name: <br>
+    {{ form.user_name(size=50) }}
+    {% for error in form.user_name.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}<br>
+  </p>
+  <p>
+    Password: <br>
+    {{ form.user_pass(size=50) }}
+    {% for error in form.user_pass.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}<br>
+  </p>
+  <p><input type="submit" value="Sign In"></p>
+</form>
 {% endblock %}
