@@ -1,6 +1,7 @@
 # IlliniStudent Backend
 #To do:
     1. Tabluate information the way it is represented in the jpg (it's on facebook chat!)
+
     2. Figure out a way to parse webpages to obtain information.
 
 #Required modules:
@@ -10,64 +11,67 @@
        - python-mysqldb (install in virtualenv)
        - nose (aka nosetests, not required to run the actual, only for test cases)
        - flask (install in vitualenv)
+
     2. Python 2.7.x
 
 # Installing all of the packages
-  Before we start: this is assuming you have Linux distro.
-  Specific steps may be different if you have Windows or Mac OS.
-  (Though most of everything should work on Mac except for apt-get)
+  <p>Before we start: this is assuming you have Linux distro.
+  <p>Specific steps may be different if you have Windows or Mac OS.
+  <p>(Though most of everything should work on Mac except for apt-get)
   1. Python 2.7.x is easy to install. Go to the python website
+
   2. Install pip
-     pip has great documentation to install it, make sure you add it to path
-     To check if pip is installed correctly, type
+     <p>pip has great documentation to install it, make sure you add it to path.
+     <p>To check if pip is installed correctly, type
      ```
      $ pip
      ```
-     it should spit out some documentation on how to use pip on the command line.
+     <p>It should spit out some documentation on how to use pip on the command line.
 
   3. Install virtualenv
-     Type:
+     <p>Type:
      ```
      $ pip install virtualenv
      ```
-     That should fetch you the latest version of virtualenv
+     <p>That should fetch you the latest version of virtualenv
 
-     Test to see if virtualenv is working
+     <p>Test to see if virtualenv is working
      ```
      $ virtualenv
      ```
-     that should spit out documentation on how to use virtualenv on the command line
-     If it does not work, you may need to <em>add python's script folder to path</em>
- 4. Installation using virtualenv (installing Python-MySQLdb, nose, flask)
-    Make sure that virtualenv is installed. (Done on previous step)
-    Now type
+     <p>That should spit out documentation on how to use virtualenv on the command line
+     <p>If it does not work, you may need to <em>add python's script folder to path</em>
+     
+  4. Installation using virtualenv (installing Python-MySQLdb, nose, flask)
+    <p>Make sure that virtualenv is installed. (Done on previous step)
+    <p>Now type
     ```
     $ virtualenv --distribute venv
     ```
-    The "venv" can be replaced with anything, it will become the name of the
+    <p>The "venv" can be replaced with anything, it will become the name of the
     folder where all of the modules are stored.
 
-    If you do decide to call it something other than "venv" please add it to
+    <p>If you do decide to call it something other than "venv" please add it to
     the .gitignore file, so it doesn't upload it to github
 
-    Now activate the venv, on Linux distros (and Mac OS) it is:
+    <p>Now activate the venv, on Linux distros (and Mac OS) it is:
     ```
     $ source <name of folder>/bin/activate
     ```
-    if you called the folder "venv" (if you followed this example) you would
+    <p>if you called the folder "venv" (if you followed this example) you would
     replace <name of folder> with "venv" (obviously without the quotes)
 
-    If everything worked you should see something like:
+    <p>If everything worked you should see something like:
     ```
     (venv)shotaro@shotaro-ThinkPad-T400 ~/IlliniStudent$
     ```
-    As long as you see the (venv) in the front, you have correctly activated
+    <p>As long as you see the (venv) in the front, you have correctly activated
     the venv
 
-    <b>This is called "Activating the virtual enviornment (abbreviated
+    <p><b>This is called "Activating the virtual enviornment (abbreviated
     venv)</b>.
 
-    After activating the venv, you can install other packages without
+    <p>After activating the venv, you can install other packages without
     messing up your regular python install.
     ```
     (venv)$ pip install nosetests
@@ -81,112 +85,112 @@
     (venv)$ pip install flask
     ```
 
-    Those three commands will install nosetests (nose), Python-MySQLdb,
+    <p>Those three commands will install nosetests (nose), Python-MySQLdb,
     and flask in that order.
 
-    Note that you don't really need virtualenv to actually install all
+    <p>Note that you don't really need virtualenv to actually install all
     of these. However, it is good practice to install modules that
     will only be used in one project (like Python-MySQLdb) in a
     Virtual Enviornment.
 
   5. Installing MySQL-server
-     Installing MySQL-server is a little different depending on
+     <p>Installing MySQL-server is a little different depending on
      the platform.
 
-     For Windows and Mac OS, use the community installer.
+     <p>For Windows and Mac OS, use the community installer.
      That will include MySQL-server. (That is the main one
      you want). You also probably want the python extension
      too.
 
-     For Linux or cygwin:
+     <p>For Linux or cygwin:
      ```
      $ sudo apt-get install mysql-server
      ```
-     (I think it should work for cygwin, provided you install
+     <p>(I think it should work for cygwin, provided you install
      the apt-get extension)
 
-Congradulations, you are now ready to follow the steps to running the backend!
+<p>Congradulations, you are now ready to follow the steps to running the backend!
     
 # Running the backend on your local machine:
 1. You have to have the requirements above fulfilled
 2. Set up mysql as the following:
 
-   login as root
+   <p>login as root
    ```
    $ mysql -u root -p
    ```
    
-   Create the studentdb database
+   <p>Create the studentdb database
    ```
    $ CREATE DATABASE studentdb;
    ```
    
-   Tell mysql to use the studentdb (need this command to create the table in the right place
+   <p>Tell mysql to use the studentdb (need this command to create the table in the right place
    ```
    USE studentdb;
    ```
    
-   Create the userinfo table
+   <p>Create the userinfo table
    ```
    $ CREATE TABLE userinfo(username VARCHAR(20) NOT NULL, useremail VARCHAR(40) NOT NULL, userpass VARCHAR(30) NOT NULL, usernetid VARCHAR(25) NOT NULL, usermajor VARCHAR(25), usergrad DATE);
    ```
    
-   Create the checkuser@localhost user
+   <p>Create the checkuser@localhost user
    ```
    $ CREATE USER 'checkuser'@'localhost' IDENTIFIED BY 'ch3ckEDl0CAL';
    ```
    
-   Create the authorized@locahost user
+   <p>Create the authorized@locahost user
    ```
    $ CREATE USER 'authorized'@'localhost' IDENTIFIED BY 'aCep0ted0dd';
    ```
    
-   Grant all permissions on everything under studentdb to authorized@localhost.
-   This will be required to have create user specific tables.
+   <p>Grant all permissions on everything under studentdb to authorized@localhost.
+   <p>This will be required to have create user specific tables.
    ```
    $ GRANT ALL ON studentdb.* TO 'authorized'@'localhost';
    ```
    
-   Grant all permissions on the userinfo table to checkuser@localhost.
-   This is done for security reasons (though it might not matter so much in the end)
+   <p>Grant all permissions on the userinfo table to checkuser@localhost.
+   <p>This is done for security reasons (though it might not matter so much in the end)
    ```
    $ GRANT ALL ON studentdb.userinfo TO 'checkuser'@'localhost';
    ```
 
 3. Now activate the flask server.
 
-   Change your directory to the backend
+   <p>Change your directory to the backend
    ```
    $ cd ~/path/to/IlliniStudent/backend/
    ```
    
-   Activate your virtualenv (or not) for me it's:
+   <p>Activate your virtualenv (or not) for me it's:
    ```
    $ source venv/bin/activate
    ```
-   if you installed all of the python modules without activating the virtual enviroment, ths is not needed
-   Note that the venv might be different between everyone, it depends on what you called it
-   PLEASE PLEASE DO NOT UPLOAD THE VIRTUALENV TO GITHUB! (it causes problems for you too!)
+   <p>If you installed all of the python modules without activating the virtual enviroment, ths is not needed
+   <p>Note that the venv might be different between everyone, it depends on what you called it
+   <p>PLEASE PLEASE DO NOT UPLOAD THE VIRTUALENV TO GITHUB! (it causes problems for you too!)
 
-   Run the flask application: 
+   <p>Run the flask application: 
    ```
    $ python run.py
    ```
-   The flask server will run on your ip address (which can be dangerous so don't keep it running too long!) or you can access it by going to your web browser and typing
+   <p>The flask server will run on your ip address (which can be dangerous so don't keep it running too long!) or you can access it by going to your web browser and typing
    ```
    localhost:5000
    ```
-   By default flask servers run on port 5000. See your console for more details on what port it is running at.
+   <p>By default flask servers run on port 5000. See your console for more details on what port it is running at.
 
 
 # Final Words
-  You can see our glorious application at illinistudent.cu.cc which is the front end.
-  To peek into the back end you can go to illinistudent.cu.cc:5000
+  <p>You can see our glorious application at illinistudent.cu.cc which is the front end.
+  <p>To peek into the back end you can go to illinistudent.cu.cc:5000
 
-  Thanks to Peter Woo, Tadas Aleksonis, and Cameron Patrick for being
+  <p>Thanks to Peter Woo, Tadas Aleksonis, and Cameron Patrick for being
   awesome CAs!
 
-  Also thanks to our fellow group members! You (might) be able to find their names in their respective readmes.
+  <p>Also thanks to our fellow group members! You (might) be able to find their names in their respective readmes.
 
-  Backend is created by Shotaro Ikeda, Derek Zhang, Zono Mei, and Jason Situ
+  <p>Backend is created by Shotaro Ikeda, Derek Zhang, Zono Mei, and Jason Situ
   
