@@ -67,8 +67,9 @@ class ManageTable(object):
             tbl_args = tbl_args.rstrip(",")   # remove the last comma
             command = "CREATE TABLE IF NOT EXISTS %s(%s)" % (tbl_name, tbl_args)
             cur.execute(command)
-        self.set_time()
-        return tbl_name
+            self.set_time()
+            return tbl_name
+        return None
 
     def create(self, tbl_name, *args):
         """
@@ -95,8 +96,9 @@ class ManageTable(object):
 
             command = "CREATE TABLE IF NOT EXISTS %s(%s)" % (tbl_name, tbl_args)
             cur.execute(command)
-        self.set_time()
-        return tbl_name
+            self.set_time()
+            return tbl_name
+        return None
 
     def describe(self, tbl):
         """
@@ -115,6 +117,7 @@ class ManageTable(object):
             cur.execute("DESCRIBE %s" % (tbl))
             dataset = cur.fetchall()
             return dataset
+        return None
 
     def insert(self, tbl, *val):
         """
@@ -150,6 +153,7 @@ class ManageTable(object):
     def retrieve(self, tbl):
         """
         Obtains data from database as a Tuple.
+        Function is deprecated! You can still use it though.
 
         Example:
         db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
@@ -159,13 +163,7 @@ class ManageTable(object):
         return db.retrieve(tbl)
         >>> will return ('Shotaro', '2015-03-11')
         """
-        with self.con:
-            cur = self.con.cursor()
-
-            cur.execute('SELECT * FROM %s' % (tbl))
-            datatpl = cur.fetchall()
-
-            return datatpl
+        return self.find(tbl)
 
     def generate_api(self, tbl):
         """
@@ -190,12 +188,52 @@ class ManageTable(object):
             cur = self.con.cursor(mdb.cursors.DictCursor)
             cur.execute('SELECT * FROM %s' % (tbl))
             return_tupl = cur.fetchall()
-        return_dict = {}
-        return_dict.update({"TABLE": return_tupl,
-                            "TIME": { "UPDATED": datetime.now()}})
-                                       
-        return return_dict
+            return_dict = {}
+            return_dict.update({"TABLE": return_tupl,
+                                "TIME": { "UPDATED": datetime.now()}})
+            
+            return return_dict
+        return None
 
+    def find(self, tbl_name, id_name=None, condition=None):
+        """
+        Returns specific values based on conditions.
+        id_name must be passed on as a tuple.
+
+        condition must be passed on as a string of a MYSQL condition statement.
+        
+        Example:
+        db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
+        tbl = db.create('TestTable', ('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
+        db.insert(tbl, 'Shotaro', '2015-03-11')
+
+        return db.find(tbl, ('Name'), "Date = '2015-03-11'")
+        >>> Returns ('Name', 'Shotaro')
+        """
+        # Preprocessing
+        cond = " WHERE "
+        if condition == None:
+            cond = ";"
+        else:
+            cond += "%s;" % (condition)
+
+        return_id = ""
+        if id_name == None:
+            return_id = "*"
+        else:
+            for item in tbl_name:
+                return_id += "%s, " % (item)
+            return_id.rstrip(", ")
+
+        command = "SELECT %s FROM %s%s" % (return_id, tbl_name,
+                                           cond)
+        with self.con:
+            cur = self.con.cursor()
+            cur.execute(command)
+            return_tupl = cur.fetchall()
+            return return_tupl
+        return None
+        
     def set_time(self):
         """
         Sets the current time. Used internally to figure out
