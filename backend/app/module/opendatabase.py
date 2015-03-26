@@ -267,3 +267,13 @@ class ManageTable(object):
         Used to return the current time.
         """
         return self.curr_time
+
+    def delete(self, tbl, coloum, content):
+        """
+        Delete the row which satisfies content in certain coloum.
+        """
+        with self.con:
+            cur = self.con.cursor()
+            query = "DELETE FROM %s WHERE (%s = %s)" % (tbl, coloum, content)
+            cur.execute(query)
+            self.set_time()
