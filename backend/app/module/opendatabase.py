@@ -221,10 +221,9 @@ class ManageTable(object):
         if id_name == None:
             return_id = "*"
         else:
-            for item in tbl_name:
+            for item in id_name:
                 return_id += "%s, " % (item)
-            return_id.rstrip(", ")
-
+            return_id = return_id.rstrip(", ")
         command = "SELECT %s FROM %s%s" % (return_id, tbl_name,
                                            cond)
         with self.con:

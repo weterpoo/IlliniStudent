@@ -1,0 +1,95 @@
+shotaro@shotaro-ThinkPad-T400 ~/Copy/project/IlliniStudent/backend/app/module $ ls
+__init__.py  __init__.pyc  opendatabase.py  opendatabase.pyc  readmysql.py
+shotaro@shotaro-ThinkPad-T400 ~/Copy/project/IlliniStudent/backend/app/module $ python 
+Python 2.7.6 (default, Mar 22 2014, 22:59:56) 
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import opendatabase.py
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named py
+>>> import opendatabase
+>>> from opendatabase import ManageTable as mt
+>>> mt('localhost', 'testuser', 'test623', 'testdb')
+<opendatabase.ManageTable object at 0x7f79a86a4a90>
+>>> db = mt('localhost', 'testuser', 'test623', 'testdb')
+>>> db.find('IlliniTest')
+(('Homework 5', 'MATH 285', datetime.date(2015, 3, 11), datetime.timedelta(0, 28800)), ('MP4', 'CS125', datetime.date(2015, 3, 9), datetime.timedelta(0, 72000)), ('LAST 170 Midterm', 'LAST 170', datetime.date(2015, 3, 11), datetime.timedelta(0, 54000)))
+>>> db.find('IlliniTest', 'due_date')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "opendatabase.py", line 232, in find
+    cur.execute(command)
+  File "/usr/lib/python2.7/dist-packages/MySQLdb/cursors.py", line 174, in execute
+    self.errorhandler(self, exc, value)
+  File "/usr/lib/python2.7/dist-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+_mysql_exceptions.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM IlliniTest' at line 1")
+>>> db.describe('IlliniTest')
+(('assign_name', 'varchar(30)', 'YES', '', None, ''), ('class', 'varchar(20)', 'YES', '', None, ''), ('due_date', 'date', 'YES', '', None, ''), ('due_time', 'time', 'YES', '', None, ''))
+>>> db.find('IlliniTest', ('due_date'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "opendatabase.py", line 232, in find
+    cur.execute(command)
+  File "/usr/lib/python2.7/dist-packages/MySQLdb/cursors.py", line 174, in execute
+    self.errorhandler(self, exc, value)
+  File "/usr/lib/python2.7/dist-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+_mysql_exceptions.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM IlliniTest' at line 1")
+>>> quit()
+shotaro@shotaro-ThinkPad-T400 ~/Copy/project/IlliniStudent/backend/app/module $ python
+Python 2.7.6 (default, Mar 22 2014, 22:59:56) 
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from opendatabase import ManageTable as mt
+>>> db = mt('localhost', 'testuser', 'test623', 'testdb')
+>>> db.find('IlliniTest', 'due_date')
+'SELECT I, l, l, i, n, i, T, e, s, t,  FROM IlliniTest;'
+>>> db.find('IlliniTest', 'due_date')
+'SELECT I, l, l, i, n, i, T, e, s, t,  FROM IlliniTest;'
+>>> quit()
+shotaro@shotaro-ThinkPad-T400 ~/Copy/project/IlliniStudent/backend/app/module $ python
+Python 2.7.6 (default, Mar 22 2014, 22:59:56) 
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> db = mt('localhost', 'testuser', 'test623', 'testdb')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'mt' is not defined
+>>> from opendatabase import ManageTable as mt
+>>> db = mt('localhost', 'testuser', 'test623', 'testdb')
+>>> db.find('IlliniTest', 'due_date')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "opendatabase.py", line 231, in find
+    cur.execute(command)
+  File "/usr/lib/python2.7/dist-packages/MySQLdb/cursors.py", line 174, in execute
+    self.errorhandler(self, exc, value)
+  File "/usr/lib/python2.7/dist-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+_mysql_exceptions.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM IlliniTest' at line 1")
+>>> db.find('IlliniTest', ('due_date'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "opendatabase.py", line 231, in find
+    cur.execute(command)
+  File "/usr/lib/python2.7/dist-packages/MySQLdb/cursors.py", line 174, in execute
+    self.errorhandler(self, exc, value)
+  File "/usr/lib/python2.7/dist-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+_mysql_exceptions.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM IlliniTest' at line 1")
+>>> quit()
+shotaro@shotaro-ThinkPad-T400 ~/Copy/project/IlliniStudent/backend/app/module $ python
+Python 2.7.6 (default, Mar 22 2014, 22:59:56) 
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from opendatabase import ManageTable as mt
+>>> db.find('IlliniTest', ('due_date'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'db' is not defined
+>>> db = mt('localhost', 'testuser', 'test623', 'testdb')
+>>> db.find('IlliniTest', ('due_date'))
+'SELECT d, u, e, _, d, a, t, e,  FROM IlliniTest;'
+>>> db.find('IlliniTest', ('due_date',))
