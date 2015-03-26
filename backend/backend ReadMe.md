@@ -92,6 +92,13 @@
     will only be used in one project (like Python-MySQLdb) in a
     Virtual Enviornment.
 
+    <p>To deactivate the virtualenv, type:
+    ```
+    $ deactivate
+    ```
+
+    Make sure you activate the virtualenv if you want to work on it! (The program might not work without it)
+
   5. Installing MySQL-server
      <p>Installing MySQL-server is a little different depending on
      the platform.
