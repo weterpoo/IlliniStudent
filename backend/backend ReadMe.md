@@ -15,9 +15,8 @@
     2. Python 2.7.x
 
 # Installing all of the packages
-  <p>Before we start: this is assuming you have Linux distro.
-  <p>Specific steps may be different if you have Windows or Mac OS.
-  <p>(Though most of everything should work on Mac except for apt-get)
+  <p>Before we start: this is assuming you have Linux distro. Specific steps may be different if you have Windows or Mac OS. (Though most of everything should work on Mac except for apt-get)
+
   1. Python 2.7.x is easy to install. Go to the python website
 
   2. Install pip
@@ -69,7 +68,7 @@
     the venv
 
     <p><b>This is called "Activating the virtual enviornment (abbreviated
-    venv)</b>.
+    venv)"</b>.
 
     <p>After activating the venv, you can install other packages without
     messing up your regular python install.
