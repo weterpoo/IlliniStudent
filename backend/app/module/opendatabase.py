@@ -197,7 +197,7 @@ class ManageTable(object):
             cur.execute('SELECT * FROM %s' % (tbl))
             return_tupl = cur.fetchall()
             return_dict = {}
-            return_dict.update({"TABLE": return_tupl,
+            return_dict.update({ tbl : return_tupl,
                                 "TIME": { "UPDATED": datetime.now()}})
             
             return return_dict
