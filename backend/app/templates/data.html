@@ -1,7 +1,7 @@
 {% extends "uibar.html" %}
 {% block content %}
     {% if output %}
-    <table style="width=100%">
+    <table width=100% >
       <tr>
         <th>Assignment Name</th>
         <th>Class</th>
@@ -23,6 +23,10 @@
     {% else %}
         <p>Your table is empty! DATTEBAYO</p>
         <img src="{{ url_for('static', filename='dattebayo.jpg')}}" alt="Can't tell you what it is until you see it" style="width:305px;height:360px">
+        <audio controls autoplay>
+          <source src="{{ url_for('static', filename='dattebayo.mp3')}}" type="audio/mpeg">
+          Your browser doesn't support 120% DATTEBAYO Mode :(
+        </audio>
     {% endif %}
     </table>
 {% endblock %}

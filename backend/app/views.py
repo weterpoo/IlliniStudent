@@ -24,19 +24,100 @@ def index():
 
         signed_in = login.login(user, password)
         if type(signed_in) == str:
-            return signed_in
+            return render_template('fail.html',
+                                   WARNING=signed_in,
+                                   DATE=time.strftime("%Y-%m-%d"),
+                                   TIME=time.strftime("%I:%M:%S%p")
+                                   )
         else:
+            global authid
             authid = signed_in[1]
-            return redirect(url_for("apibrowser"))
+            return redirect(url_for("taskview"))
     else:
         return render_template('index.html',
-                               form=form)
+                               form=form,
+                               DATE=time.strftime("%Y-%m-%d"),
+                               TIME=time.strftime("%I:%M:%S%p")
+                               )
+        
+# jquery related things go down here
+@app.route('/jqtask')
+# Handles jquery logins.
+def jqtask():
+    authid = request.args.get('id')
+    userin = login.login_jquery(authid)
 
-# @app.route('/webapi')
-# def webapi():
-#     dictout = main.getapi()
-#     return json.dumps(dictout, default=date_handler)
-    
+    global user
+    user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+    if user: 
+        dictout = main.getapi(user)
+        dictout.update({"authid": authid})
+        return json.dumps(dictout, default=date_handler)
+    else:
+        return "Error: no id found"
+
+@app.route('/jqschedule')
+# Handles automated schedule fetching
+def jqschedule():
+    authid = request.args.get('id')
+    userin = login.login_jquery(authid)
+
+    global user
+    user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+
+    if user:
+        dictout = main.getapi_schedule(user)
+        dictout.update({"authid": authid})
+        return json.dumps(dictout, default=date_handler)
+    else:
+        return "Error: no id found"
+
+# Manual, user inputted pages
+@app.route('/taskview')
+# Handles manually logged in API browsers
+def taskview():
+    if user:
+        output = main.table_info(user)
+        return render_template("data.html",
+                               output=output,
+                               DATE=time.strftime("%Y-%m-%d"),
+                               TIME=time.strftime("%I:%M:%S%p")
+                               )
+    else:
+        flash("Log in before looking at tasks!")
+        return redirect(url_for('index'))
+
+@app.route('/taskapi')
+# Get to the api manually
+def taskapi():
+    link = "/jqtask?id=%s" % (authid)
+    return redirect(link)
+
+@app.route('/scheduleview')
+# get the schedule table
+def scheduleview():
+    if user:
+        output = main.table_schedule(user)
+        return render_template("sched.html",
+                               output=output,
+                               DATE=time.strftime("%Y-%m-%d"),
+                               TIME=time.strftime("%I:%M:%S%p")
+                               )
+    else:
+        flash("Login before getting your schedule!")
+        return redirect(url_for('index'))
+
+@app.route('/scheduleapi')
+# Get to the schedule api manually
+def scheduleapi():
+    link = "/jqschedule?id=%s" % (authid)
+    return redirect(link)
+
+# json parsing functions
 def date_handler(obj):
     if hasattr(obj, 'isoformat'):
         return obj.isoformat()
@@ -67,35 +148,3 @@ def time_to_string(s):
     seconds_str += "%s" % (seconds)
 
     return ("%s:%s:%s" % (hours_str, minutes_str, seconds_str))
-
-@app.route('/jqlogin')
-# Handles jquery logins.
-def jqlogin():
-    authid = request.args.get('id')
-    userin = login.login_jquery(authid)
-
-    global user
-    user = userin.get("username")
-    global authid
-    authid = userin.get("authid")
-    if user: 
-        dictout = main.getapi(user)
-        dictout.update({"authid": authid})
-        return json.dumps(dictout, default=date_handler)
-    else:
-        return "Error: no id found"
-
-@app.route('/apibrowser')
-# Handles manually logged in API browsers
-def apibrowser():
-    if user:
-        output = main.table_info(user)
-        return render_template("data.html",
-                               output=output,
-                               DATE=time.strftime("%Y-%m-%d"),
-                               TIME=time.strftime("%I:%M:%S%p")
-                               )
-    else:
-        flash("Log in before continuing!")
-        return redirect(url_for('index'))
-    

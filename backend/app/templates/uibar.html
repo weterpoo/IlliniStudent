@@ -4,7 +4,8 @@
   </head>
   <body>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="apistyle.css") }}">
-    <div>IlliniStudent: <a href="/">Table Output</a> <a href="/webapi">API Output</a></div>
+    <div>IlliniStudent: <a href="/taskview">Task Table</a> | <a href="/scheduleview">Schedule Table</a> | <a href="/taskapi">Task API</a> | <a href="/scheduleapi">Schedule API</a> | <a href="/index">Home</a>
+    </div>
     <hr>
     {% with messages = get_flashed_messages() %}
       {% if messages %}

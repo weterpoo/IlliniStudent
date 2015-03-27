@@ -1,0 +1,38 @@
+{% extends "uibar.html" %}
+{% block content %}
+    {% if output %}
+    <table width=100% Border=5>
+      <tr>
+        <th align="center">Class</th>
+        <th colspan=2 align="center">Monday (Start|End)</th>
+        <th colspan=2 align="center">Tuesday (Start|End)</th>
+        <th colspan=2 align="center">Wednesday (Start|End)</th>
+        <th colspan=2 align="center">Thursday (Start|End)</th>
+        <th colspan=2 align="center">Friday (Start|End)</th>
+        <th colspan=2 align="center">Saturday (Start|End)</th>
+        <th colspan=2 align="center">Sunday (Start|End)</th>
+      </tr>
+      {% for class, mon_s, mon_e, tues_s, tues_e, wed_s, wed_e, thur_s, thur_e, fri_s, fri_e, sat_s, sat_e, sun_s, sun_e in output %}
+        <tr>
+          <td align="center">{{ class }}</td>
+          <td align="center">{{ mon_s }}</td>
+          <td align="center">{{ mon_e }}</td>
+          <td align="center">{{ tues_s }}</td>
+          <td align="center">{{ tues_e }}</td>
+          <td align="center">{{ wed_s }}</td>
+          <td align="center">{{ wed_e }}</td>
+          <td align="center">{{ thur_s}}</td>
+          <td align="center">{{ thur_e }}</td>
+          <td align="center">{{ fri_s }}</td>
+          <td align="center">{{ fri_e }}</td>
+          <td align="center">{{ sat_s }}</td>
+          <td align="center">{{ sat_e }}</td>
+          <td align="center">{{ sun_s }}</td>
+          <td align="center">{{ sun_e }}</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+        <p>Your schedule is empty!</p>
+    {% endif %}
+    </table>
+{% endblock %}
