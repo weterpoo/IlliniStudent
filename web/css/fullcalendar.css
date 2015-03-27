@@ -7,7 +7,7 @@
 
 .fc {
 	direction: ltr;
-	text-align: left;
+	text-align: center;
 }
 
 .fc-rtl {
@@ -164,7 +164,7 @@ NOTE: use percentage font sizes or else old IE chokes
 	padding: 0 .6em;
 
 	/* text & cursor */
-	font-size: 1em; /* normalize */
+	font-size: 1.3em; /* normalize */
 	white-space: nowrap;
 	cursor: pointer;
 }
