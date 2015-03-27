@@ -4,6 +4,7 @@ from app import main
 from forms import LoginForm
 import login
 import json
+import time
 
 #important variables to be used
 user=None
@@ -16,11 +17,11 @@ def index():
     form = LoginForm()
     if request.method == 'POST':
         # Pass the args on the url as user and password
+        global user
         user = form.user_name.data
+        global password
         password = form.user_pass.data
 
-        # Flash a message to the users
-        flash(("Login Requested for ID=%s") % (user))
         signed_in = login.login(user, password)
         if type(signed_in) == str:
             return signed_in
@@ -31,10 +32,10 @@ def index():
         return render_template('index.html',
                                form=form)
 
-@app.route('/webapi')
-def webapi():
-    dictout = main.getapi()
-    return json.dumps(dictout, default=date_handler)
+# @app.route('/webapi')
+# def webapi():
+#     dictout = main.getapi()
+#     return json.dumps(dictout, default=date_handler)
     
 def date_handler(obj):
     if hasattr(obj, 'isoformat'):
@@ -73,14 +74,28 @@ def jqlogin():
     authid = request.args.get('id')
     userin = login.login_jquery(authid)
 
+    global user
     user = userin.get("username")
+    global authid
     authid = userin.get("authid")
     if user: 
-        return "Welcome %s with id: %s" % (user, authid)
+        dictout = main.getapi(user)
+        dictout.update({"authid": authid})
+        return json.dumps(dictout, default=date_handler)
     else:
         return "Error: no id found"
 
 @app.route('/apibrowser')
 # Handles manually logged in API browsers
 def apibrowser():
-    return "Thank you for logging in!"
+    if user:
+        output = main.table_info(user)
+        return render_template("data.html",
+                               output=output,
+                               DATE=time.strftime("%Y-%m-%d"),
+                               TIME=time.strftime("%I:%M:%S%p")
+                               )
+    else:
+        flash("Log in before continuing!")
+        return redirect(url_for('index'))
+    
