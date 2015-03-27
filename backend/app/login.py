@@ -56,12 +56,43 @@ def create_login(un, ue, up, uid, um, ug):
                                                                               ue,
                                                                               uid)
     result = access.find("userinfo", ('username', 'useremail', 'usernetid'), cond)
-    if not (len(result) == 0):
+    if not (result == None):
         # return something when it already exists
         print "user exists"
         return False
     access.insert('userinfo', un, ue,
                   user_p, uid, um, ug, user_id)
+    # When the user creates an account, there should be two databases created
+    # for the user
+    # <username>_schedule
+    # <username>
+
+    table1 = "%s" % (un)
+    table2 = "%s_schedule" % (un)
+    access.create_new(table1, ('assign_name', 'VARCHAR(50) NOT NULL'),
+                      ('class_name', 'VARCHAR(30)'),
+                      ('description', 'VARCHAR(256)'),
+                      ('due_date', 'DATE'), ('due_time', 'TIME'),
+                      ('tags', 'VARCHAR(256)')
+                      )
+    access.create_new(table2, ('class', 'VARCHAR(128) NOT NULL'),
+                      ('monday_start', 'TIME'),
+                      ('monday_end', 'TIME'),
+                      ('tuesday_start', 'TIME'),
+                      ('tuesday_end', 'TIME'),
+                      ('wednesday_start', 'TIME'),
+                      ('wednesday_end', 'TIME'),
+                      ('thursday_start', 'TIME'),
+                      ('thursday_end', 'TIME'),
+                      ('friday_start', 'TIME'),
+                      ('friday_end', 'TIME'),
+                      ('saturday_start', 'TIME'),
+                      ('saturday_end', 'TIME'),
+                      ('sunday_start', 'TIME'),
+                      ('sunday_end', 'TIME'),
+                      ('class_start', 'DATE'),
+                      ('class_end', 'DATE')
+                      )
     return login(un, up)
     
 # Make a function to edit login info
@@ -94,7 +125,7 @@ def main():
     create_login('SomethingRandom', 'random.rambo@gmail.com',
                  'abc123', 'rand123','GENERAL', '2099-12-00')
 
-    jquery_result = login_jquery("$6$rounds=108441$5IQLSZTA4Q91OAJD$3uTUw53SFsocT5AyQ0YwVxGCkA0PECv9A3DfOcAN9GRiK.EQ6kKK1gC3OxKRZFFjlF4whCtfKGYz0djx97XSw1")
+    jquery_result = login_jquery("$6$rounds=93721$q/WllrDVBZCHqQgU$5xnOxgqlvMJP4ZUhEbHNhiQ/YNYnvY636XdI/w1qrDegx/vwjeH9CJBPpEaKPpWtDya7BfEKSF/Msh328luP30")
     
     print "Hello %s! Hope you have a good day!" % (jquery_result.get("username"))
 
