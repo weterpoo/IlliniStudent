@@ -171,7 +171,7 @@ class ManageTable(object):
         return db.retrieve(tbl)
         >>> will return ('Shotaro', '2015-03-11')
         """
-        return self.find(tbl)
+        return self.findall(tbl)
 
     def generate_api(self, tbl):
         """
