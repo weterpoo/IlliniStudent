@@ -1,19 +1,28 @@
 {% extends "uibar.html" %}
 {% block content %}
+    {% if output %}
     <table style="width=100%">
       <tr>
         <th>Assignment Name</th>
         <th>Class</th>
+        <th>Description</th>
         <th>Due Date</th>
         <th>Due Time</th>
+        <th>Tags</th>
       </tr>
-    {% for assign_name, class, dued, duet in output %}
+      {% for assign_name, class, desc, dued, duet, tags in output %}
         <tr>
           <td>{{ assign_name }}</td>
           <td>{{ class }}</td>
+          <td>{{ desc }}</td>
           <td>{{ dued }}</td>
           <td>{{ duet }}</td>
+          <td>{{ tags }}</td>
         </tr>
-    {% endfor %}
+      {% endfor %}
+    {% else %}
+        <p>Your table is empty! DATTEBAYO</p>
+        <img src="{{ url_for('static', filename='dattebayo.jpg')}}" alt="Can't tell you what it is until you see it" style="width:305px;height:360px">
+    {% endif %}
     </table>
 {% endblock %}
