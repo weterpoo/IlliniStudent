@@ -1,19 +1,19 @@
 ###################################################################################
 # opendatabase.py
 # Dependencies, MySQLdb
-# 
+#
 # This is the main function used to communicate with the database.
 # Make sure you create an Object of ManageTable first, or the functions will
 # not work as expected.
-# 
+#
 # You also must have a MySQL user authorized the access the specific database
 # you are attempting to read, write, create, etc. to the tables.
-# 
+#
 # TODO
 # - Must create a delete() function to delete an element in the tables
 # - Must create a update() function to update the table, deleting old
 # or expired elements in the table.
-# 
+#
 # This module is written to be flexible as possible, please keep it that way.
 # If you do not understand how the module accesses/writes to the database, you
 # may want to look into MYSQL and how tables are created
@@ -34,7 +34,7 @@ class ManageTable(object):
         """
         Initialize which user to login as.
         ManageTable(<Login Location>, <Username>, <Password>, <Database Name>)
-        
+
         Example:
         db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
 
@@ -42,7 +42,27 @@ class ManageTable(object):
         Make sure you have created the user, with access to the database you
         are connecting to.
         """
-        self.con = mdb.connect(net_loc, user, password, db)
+        self.net = net_loc
+        self.user = user
+        self.passwd = password
+        self.db = db
+        self.con = mdb.connect(self.net, self.user,
+                                self.passwd, self.db)
+
+    def stale_fix(self):
+        """
+        Checks the mysql connection to see if everything is working as expacted.
+        If there isn't, it initializes a new connection, so things do go
+        smoothly.
+        """
+        try:
+            cur = self.con.cursor()
+            cur.execute("")
+        except (AttributeError, MySQLdb.OperationalError):
+            self.con = mdb.connect(self.net, self.user,
+                                    self.passwd, self.db)
+            cur.execute("")
+
 
     def create_new(self, tbl_name, *args):
         """
@@ -51,7 +71,7 @@ class ManageTable(object):
         create_new(<table name>, (<name of table element>, <variable type>), ...)
         *args must be passed as a tuple. You can pass more than 1 tuple to
         create more elements in the table
-  
+
         create_new() returns the table name given. You can use this to guarentee
         that other functions are reading/writing to the same table.
 
@@ -59,12 +79,13 @@ class ManageTable(object):
         db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
         db.create_new('TestTable', ('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
         """
+        self.stale_fix()
 
         with self.con:
             cur = self.con.cursor()
             command = "DROP TABLE IF EXISTS %s" % (tbl_name)
             cur.execute(command)
-            
+
             tbl_args = ""
             for key, value in args:
                 tbl_args += " %s %s," % (key, value)
@@ -90,6 +111,8 @@ class ManageTable(object):
         db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
         db.create('TestTable', ('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
         """
+        self.stale_fix()
+
         # Quick Error checking:
         if not (type(args[0]) == tuple):
             FormatError('One or more element of args is not a tuple')
@@ -120,6 +143,8 @@ class ManageTable(object):
         return db.describe(tbl)
         >>> Will return (('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
         """
+        self.stale_fix()
+
         with self.con:
             cur = self.con.cursor()
             cur.execute("DESCRIBE %s" % (tbl))
@@ -135,7 +160,7 @@ class ManageTable(object):
         Use describe() if you are not sure what data formats are required
         (or use DESCRIBE <table name>; in MYSQL)
 
-        Example: 
+        Example:
         db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
         tbl = db.create('TestTable', ('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
 
@@ -144,6 +169,8 @@ class ManageTable(object):
         >>> This will populate the first row of TestTable with
         "Shotaro | 2015-03-11"
         """
+        self.stale_fix()
+
         with self.con:
             cur = self.con.cursor()
             values = ""
@@ -184,14 +211,15 @@ class ManageTable(object):
         db.insert(tbl, 'Shotaro', '2015-03-11')
 
         return db.generate_api(tbl)
-        >>> Will return 
+        >>> Will return
                         {"TABLE":
                            ({"Name": "Shotaro", "Date": "2015-03-11"})
-                        
+
                          "TIME":
                             { "UPDATED": "2015-03-25T21:55:09.401689"}
                         }
         """
+        self.stale_fix()
         with self.con:
             cur = self.con.cursor(mdb.cursors.DictCursor)
             cur.execute('SELECT * FROM %s' % (tbl))
@@ -199,7 +227,7 @@ class ManageTable(object):
             return_dict = {}
             return_dict.update({ tbl : return_tupl,
                                 "TIME": { "UPDATED": datetime.now()}})
-            
+
             return return_dict
         return None
 
@@ -209,7 +237,7 @@ class ManageTable(object):
         id_name must be passed on as a tuple.
 
         condition must be passed on as a string of a MYSQL condition statement.
-        
+
         Example:
         db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
         tbl = db.create('TestTable', ('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
@@ -218,6 +246,8 @@ class ManageTable(object):
         return db.find(tbl, ('Name'), "Date = '2015-03-11'")
         >>> Returns ('Name', 'Shotaro')
         """
+        self.stale_fix()
+
         # Error Checking
         if not ((type(id_name) == tuple) or (id_name == None)):
             FormatError('id_name is not a tuple')
@@ -251,14 +281,14 @@ class ManageTable(object):
             else:
                 return return_tupl[0]
         return None
-        
+
     def findall(self, tbl_name, id_name=None, condition=None):
         """
         Returns all specific values based on conditions.
         id_name must be passed on as a tuple.
 
         condition must be passed on as a string of a MYSQL condition statement.
-        
+
         Example:
         db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
         tbl = db.create('TestTable', ('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
@@ -267,6 +297,7 @@ class ManageTable(object):
         return db.find(tbl, ('Name'), "Date = '2015-03-11'")
         >>> Returns ('Name', 'Shotaro')
         """
+        self.stale_fix()
         # Error Checking
         if not ((type(id_name) == tuple) or (id_name == None)):
             FormatError('id_name is not a tuple')
@@ -324,6 +355,7 @@ class ManageTable(object):
         """
         Delete the row which satisfies content in certain coloum.
         """
+        self.stale_fix()
         with self.con:
             cur = self.con.cursor()
             query = "DELETE FROM %s WHERE (%s = %s)" % (tbl, coloum, content)
