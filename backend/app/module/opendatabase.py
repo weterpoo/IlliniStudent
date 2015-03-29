@@ -361,3 +361,28 @@ class ManageTable(object):
             query = "DELETE FROM %s WHERE (%s = %s)" % (tbl, coloum, content)
             cur.execute(query)
             self.set_time()
+    
+    def edit(self, tbl, coloum, content, replace):
+        """
+        Edit certain cell
+        """
+        with self.con:
+           cur = self.con.cursor()
+           query = "UPDATE %s SET %s = %s WHERE (%s = %s)" % (tbl,
+                                                              coloum,
+                                                              replace,
+                                                              coloum,
+                                                              content)
+           cur.execute(query)
+           self.set_time()
+
+    def update(self, tbl, datecoloum, date):
+        """
+        delete all rows before certain time
+        """
+        with self.con:
+            cur = self.con.cursor()
+            query = "DELETE FROM %s WHERE %s < %r" % (tbl,datecoloum,date)
+            cur.execute(query)
+            self.set_time()
+
