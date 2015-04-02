@@ -58,11 +58,18 @@ class ManageTable(object):
         try:
             cur = self.con.cursor()
             cur.execute("")
-        except (AttributeError, MySQLdb.OperationalError):
+        except (AttributeError, mdb.OperationalError):
             self.con = mdb.connect(self.net, self.user,
                                     self.passwd, self.db)
             cur.execute("")
 
+    def close_con(self):
+        """
+        Closes the connection to the mysql database.
+        Another prevention of "_mysql has gone away"
+        """
+        if self.con:
+            self.con.close()
 
     def create_new(self, tbl_name, *args):
         """
