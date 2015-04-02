@@ -8330,6 +8330,7 @@ Calendar.defaults = {
 	weekNumberCalculation: 'local',
 	
 	//editable: false,
+    editable: true,
 	
 	// event ajax
 	lazyFetching: true,
