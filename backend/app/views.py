@@ -112,6 +112,54 @@ def jqcreatelogin():
 
     return redirect('/taskapi')
 
+@app.route('/jqaddtask')
+def jqaddtask():
+    authid = request.args.get('id')
+    userin = login.login_jquery(authid)
+
+    global user
+    user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+
+    if not user:
+        return "not a valid id"
+
+    # Get the parameters required
+    u_assign = request.args.get('assign')
+    u_class = request.args.get('class')
+    u_desc = request.args.get('desc')
+    u_dued = request.args.get('dued')
+    u_duet = request.args.get('duet')
+    u_tags = request.args.get('tags')
+
+    # Check for Errors
+    if not u_assign:
+        return "assign is required"
+    if not u_class:
+        u_class = "Personal"
+    if not u_desc:
+        u_desc = ""
+    if not u_dued:
+        return "dued is required"
+    elif (not (len(u_dued) == 10) or
+        not (u_dued.rfind('-') == 7) or
+        not (u_dued.find('-') == 4)):
+        return "dued is not valid (needs YYYY-MM-DD)"
+    if not u_duet:
+        u_duet = "00:00:00"
+    elif (not (len(u_duet) == 8) or
+        not (u_duet.rfind('-') == 5) or
+        not (u_duet.find('-') == 2)):
+        return "duet is not valid (needs HH:MM:SS)"
+    if not u_tags:
+        u_tags = ""
+    # Front end must make sure that the characters do not overflow
+    main.add_task(user, u_assign, u_class, u_desc,
+                  u_dued, u_duet, u_tags)
+    return redirect('/taskapi')
+
+
 ##############################
 # jquery to obtain user data
 ##############################
