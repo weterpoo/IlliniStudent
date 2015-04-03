@@ -11,6 +11,7 @@
        - python-mysqldb (install in virtualenv)
        - nose (aka nosetests, not required to run the actual, only for test cases)
        - flask (install in vitualenv)
+       - passlib
 
     2. Python 2.7.x
 
@@ -120,6 +121,14 @@
       ```
       $ sudo apt-get install python-mysqldb
       ```
+  7. Installing passlib
+     <p> Passlib is a library for password encryptions, which means that we do not have to manually write SHA-1 encrpytion! (and other various ones)
+     <p> To install it activate your venv then
+     ```
+     (venv) $ pip install passlib
+     ```
+     <p> I believe you do not need sudo permission for this pacakge. Please contact me if I am wrong.
+     
 <p>Congradulations, you are now ready to follow the steps to running the backend!
     
 # Running the backend on your local machine:
