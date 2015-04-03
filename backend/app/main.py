@@ -31,6 +31,11 @@ def table_task(user_name):
     output = access.findall(user_name)
     return output
 
+def add_task(u_name, u_assign, u_class, u_desc, u_dued, u_duet,
+             u_tags):
+    access.insert(u_name, u_assign, u_class, u_desc, u_dued, u_duet,
+                  u_tags)
+
 ##################################################################################
 #
 # Schedule handling
@@ -44,6 +49,12 @@ def getapi_schedule(user_name):
 def table_schedule(user_name):
     tbl_name = "%s_schedule" % (user_name)
     return access.findall(tbl_name)
+
+##################################################################################
+#
+# Update time returners
+#
+##################################################################################
 
 def get_date():
     return access.get_date()
