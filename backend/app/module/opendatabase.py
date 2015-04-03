@@ -46,22 +46,15 @@ class ManageTable(object):
         self.user = user
         self.passwd = password
         self.db = db
+
+    def open_con(self):
+        """
+        Opens a connection to the mysql database.
+        Make sure self.close_con() is called after running
+        a command.
+        """
         self.con = mdb.connect(self.net, self.user,
                                 self.passwd, self.db)
-
-    def stale_fix(self):
-        """
-        Checks the mysql connection to see if everything is working as expacted.
-        If there isn't, it initializes a new connection, so things do go
-        smoothly.
-        """
-        try:
-            cur = self.con.cursor()
-            cur.execute("")
-        except (AttributeError, mdb.OperationalError):
-            self.con = mdb.connect(self.net, self.user,
-                                    self.passwd, self.db)
-            cur.execute("")
 
     def close_con(self):
         """
@@ -86,7 +79,8 @@ class ManageTable(object):
         db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
         db.create_new('TestTable', ('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
         """
-        self.stale_fix()
+        
+        self.open_con()
 
         with self.con:
             cur = self.con.cursor()
@@ -100,8 +94,8 @@ class ManageTable(object):
             command = "CREATE TABLE IF NOT EXISTS %s(%s)" % (tbl_name, tbl_args)
             cur.execute(command)
             self.set_time()
-            return tbl_name
-        return None
+        self.close_con()
+        return tbl_name if tbl_name else None
 
     def create(self, tbl_name, *args):
         """
@@ -118,11 +112,12 @@ class ManageTable(object):
         db = ManageTable('localhost', 'testuser', 'thisisapassword', 'testdb')
         db.create('TestTable', ('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
         """
-        self.stale_fix()
 
         # Quick Error checking:
         if not (type(args[0]) == tuple):
             FormatError('One or more element of args is not a tuple')
+
+        self.open_con()
 
         with self.con:
             cur = self.con.cursor()
@@ -135,8 +130,9 @@ class ManageTable(object):
             command = "CREATE TABLE IF NOT EXISTS %s(%s)" % (tbl_name, tbl_args)
             cur.execute(command)
             self.set_time()
-            return tbl_name
-        return None
+
+        self.close_con()
+        return tbl_name if tbl_name else None
 
     def describe(self, tbl):
         """
@@ -150,14 +146,16 @@ class ManageTable(object):
         return db.describe(tbl)
         >>> Will return (('Name', 'VARCHAR(20)'), ('Date', 'DATE'))
         """
-        self.stale_fix()
+
+        self.open_con()
 
         with self.con:
             cur = self.con.cursor()
             cur.execute("DESCRIBE %s" % (tbl))
             dataset = cur.fetchall()
-            return dataset
-        return None
+
+        self.close_con()
+        return dataset if dataset else None
 
     def insert(self, tbl, *val):
         """
@@ -176,7 +174,8 @@ class ManageTable(object):
         >>> This will populate the first row of TestTable with
         "Shotaro | 2015-03-11"
         """
-        self.stale_fix()
+
+        self.open_con()
 
         with self.con:
             cur = self.con.cursor()
@@ -192,6 +191,8 @@ class ManageTable(object):
             cur.execute(command)
             self.set_time()
 
+        self.close_con()
+
     def retrieve(self, tbl):
         """
         Obtains data from database as a Tuple.
@@ -205,7 +206,7 @@ class ManageTable(object):
         return db.retrieve(tbl)
         >>> will return ('Shotaro', '2015-03-11')
         """
-        return self.findall(tbl)
+        return self.find(tbl)
 
     def generate_api(self, tbl):
         """
@@ -226,7 +227,9 @@ class ManageTable(object):
                             { "UPDATED": "2015-03-25T21:55:09.401689"}
                         }
         """
-        self.stale_fix()
+        
+        self.open_con()
+
         with self.con:
             cur = self.con.cursor(mdb.cursors.DictCursor)
             cur.execute('SELECT * FROM %s' % (tbl))
@@ -235,8 +238,8 @@ class ManageTable(object):
             return_dict.update({ tbl : return_tupl,
                                 "TIME": { "UPDATED": datetime.now()}})
 
-            return return_dict
-        return None
+        self.close_con()
+        return return_dict if return_dict else None
 
     def find(self, tbl_name, id_name=None, condition=None):
         """
@@ -253,7 +256,6 @@ class ManageTable(object):
         return db.find(tbl, ('Name'), "Date = '2015-03-11'")
         >>> Returns ('Name', 'Shotaro')
         """
-        self.stale_fix()
 
         # Error Checking
         if not ((type(id_name) == tuple) or (id_name == None)):
@@ -278,16 +280,19 @@ class ManageTable(object):
             return_id = return_id.rstrip(", ")
         command = "SELECT %s FROM %s%s" % (return_id, tbl_name,
                                            cond)
+        self.open_con()
+        
         with self.con:
             cur = self.con.cursor()
             cur.execute(command)
             return_tupl = cur.fetchall()
-            #only return a tuple if there is something in it
-            if len(return_tupl) == 0:
-                return None
-            else:
-                return return_tupl[0]
-        return None
+
+        self.close_con()
+        #only return a tuple if there is something in it
+        if len(return_tupl) == 0:
+            return None
+        else:
+            return return_tupl[0] if return_tupl[0] else None
 
     def findall(self, tbl_name, id_name=None, condition=None):
         """
@@ -304,7 +309,7 @@ class ManageTable(object):
         return db.find(tbl, ('Name'), "Date = '2015-03-11'")
         >>> Returns ('Name', 'Shotaro')
         """
-        self.stale_fix()
+        
         # Error Checking
         if not ((type(id_name) == tuple) or (id_name == None)):
             FormatError('id_name is not a tuple')
@@ -328,16 +333,20 @@ class ManageTable(object):
             return_id = return_id.rstrip(", ")
         command = "SELECT %s FROM %s%s" % (return_id, tbl_name,
                                            cond)
+        self.open_con()
+        
         with self.con:
             cur = self.con.cursor()
             cur.execute(command)
             return_tupl = cur.fetchall()
-            #only return a tuple if there is something in it
-            if len(return_tupl) == 0:
-                return None
-            else:
-                return return_tupl[0]
-        return None
+
+        self.close_con()
+        #only return a tuple if there is something in it
+        if len(return_tupl) == 0:
+            return None
+        else:
+            return return_tupl if return_tupl else None
+
     def set_time(self):
         """
         Sets the current time. Used internally to figure out
@@ -362,17 +371,24 @@ class ManageTable(object):
         """
         Delete the row which satisfies content in certain coloum.
         """
-        self.stale_fix()
+
+        self.open_con()
+
         with self.con:
             cur = self.con.cursor()
             query = "DELETE FROM %s WHERE (%s = %s)" % (tbl, coloum, content)
             cur.execute(query)
-            self.set_time()
+
+        self.close_con()
+        self.set_time()
     
     def edit(self, tbl, coloum, content, replace):
         """
         Edit certain cell
         """
+
+        self.open_con()
+
         with self.con:
            cur = self.con.cursor()
            query = "UPDATE %s SET %s = %s WHERE (%s = %s)" % (tbl,
@@ -381,15 +397,22 @@ class ManageTable(object):
                                                               coloum,
                                                               content)
            cur.execute(query)
-           self.set_time()
+
+        self.close_con()
+        self.set_time()
 
     def update(self, tbl, datecoloum, date):
         """
         delete all rows before certain time
         """
+
+        self.open_con()
+
         with self.con:
             cur = self.con.cursor()
             query = "DELETE FROM %s WHERE %s < %r" % (tbl,datecoloum,date)
             cur.execute(query)
-            self.set_time()
+
+        self.close_con()
+        self.set_time()
 
