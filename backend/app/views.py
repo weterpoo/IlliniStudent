@@ -76,7 +76,9 @@ def jqschedule():
     else:
         return "Error: no id found"
 
+##################################################################################
 # Manual, user inputted pages
+##################################################################################
 @app.route('/taskview')
 # Handles manually logged in API browsers
 def taskview():
