@@ -1,23 +1,23 @@
 {% extends "uibar.html" %}
 {% block content %}
     {% if output %}
-    <table width=100% >
+    <table width=100% Border=5>
       <tr>
-        <th>Assignment Name</th>
-        <th>Class</th>
-        <th>Description</th>
-        <th>Due Date</th>
-        <th>Due Time</th>
-        <th>Tags</th>
+        <th align="center">Assignment Name</th>
+        <th align="center">Class</th>
+        <th align="center">Description</th>
+        <th align="center">Due Date</th>
+        <th align="center">Due Time</th>
+        <th align="center">Tags</th>
       </tr>
       {% for assign_name, class, desc, dued, duet, tags in output %}
         <tr>
-          <td>{{ assign_name }}</td>
-          <td>{{ class }}</td>
-          <td>{{ desc }}</td>
-          <td>{{ dued }}</td>
-          <td>{{ duet }}</td>
-          <td>{{ tags }}</td>
+          <td align="center">{{ assign_name }}</td>
+          <td align="center">{{ class }}</td>
+          <td align="center">{{ desc }}</td>
+          <td align="center">{{ dued }}</td>
+          <td align="center">{{ duet }}</td>
+          <td align="center">{{ tags }}</td>
         </tr>
       {% endfor %}
     {% else %}
