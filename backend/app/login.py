@@ -43,8 +43,6 @@ def create_login(un, ue, up, uid, um, ug):
     # Check for optional fields
     if um == None:
         um = "NULL"
-    if ug == None:
-        ug = "NULL"
 
     # Hash password
     user_p = pass_hasher(up)
@@ -58,8 +56,7 @@ def create_login(un, ue, up, uid, um, ug):
     result = access.find("userinfo", ('username', 'useremail', 'usernetid'), cond)
     if not (result == None):
         # return something when it already exists
-        print "user exists"
-        return False
+        return "Error -1: user exists. Please contact for help."
     access.insert('userinfo', un, ue,
                   user_p, uid, um, ug, user_id)
     # When the user creates an account, there should be two databases created

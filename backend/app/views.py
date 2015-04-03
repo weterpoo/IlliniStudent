@@ -5,12 +5,21 @@ from forms import LoginForm
 import login
 import json
 import time
+##################################################################################
+# important variables to be used
+###################################################################################
 
-#important variables to be used
+global user
+global authid
+global signed_in
+
 user=None
 authid=None
 signed_in=None
 
+##################################################################################
+# Flask Application Routes
+##################################################################################
 @app.route('/')
 @app.route('/index', methods=['POST', 'GET'])
 def index():
@@ -23,7 +32,7 @@ def index():
         password = form.user_pass.data
 
         signed_in = login.login(user, password)
-        if type(signed_in) == str:
+        if type(signed_in) == int:
             return render_template('fail.html',
                                    WARNING=signed_in,
                                    DATE=time.strftime("%Y-%m-%d"),
@@ -40,7 +49,72 @@ def index():
                                TIME=time.strftime("%I:%M:%S%p")
                                )
         
+##################################################################################
 # jquery related things go down here
+##################################################################################
+
+##############################
+# "Logging in"
+# 1. Used when user logins in a device without knowing their auth_id
+# 2. Used when user creates an account
+##############################
+
+@app.route('/jqlogin')
+def jqlogin():
+    userin = request.args.get('user')
+    passin = request.args.get('pass')
+
+    result = login.login(userin, passin)
+
+    if type(result) == int:
+        return result
+    else:
+        global authid
+        authid = result[1]
+        return redirect('/taskapi')
+
+@app.route('/jqcreatelogin')
+def jqcreatelogin():
+    userin = request.args.get('user')
+    emailin = request.args.get('email')
+    passin = request.args.get('pass')
+    netidin = request.args.get('netid')
+    majorin = request.args.get('major')
+    gradin = request.args.get('grad')
+
+    # Check if arguments are supplied
+    if not userin:
+        return "missing user parameter"
+    elif not emailin:
+        return "missing email parameter"
+    elif not passin:
+        return "missing pass parameter"
+    elif not netidin:
+        return "missing netid parameter"
+    elif not majorin:
+        majorin = "NULL"
+
+    if not gradin:
+        gradin = "0000-00-00"
+
+    if (not (len(gradin) == 10) or
+        not (gradin.rfind('-') == 7) or
+        not (gradin.find('-') == 4)):
+        return "grad is not in the right format."
+
+    user = login.create_login(userin, emailin, passin,
+                       netidin, majorin, gradin)
+    if type(user) == str:
+        return user
+
+    global authid
+    authid = user[1]
+
+    return redirect('/taskapi')
+
+##############################
+# jquery to obtain user data
+##############################
 @app.route('/jqtask')
 # Handles jquery logins.
 def jqtask():
@@ -52,7 +126,7 @@ def jqtask():
     global authid
     authid = userin.get("authid")
     if user: 
-        dictout = main.getapi(user)
+        dictout = main.getapi_task(user)
         dictout.update({"authid": authid})
         return json.dumps(dictout, default=date_handler)
     else:
@@ -79,11 +153,15 @@ def jqschedule():
 ##################################################################################
 # Manual, user inputted pages
 ##################################################################################
+
+####################
+# Task related
+####################
 @app.route('/taskview')
 # Handles manually logged in API browsers
 def taskview():
     if user:
-        output = main.table_info(user)
+        output = main.table_task(user)
         return render_template("data.html",
                                output=output,
                                DATE=time.strftime("%Y-%m-%d"),
@@ -99,6 +177,9 @@ def taskapi():
     link = "/jqtask?id=%s" % (authid)
     return redirect(link)
 
+####################
+# Schedule Related
+####################
 @app.route('/scheduleview')
 # get the schedule table
 def scheduleview():
@@ -119,7 +200,10 @@ def scheduleapi():
     link = "/jqschedule?id=%s" % (authid)
     return redirect(link)
 
+##################################################################################
 # json parsing functions
+##################################################################################
+
 def date_handler(obj):
     if hasattr(obj, 'isoformat'):
         return obj.isoformat()
