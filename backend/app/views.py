@@ -126,7 +126,17 @@ def jqcreatelogin():
     global authid
     authid = user[1]
 
-    return redirect('/taskapi')
+    userin = login.login_jquery(authid)
+    global user
+    user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+    if user: 
+        dictout = main.getapi_task(user)
+        dictout.update({"authid": authid})
+        return json.dumps(dictout, default=date_handler)
+    else:
+        return "Error: no id found"
 
 @app.route('/jqaddtask')
 def jqaddtask():
@@ -173,7 +183,18 @@ def jqaddtask():
     # Front end must make sure that the characters do not overflow
     main.add_task(user, u_assign, u_class, u_desc,
                   u_dued, u_duet, u_tags)
-    return redirect('/taskapi')
+
+    userin = login.login_jquery(authid)
+    global user
+    user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+    if user: 
+        dictout = main.getapi_task(user)
+        dictout.update({"authid": authid})
+        return json.dumps(dictout, default=date_handler)
+    else:
+        return "Error: no id found"
 
 
 ##############################
