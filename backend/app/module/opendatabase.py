@@ -280,6 +280,8 @@ class ManageTable(object):
             return_id = return_id.rstrip(", ")
         command = "SELECT %s FROM %s%s" % (return_id, tbl_name,
                                            cond)
+        print command
+        
         self.open_con()
         
         with self.con:
