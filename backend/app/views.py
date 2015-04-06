@@ -12,10 +12,13 @@ import time
 global user
 global authid
 global signed_in
+global password
 
 user=None
 authid=None
 signed_in=None
+password=None
+
 
 ##################################################################################
 # Flask Application Routes
@@ -61,17 +64,20 @@ def index():
 
 @app.route('/jqlogin')
 def jqlogin():
-    userin = request.args.get('user')
-    passin = request.args.get('pass')
+    global user
+    user = request.args.get('user')
+    global password
+    password = request.args.get('pass')
 
-    result = login.login(userin, passin)
-
+    result = login.login(user, password)
+    print result
     if type(result) == int:
         return result
     else:
         global authid
         authid = result[1]
-        return redirect('/taskapi')
+
+        return return_json_task()
 
 @app.route('/jqcreatelogin')
 def jqcreatelogin():
@@ -110,7 +116,7 @@ def jqcreatelogin():
     global authid
     authid = user[1]
 
-    return redirect('/taskapi')
+    return return_json_task()
 
 @app.route('/jqaddtask')
 def jqaddtask():
@@ -157,8 +163,8 @@ def jqaddtask():
     # Front end must make sure that the characters do not overflow
     main.add_task(user, u_assign, u_class, u_desc,
                   u_dued, u_duet, u_tags)
-    return redirect('/taskapi')
 
+    return return_json_task()
 
 ##############################
 # jquery to obtain user data
@@ -167,18 +173,8 @@ def jqaddtask():
 # Handles jquery logins.
 def jqtask():
     authid = request.args.get('id')
-    userin = login.login_jquery(authid)
 
-    global user
-    user = userin.get("username")
-    global authid
-    authid = userin.get("authid")
-    if user: 
-        dictout = main.getapi_task(user)
-        dictout.update({"authid": authid})
-        return json.dumps(dictout, default=date_handler)
-    else:
-        return "Error: no id found"
+    return return_json_task()
 
 @app.route('/jqschedule')
 # Handles automated schedule fetching
@@ -282,3 +278,18 @@ def time_to_string(s):
     seconds_str += "%s" % (seconds)
 
     return ("%s:%s:%s" % (hours_str, minutes_str, seconds_str))
+
+def return_json_task():
+    userin = login.login_jquery(authid)
+
+    global user
+    user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+
+    if user:
+        dictout = main.getapi_task(user)
+        dictout.update({"authid": authid})
+        return json.dumps(dictout, default=date_handler)
+    else:
+        return "Error: no id found"
