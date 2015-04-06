@@ -16,30 +16,15 @@
 
 <script>
 $(document).ready(function() {
-		var $user = $('#newName');
-		var	$pass = $('#newPassword');
-		var	$email = $('#newEmail');
-		var	$netid = $('#newNetID');
 $("#sign-up").click(function() {
-        var input = {
-		user: $user.val();
-		pass: $newPassword.val();
-		email: $newEmail.val();
-		netid: $newNetID.val();
-		}
-        
-        $.ajax({
-			type: 'POST',
-            url: '/jqcreatelogin',
-            data: input,
-            
-            success: function(response) {
-                alert(response);
-            },
-            error: function(error) {
-                alert(error);
-            }
-        });
+      	$.getJSON("http://illinistudent.cu.cc:5000/jqcreatelogin", {
+			user:$("#newName").val(), 
+			pass:$("#newPassword").val(),
+			netid:$("#newNetID").val(),
+			email:$("#newEmail").val() 
+			}, function(data) {
+        $("#result").text(data.result);
+	});
     });
 });
 
