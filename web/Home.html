@@ -14,6 +14,37 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+<script>
+$(document).ready(function() {
+		var $user = $('#newName');
+		var	$pass = $('#newPassword');
+		var	$email = $('#newEmail');
+		var	$netid = $('#newNetID');
+$("#sign-up").click(function() {
+        var input = {
+		user: $user.val();
+		pass: $newPassword.val();
+		email: $newEmail.val();
+		netid: $newNetID.val();
+		}
+        
+        $.ajax({
+			type: 'POST',
+            url: '/jqcreatelogin',
+            data: input,
+            
+            success: function(response) {
+                alert(response);
+            },
+            error: function(error) {
+                alert(error);
+            }
+        });
+    });
+});
+
+
+</script>
 <!-- Latest compiled JavaScript -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         
@@ -64,10 +95,14 @@
             <div class="form-group">
             <input class="form-control" type="text" placeholder="Password" id="newPassword"></input>
             </div>
-            <button type="button" class="btn btn-danger btn-block">Sign Up!</button>
+			<div class="form-group">
+            <input class="form-control" type="text" placeholder="NetID" id="newNetID"></input>
+            </div>
+            <button type="button" id="sign-up" class="btn btn-danger btn-block">Sign Up!</button>
         </div>
     </div>
     <div class="container">
     </div>
-</body>
+
+	</body>
 </html>
