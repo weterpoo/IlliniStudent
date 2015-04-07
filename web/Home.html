@@ -15,29 +15,75 @@
 function SignUp()
     {
         new Ajax.Request('http://illinistudent.cu.cc:5000/jqcreatelogin',{
-            method: 'get',
+            method: 'GET',
             user: $('#newName'),
             pass: $('#newPass'),
             email: $('#newEmail'),
             netid: $('#newNetID'),
+            
+            
         });
         
     }
    
    </script-->
-    <script>
+    
+    
+    <!--script>
 function Login()
     {
-        new Ajax.Request('http://illinistudent.cu.cc:5000/jqlogin',{
-            method: 'get',
-            user: $('#Email'),
-            pass: $('#Password')
-            
+        var json=$.getJSON("http://illinistudent.cu.cc:5000/jqlogin",{
+            user:$("#Email").val(),
+            pass:$("#Password").val(),
+        }, function(data){
+            $("#result").text(data.result)
+        },
+        success: function(data){
+            window.location.href="main.html";
         });
+    
+                
+            
     }
 
 
-</script>
+</script-->
+    
+    <script>
+    function Login()
+        {
+            var user=$("#Username").val();
+            var pass=$("#Password").val();
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: "http://illinistudent.cu.cc:5000/jqlogin",
+                data:{user:name, pass:pass},
+                
+            });
+            setTimeout(function(){
+                window.location.href="main.html"}, 1000);
+        }
+    </script>
+    <script>
+    function SignUp()
+        {
+            var newuser=$("#newName").val();
+            var newpass=$("#newPassword").val();
+            var newnetid=$("#newNetID").val();
+            var newemail=$("newEmail").val();
+            $.ajax({
+                dataType:"json",
+                type: "GET",
+                url: "http://illinistudent.cu.cc:5000/jqcreatelogin",
+                data:{user:newuser, pass:newpass, netid:newnetid, email:newemail},
+            });
+            setTimeout(function(){
+                alert("New User Created!")}, 1000);
+        }
+    
+    
+    </script>
 </head>
     
 <body>
@@ -48,7 +94,7 @@ function Login()
 <!-- Latest compiled JavaScript -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     
-<script>
+<!--script>
 $(document).ready(function() {
 $("#sign-up").click(function() {
       	var stuff= $.getJSON("http://illinistudent.cu.cc:5000/jqcreatelogin", {
@@ -63,7 +109,7 @@ $("#sign-up").click(function() {
 });
 
 
-</script>
+</script-->
     
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -86,14 +132,14 @@ $("#sign-up").click(function() {
     <div class="container">
         <div class="col-sm-4 col-sm-offset-4">
             <div class="form-group">
-            <input class="form-control" type="text" placeholder="Email" id="Email"></input>
+            <input class="form-control" type="text" placeholder="Username" id="Username"></input>
             </div>
             <div class="form-group">
             <input class="form-control" type="text" placeholder="Password" id="Password"></input>
             </div>
             <!--delete line 47 and 49 after presentation-->
             <!--a href="Main.html"-->
-            <button type="button" onclick="Login()" class="btn btn-success btn-block">Sign Up!</button>
+            <button type="button" onclick="Login()" class="btn btn-success btn-block">Sign In!</button>
             <!--/a-->
         </div>
     </div>
@@ -104,19 +150,19 @@ $("#sign-up").click(function() {
         <h2 align="center">Sign up below!</h2>
         <div class="col-sm-4 col-sm-offset-4">
             <div class="form-group">
-            <input class="form-control" type="text" placeholder="Name" id="newName"></input>
-            </div>
-            <div class="form-group">
-            <input class="form-control" type="text" placeholder="Email" id="newEmail"></input>
+            <input class="form-control" type="text" placeholder="Username" id="newName"></input>
             </div>
             <div class="form-group">
             <input class="form-control" type="text" placeholder="Password" id="newPassword"></input>
             </div>
+            <div class="form-group">
+            <input class="form-control" type="text" placeholder="Email" id="newEmail"></input>
+            </div>
 			<div class="form-group">
             <input class="form-control" type="text" placeholder="NetID" id="newNetID"></input>
             </div>
-            <!--button type="button" onclick="SignUp()" class="btn btn-danger btn-block">Sign Up!</button-->
-<button type="button" id="sign-up" class="btn btn-danger btn-block">Sign Up!</button>
+            <!--button type="button" class="btn btn-danger btn-block" id="sign-up">Sign Up!</button-->
+<button type="button" id="sign-up" class="btn btn-danger btn-block" onclick="SignUp()">Sign Up!</button-->
         </div>
     </div>
     <div class="container">
