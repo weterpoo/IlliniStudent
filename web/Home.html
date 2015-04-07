@@ -8,16 +8,50 @@
     
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/flatlybootstrap.css">
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script>
+    
+    <!--script>
+function SignUp()
+    {
+        new Ajax.Request('http://illinistudent.cu.cc:5000/jqcreatelogin',{
+            method: 'get',
+            user: $('#newName'),
+            pass: $('#newPass'),
+            email: $('#newEmail'),
+            netid: $('#newNetID'),
+        });
+        
+    }
+   
+   </script-->
+    <script>
+function Login()
+    {
+        new Ajax.Request('http://illinistudent.cu.cc:5000/jqlogin',{
+            method: 'get',
+            user: $('#Email'),
+            pass: $('#Password')
+            
+        });
+    }
+
+
+</script>
 </head>
     
 <body>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
 <script>
 $(document).ready(function() {
 $("#sign-up").click(function() {
-      	$.getJSON("http://illinistudent.cu.cc:5000/jqcreatelogin", {
+      	var stuff= $.getJSON("http://illinistudent.cu.cc:5000/jqcreatelogin", {
 			user:$("#newName").val(), 
 			pass:$("#newPassword").val(),
 			netid:$("#newNetID").val(),
@@ -30,9 +64,7 @@ $("#sign-up").click(function() {
 
 
 </script>
-<!-- Latest compiled JavaScript -->
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        
+    
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -60,9 +92,9 @@ $("#sign-up").click(function() {
             <input class="form-control" type="text" placeholder="Password" id="Password"></input>
             </div>
             <!--delete line 47 and 49 after presentation-->
-            <a href="Main.html">
-            <button type="button" class="btn btn-success btn-block">Submit</button>
-            </a>
+            <!--a href="Main.html"-->
+            <button type="button" onclick="Login()" class="btn btn-success btn-block">Sign Up!</button>
+            <!--/a-->
         </div>
     </div>
     </div>
@@ -83,7 +115,8 @@ $("#sign-up").click(function() {
 			<div class="form-group">
             <input class="form-control" type="text" placeholder="NetID" id="newNetID"></input>
             </div>
-            <button type="button" id="sign-up" class="btn btn-danger btn-block">Sign Up!</button>
+            <!--button type="button" onclick="SignUp()" class="btn btn-danger btn-block">Sign Up!</button-->
+<button type="button" id="sign-up" class="btn btn-danger btn-block">Sign Up!</button>
         </div>
     </div>
     <div class="container">
