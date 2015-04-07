@@ -1,4 +1,4 @@
-@import url("http://fonts.googleapis.com/css?family=Lato:400,700,400italic");
+@import url("//fonts.googleapis.com/css?family=Lato:400,700,400italic");
 /*!
  * bootswatch v3.3.2
  * Homepage: http://bootswatch.com
@@ -120,14 +120,20 @@ textarea {
   font: inherit;
   margin: 0;
 }
-apage {
+#about1{
+font-size: 2em;
+font-weight: bold;
+}
+#about2 {
 font-size: 1em;
-margin: auto
-border:10px;
-width: 300px;
+margin: auto;
+border:1em;
+width: 50em;
 text-align:left;
 
+
 }
+
 button {
   overflow: visible;
 }
