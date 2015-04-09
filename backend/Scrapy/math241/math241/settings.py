@@ -12,8 +12,9 @@ BOT_NAME = 'math241'
 
 SPIDER_MODULES = ['math241.spiders']
 NEWSPIDER_MODULE = 'math241.spiders'
+DEFAULT_ITEM_CLASS = 'math241.items.mathItem'
 
-ITEM_PIPELINES = {'math241.pipelines.Math241Pipeline':0}
+ITEM_PIPELINES = {'math241.pipelines.Math241Pipeline':1}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'math241 (+http://www.yourdomain.com)'
