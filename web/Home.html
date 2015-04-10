@@ -57,7 +57,7 @@ function Login()
             $.ajax({
                 dataType: "json",
                 type: "GET",
-                url: "http://illinistudent.cu.cc:5000/jqlogin",
+                url: "localhost:5000/jqlogin",
                 data:{user:name, pass:pass},
                 
             });
@@ -75,7 +75,7 @@ function Login()
             $.ajax({
                 dataType:"json",
                 type: "GET",
-                url: "http://illinistudent.cu.cc:5000/jqcreatelogin",
+                url: "localhost:5000/jqcreatelogin",
                 data:{user:newuser, pass:newpass, netid:newnetid, email:newemail},
             });
             setTimeout(function(){
