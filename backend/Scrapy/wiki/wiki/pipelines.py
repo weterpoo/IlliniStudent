@@ -8,7 +8,7 @@ from scrapy.exceptions import DropItem
 
 class WikiPipeline(object):
 
-	words_to_filter = ['due']
+	words_to_filter = ['hw']
 
 	def process_item(self, item, spider):
 		for word in self.words_to_filter:

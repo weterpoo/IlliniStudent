@@ -16,7 +16,7 @@ class Math241Demo(Spider):
 
 		for site in sites:
 			item = WikiItem()
-			item['name'] = site.xpath('text()').re(re.compile('\w+', re.UNICODE))
+			item['name'] = site.xpath('text()').re(r'HW\s{1}\d+')
 			#item['name'] = site.re('HW\s{1}\d+')
 			#item['name'] = site.xpath('text()').re(re.match(r'HW\s{1}\w+', re.UNICODE))
 			#item['name'] = site.xpath('text()').extract()
