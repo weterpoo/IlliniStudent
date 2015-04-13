@@ -166,6 +166,11 @@ def jqaddtask():
 
     return return_json_task()
 
+@app.route('/jqedittask')
+def jqedittask():
+    mesg = request.args.get('msg')
+    return mesg
+
 ##############################
 # jquery to obtain user data
 ##############################
