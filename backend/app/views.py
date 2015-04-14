@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, request, url_for
+from flask import render_template, flash, redirect, request, url_for, Response
 from app import app
 from app import main
 from forms import LoginForm
@@ -295,6 +295,8 @@ def return_json_task():
     if user:
         dictout = main.getapi_task(user)
         dictout.update({"authid": authid})
-        return json.dumps(dictout, default=date_handler)
+        data = json.dumps(dictout, default=date_handler)
+        resp = Response(response=data, status=200, mimetype="application/json")
+        return resp
     else:
         return "Error: no id found"
