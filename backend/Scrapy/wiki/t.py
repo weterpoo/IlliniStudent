@@ -25,10 +25,3 @@ if __name__ == "__main__":
     with open(DUMP_NAME, 'w') as out:
         table = get_formated_announcement()
         out.write(table)
-    
-    
-    
-    
-    
-    
-
