@@ -109,6 +109,20 @@ def pass_hasher(password):
 def pass_equal(password, hashed_password):
     return pwd_context.verify(password, hashed_password)
 
+def delete_user(name=None):
+    access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
+    if name:
+        schedule_table = "%s_schedule" % (name)
+        
+        access.delete('userinfo', 'username', name)
+        access.delete_table(name)
+        access.delete_table(schedule_table)
+        return "Success"
+
+    return "No name of user specified."
+        
+
+
 # Test functions
 def main():
     print "Trying User 1"

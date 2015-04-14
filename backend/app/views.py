@@ -200,6 +200,17 @@ def jqschedule():
         return "Error: no id found"
 
 ##################################################################################
+# DANGER ZONE!
+##################################################################################
+@app.route('/jqsadboys')
+# Deletes the user. Good bye :(
+def jqsadboys():
+    authid = request.args.get('id')
+    userin = login.login_jquery(authid)
+    return login.delete_user(userin.get("username"))
+    
+
+##################################################################################
 # Manual, user inputted pages
 ##################################################################################
 
