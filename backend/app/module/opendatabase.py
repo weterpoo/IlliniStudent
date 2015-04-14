@@ -383,6 +383,21 @@ class ManageTable(object):
 
         self.close_con()
         self.set_time()
+
+    def delete_table(self, tbl):
+        """
+        Runs the query: DROP TABLE IF EXISTS
+        """
+
+        self.open_con()
+
+        with self.con:
+            cur = self.con.cursor()
+            query = "DROP TABLE IF EXISTS %s" % (tbl)
+            cur.execute(query)
+
+        self.close_con()
+        self.set_time()
     
     def edit(self, tbl, coloum, content, replace):
         """
