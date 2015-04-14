@@ -378,7 +378,7 @@ class ManageTable(object):
 
         with self.con:
             cur = self.con.cursor()
-            query = "DELETE FROM %s WHERE (%s = %s)" % (tbl, coloum, content)
+            query = "DELETE FROM %s WHERE %s = \'%s\'" % (tbl, coloum, content)
             cur.execute(query)
 
         self.close_con()
