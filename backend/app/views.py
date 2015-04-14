@@ -208,6 +208,11 @@ def jqsadboys():
     authid = request.args.get('id')
     userin = login.login_jquery(authid)
     return login.delete_user(userin.get("username"))
+
+@app.route('/quickdel')
+def quickdel():
+    quick_user = request.args.get('user')
+    return login.delete_user(quick_user)
     
 
 ##################################################################################
