@@ -35,7 +35,7 @@ def index():
         password = form.user_pass.data
 
         signed_in = login.login(user, password)
-        if type(signed_in) == int:
+        if type(signed_in) == str:
             return render_template('fail.html',
                                    WARNING=signed_in,
                                    DATE=time.strftime("%Y-%m-%d"),
