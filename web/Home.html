@@ -118,10 +118,15 @@ function Login()
                    {
                        window.alert("Choose new username/password");
                    }
-                if(data=="missing user parameter" || data=="missing pass parameter" || data=="missing email parameter" || data=="missing netid")
+                else if(data=="missing user parameter" || data=="missing pass parameter" || data=="missing email parameter" || data=="missing netid")
                 {
                     window.alert("Fill all fields");
                 }
+                else if(data!="Error -1: user exists. Please contact for help." && (data!="missing user parameter" || data!="missing pass parameter" || data!="missing email parameter" || data!="missing netid"))
+                {
+                    window.alert("New User Created, Sign in above");
+                }
+                
                 
                    
             }
