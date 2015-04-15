@@ -76,10 +76,9 @@ function Login()
                     }
                     else
                     {
-                       Cookies.set('name', data, {expires: 7, path: '/'});
+                        Cookies.json=true;
+                       Cookies.set('authdid', data, {expires: 7, path: '/'});
                         console.log(Cookies.get());
-                        
-                        
                         window.location.href="Main.html";
                        // document.cookie="username=valid"
                         
