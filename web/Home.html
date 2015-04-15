@@ -77,7 +77,7 @@ function Login()
                     else
                     {
                         Cookies.json=true;
-                       Cookies.set('authdid', data, {expires: 7, path: '/'});
+                       Cookies.set('user', data, {path: '/'});
                         console.log(Cookies.get());
                         window.location.href="Main.html";
                        // document.cookie="username=valid"

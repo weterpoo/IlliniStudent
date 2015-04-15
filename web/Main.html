@@ -14,8 +14,13 @@
     
     <script src="js/moment.js"></script>
     
+    
+    
+    
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
+    <script src="js/js.cookie.js"></script>
 
     <script src="js/fullcalendar.js"></script>
     <!-- Latest compiled JavaScript -->
@@ -47,6 +52,7 @@
         
         
     })
+   
 
     });
     </script>
@@ -54,14 +60,21 @@
     
     
     <script>
-    $(document).ready(function(){
-    if(Cookie.exists('authid')==false)
+    if(Cookies.get('user')==null)
     {
+        //alert("Hello");
+       // window.location.href="Home.html";
+        console.log(Cookies.get());
+        //alert("Hello!");
         window.location.href="Home.html";
-        
     }
-    });
+    </script>
     
+    <script>
+    function Delete()
+        {
+            Cookies.remove('user', { path: '/' })
+        }
     </script>
    
    
@@ -81,7 +94,7 @@
                 <li><a href="Resources.html">Resources</a></li>
                 <li><a href="Profile.html">Profile</a></li>
                 <li><a href="#">Settings</a></li>
-                <li><a href="Home.html">Log Out</a></li>
+                <li><a href="Home.html" onclick="Delete()">Log Out</a></li>
             </ul>
         </div>
          </div>
