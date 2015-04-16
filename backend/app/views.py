@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, request, url_for, Response
 from app import app
 from app import main
+from app import mail
 from forms import LoginForm
 import login
 import json
@@ -51,6 +52,12 @@ def index():
                                DATE=time.strftime("%Y-%m-%d"),
                                TIME=time.strftime("%I:%M:%S%p")
                                )
+
+@app.route('/testmail')
+def testmail():
+    email = request.args.get('email')
+    mail.send(email)
+    return "Email Sent"
         
 ##################################################################################
 # jquery related things go down here
