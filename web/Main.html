@@ -4,54 +4,123 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>illiniStudent-about</title>
+    <title>illiniStudent-Main</title>
     
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/flatlybootstrap.css">
-</head>
     
-<body>
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--FullCalendar-->
+    <link rel="stylesheet" href="css/fullcalendar.css">
+    
+    <script src="js/moment.js"></script>
+    
+    
+    
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
+    <script src="js/js.cookie.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="js/fullcalendar.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js">   </script>
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    // page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+        // put your options and callbacks here
+        header:{
+            left:'prev,next today',
+            center:'title',
+            right:'month,agendaWeek,agendaDay'
+        },
         
+        events:[
+            {
+                title:'CS125 MP4',
+                start:'2015-03-09'
+            },
+            {
+                title:'CS125 MP5',
+                start:'2015-04-13'
+            }
+        ]
+        
+        
+    })
+   
+
+    });
+    </script>
+    <script src="js/todoList.js"></script>
+    
+    
+    <script>
+    if(Cookies.get('user')==null)
+    {
+        //alert("Hello");
+       // window.location.href="Home.html";
+        console.log(Cookies.get());
+        //alert("Hello!");
+        window.location.href="Home.html";
+    }
+    </script>
+    
+    <script>
+    function Delete()
+        {
+            Cookies.remove('user', { path: '/' })
+        }
+    </script>
+   
+   
+    
+    
+</head>
+<body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="Home.html">illiniStudent</a>
+                <a class="navbar-brand" href="">illiniStudent</a>
             </div>
         <div>
             <ul class="nav navbar-nav">
-                <li><a href="about.html">About</a></li>
-                <li><a href="help.html"">Help</a></li>
-                <li><a href="#">Supported Sites</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="Resources.html">Resources</a></li>
+                <li><a href="Profile.html">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="Home.html" onclick="Delete()">Log Out</a></li>
             </ul>
         </div>
+         </div>
     </nav>
+        <!--div class="page-header">
+        <h2 align="middle">Calendar</h2>
+        </div-->
     
-    <div class="jumbotron", align="center">
-        <h1>About illiniStudent</h1>
-		<h2> All of UIUC websites organized and made simple for you!</h2>
-		<apage>
-		Remember working on that assignment on Compass2g? <br>
-		Then you realize you need to check your homework<br>
-		on Moodle but since they are independent websites,<br>
-		you need to go to Moodle on a separate tab, and<br>
-		then log in to check the homework. In comes	illiniStudent,<br>
-		a student made website aimed to ease the lives of<br>
-		students through one simple login of NetID and Password<br>
-		to access an integration of the	UIUC websites<br>
-		and an interactive calendar to remind you of upcoming<br>
-		homework that is due.
-        </apage>
-    <div class="container">
-       
-    </div>
-    </div>
+    <div id='calendar'></div>
     
+      
+    
+    <div class="page-header">
+    <h2 align="middle">Tasks</h2>
+     </div>
+    <div class="container"></div>
      
+<div id="demo" class="col-sm-4 col-sm-offset-4" style="font-size:18px"></div>
+ <script type="text/javascript">
+    $("#demo").todoList({
+  
+    });</script>
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+    
     
 </body>
 </html>
