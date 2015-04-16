@@ -56,7 +56,7 @@ def index():
 @app.route('/testmail')
 def testmail():
     email = request.args.get('email')
-    mail.send(email)
+    mail.send_email_to(str(email))
     return "Email Sent"
         
 ##################################################################################
