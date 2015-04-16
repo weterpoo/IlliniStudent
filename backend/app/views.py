@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, request, url_for, Response
 from app import app
 from app import main
-from app import mail
 from forms import LoginForm
+import mail
 import login
 import json
 import time
