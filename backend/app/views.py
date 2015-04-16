@@ -55,9 +55,8 @@ def index():
 
 @app.route('/testmail')
 def testmail():
-    email = request.args.get('email')
-    mail.send_email_to(str(email))
-    return "Email Sent"
+    email = str(request.args.get('email'))
+    return "%r" % email 
         
 ##################################################################################
 # jquery related things go down here
