@@ -6,11 +6,11 @@
 WTF_CSRF_ENABLED = True
 SECRET_KEY = "somethingsomethingunrelated"
 
-##################################################################################
+###############################################################################
 # Mail Configuration
-##################################################################################
+###############################################################################
 
-MAIL_SERVER = 'mail.illinistudent.cu.cc'
+MAIL_SERVER = 'localhost'
 MAIL_PORT = 25
 MAIL_USERNAME = 'do-not-reply'
 MAIL_PASSWORD = 'replybot'
