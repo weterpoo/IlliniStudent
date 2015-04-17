@@ -3,6 +3,7 @@ from flask.ext import Message
 from app import app
 from app import main
 from forms import LoginForm
+import mail
 import login
 import json
 import time
@@ -55,11 +56,9 @@ def index():
 
 @app.route('/testmail')
 def testmail():
-    msg = Message("Hello",
-                  sender="ikeda.shot@gmail.com",
-                  recipients=["ikeda.shot@gmail.com"])
-    mail.send(msg)
-        
+    email = str(request.args.get('email'))
+    mail.send_email_to(email)
+    return "%r" % email 
 ##################################################################################
 # jquery related things go down here
 ##################################################################################

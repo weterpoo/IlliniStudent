@@ -11,6 +11,8 @@
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script>
     
+    <script src="js/js.cookie.js"></script>
+    
     <!--script>
 function SignUp()
     {
@@ -55,14 +57,41 @@ function Login()
             var user=$("#Username").val();
             var pass=$("#Password").val();
             $.ajax({
-                dataType: "json",
+                //dataType: "jsonp",
+                contentType: "application/json",
                 type: "GET",
-                url: "localhost:5000/jqlogin",
-                data:{user:name, pass:pass},
+                url: "http://illinistudent.cu.cc:5000/jqlogin",
+                data:{user:user, pass:pass},
+                async: true,
+                
+               success: function(data)
+                {
+                    var cool=data;
+                    console.log(cool);
+                    if(cool=="Error: no id found")
+                    {
+                        alert("Incorrect username/password");
+                        //Cookies.set('name', 'value');
+                        //console.log(Cookies.get('name', 'value'));
+                    }
+                    else
+                    {
+                        Cookies.json=true;
+                       Cookies.set('user', data, {path: '/'});
+                        console.log(Cookies.get());
+                        window.location.href="Main.html";
+                       // document.cookie="username=valid"
+                        
+                    }
+                    
+                    //Cookies.set('json', cool);
+                }
                 
             });
-            setTimeout(function(){
-                window.location.href="Main.html"}, 1000);
+           // setTimeout(function(){
+              //  window.location.href="Main.html"}, 1000);
+            
+        
         }
     </script>
     <script>
@@ -73,17 +102,52 @@ function Login()
             var newnetid=$("#newNetID").val();
             var newemail=$("#newEmail").val();
             $.ajax({
-                dataType:"json",
+               // dataType:"jsonp",
+                contentType: "application/json",
+                async: true,
                 type: "GET",
-                url: "localhost:5000/jqcreatelogin",
+                url: "http://illinistudent.cu.cc:5000/jqcreatelogin",
                 data:{user:newuser, pass:newpass, netid:newnetid, email:newemail},
+                
+                
+            success:function(data)
+            {
+                var cool=data;
+                console.log(cool);
+                if(data=="Error -1: user exists. Please contact for help.")
+                   {
+                       window.alert("Choose new username/password");
+                   }
+                else if(data=="missing user parameter" || data=="missing pass parameter" || data=="missing email parameter" || data=="missing netid")
+                {
+                    window.alert("Fill all fields");
+                }
+                else if(data!="Error -1: user exists. Please contact for help." && (data!="missing user parameter" || data!="missing pass parameter" || data!="missing email parameter" || data!="missing netid"))
+                {
+                    window.alert("New User Created, Sign in above");
+                }
+                
+                
+                   
+            }
             });
-            setTimeout(function(){
-                alert("New User Created!")}, 1000);
+            //setTimeout(function(){
+              //  alert("New User Created!")}, 1000);
+           
+            
         }
     
     
     </script>
+    
+    <script>
+    if(Cookies.get('user'))
+    {
+        window.location.href="Main.html";
+    }
+    </script>
+    
+    
 </head>
     
 <body>

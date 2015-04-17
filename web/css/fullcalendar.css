@@ -18,6 +18,16 @@ body .fc { /* extra precedence to overcome jqui */
 	font-size: 1em;
 }
 
+#calendar{
+    width: 50%;
+    display:inline-block;
+}
+
+#tasks{
+    width: 50%;
+    float:right;
+}
+
 
 /* Colors
 --------------------------------------------------------------------------------------------------*/
