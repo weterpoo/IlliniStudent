@@ -1,4 +1,5 @@
 from flask import render_template, flash, redirect, request, url_for, Response
+from flask.ext import Message
 from app import app
 from app import main
 from forms import LoginForm
@@ -35,7 +36,7 @@ def index():
         password = form.user_pass.data
 
         signed_in = login.login(user, password)
-        if type(signed_in) == int:
+        if type(signed_in) == str:
             return render_template('fail.html',
                                    WARNING=signed_in,
                                    DATE=time.strftime("%Y-%m-%d"),
@@ -51,6 +52,13 @@ def index():
                                DATE=time.strftime("%Y-%m-%d"),
                                TIME=time.strftime("%I:%M:%S%p")
                                )
+
+@app.route('/testmail')
+def testmail():
+    msg = Message("Hello",
+                  sender="ikeda.shot@gmail.com",
+                  recipients=["ikeda.shot@gmail.com"])
+    mail.send(msg)
         
 ##################################################################################
 # jquery related things go down here
@@ -177,6 +185,7 @@ def jqedittask():
 @app.route('/jqtask')
 # Handles jquery logins.
 def jqtask():
+    global authid
     authid = request.args.get('id')
 
     return return_json_task()
