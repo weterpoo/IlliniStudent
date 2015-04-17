@@ -12,7 +12,7 @@ SECRET_KEY = "somethingsomethingunrelated"
 
 MAIL_SERVER = 'localhost'
 MAIL_PORT = 25
-MAIL_USERNAME = 'do-not-reply'
-MAIL_PASSWORD = 'replybot'
+MAIL_USERNAME = None #'do-not-reply'
+MAIL_PASSWORD = None #'replybot'
 
 ADMINS = ['do-not-reply@mail.illinistudent.cu.cc']
