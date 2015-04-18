@@ -25,4 +25,4 @@ def store_temp(emailin, userin, passin, netidin, majorin, gradin, salt):
 
 
 def send_email_to(email):
-    
+    pass
