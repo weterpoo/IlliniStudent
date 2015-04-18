@@ -1,5 +1,4 @@
 from flask import render_template, flash, redirect, request, url_for, Response
-from flask.ext import Message
 from app import app
 from app import main
 from forms import LoginForm
@@ -7,24 +6,24 @@ import mail
 import login
 import json
 import time
-##################################################################################
+###############################################################################
 # important variables to be used
-###################################################################################
+###############################################################################
 
 global user
 global authid
 global signed_in
 global password
 
-user=None
-authid=None
-signed_in=None
-password=None
+user = None
+authid = None
+signed_in = None
+password = None
 
 
-##################################################################################
+###############################################################################
 # Flask Application Routes
-##################################################################################
+###############################################################################
 @app.route('/')
 @app.route('/index', methods=['POST', 'GET'])
 def index():
@@ -54,14 +53,15 @@ def index():
                                TIME=time.strftime("%I:%M:%S%p")
                                )
 
+
 @app.route('/testmail')
 def testmail():
     email = str(request.args.get('email'))
     mail.send_email_to(email)
     return "%r" % email 
-##################################################################################
+###############################################################################
 # jquery related things go down here
-##################################################################################
+###############################################################################
 
 ##############################
 # "Logging in"
