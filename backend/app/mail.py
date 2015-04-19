@@ -21,7 +21,6 @@ def generate_salt(num):
 
 def store_temp(emailin, userin, passin, netidin, majorin, gradin, salt):
     access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
-    
 
 
 def send_email_to(email):
