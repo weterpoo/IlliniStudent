@@ -36,12 +36,10 @@ aren't supposed to), which is why we have this guide!
 ```
 /jqlogin
 ```
-<poem>
 Takes in:
 	  - *user: the username of the user
 	  - *pass: the password of the user
 	  - nothing: parameter to determine if the user likes to eat pies.
-</poem>
 The stars (*) means that the columns are required. If you don't pass them in, there
 will be an error passed back to you. How you handle it is up to you.
 However, if there is no star (*) and the user doesn't put anything in the column, don't
