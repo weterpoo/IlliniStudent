@@ -37,11 +37,11 @@ aren't supposed to), which is why we have this guide!
 /jqlogin
 ```
 Takes in:<br>
-	  - *user: the username of the user<br>
+	  - **user: the username of the user<br>
 	  - *pass: the password of the user<br>
 	  - nothing: parameter to determine if the user likes to eat pies.<br>
 <br>
-The stars (*) means that the columns are required. If you don't pass them in, there
+The stars (**) means that the columns are required. If you don't pass them in, there
 will be an error passed back to you. How you handle it is up to you.
 However, if there is no star (*) and the user doesn't put anything in the column, don't
 send any query! That means that if the user made the MyUserName account, the query
