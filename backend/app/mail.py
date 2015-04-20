@@ -11,7 +11,7 @@ def send_confirm(emailin, userin, passin, netidin, majorin, gradin):
     salt = pwd_context.encrypt(salt)
     store_temp(emailin, userin, passin, netidin, majorin, gradin, salt)
 
-    #Creating the email message
+    # Creating the email message
     subject = "Welcome to IlliniStudent!"
     body = "Hello %s,\n" % (userin)
     body += "Welcome to IlliniStudent! We are very happy to have you.\n"
@@ -20,7 +20,6 @@ def send_confirm(emailin, userin, passin, netidin, majorin, gradin):
     body += "illinistudent.cu.cc:5000/jqactivate?id=%s" % (salt)
 
     sm(body, subject, emailin)
-
 
 
 def generate_salt(num):
@@ -40,4 +39,5 @@ def store_temp(emailin, userin, passin, netidin, majorin, gradin, salt):
 
 
 def send_email_to(email):
-    sm("Hello, this is Shotaro.", "Testing", email)
+    print "sending email now!"
+    sm.send_mail("Hello, this is Shotaro.", "Testing", email)
