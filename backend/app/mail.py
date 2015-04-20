@@ -30,7 +30,7 @@ def send_confirm(emailin, userin, passin, netidin, majorin, gradin):
     body += "Welcome to IlliniStudent! We are very happy to have you.\n"
     body += "Please click the link below to activate your account.\n"
     body += "We hope you enjoy this service!\n"
-    body += "illinistudent.cu.cc:5000/jqactivate?id=%s" % (salt)
+    body += "illinistudent.cu.cc:5000/jqconfirmlogin?id=%s" % (salt)
 
     sm(body, subject, emailin)
 
