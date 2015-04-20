@@ -9,7 +9,8 @@ def send_confirm(emailin, userin, passin, netidin, majorin, gradin):
     salt = generate_salt(random.randint(7, 10))
     salt += userin + passin + netidin
     salt = pwd_context.encrypt(salt)
-    store_temp(emailin, userin, passin, netidin, majorin, gradin, salt)
+    passwd_final = pwd_context.encrypt(passin)
+    store_temp(emailin, userin, passwd_final, netidin, majorin, gradin, salt)
 
     # Creating the email message
     subject = "Welcome to IlliniStudent!"
@@ -34,7 +35,7 @@ def store_temp(emailin, userin, passin, netidin, majorin, gradin, salt):
     now = time.strftime("%Y-%m-%d")
 
     # Store information in the temp
-    access.insert("temp", emailin, userin, passin, netidin,
+    access.insert("temp", userin, emailin, passin, netidin,
                   majorin, gradin, salt, now)
 
 
