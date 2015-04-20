@@ -7,9 +7,10 @@ import time
 
 def send_confirm(emailin, userin, passin, netidin, majorin, gradin):
     salt = generate_salt(random.randint(7, 10))
-    salt += namein + passin + netidin
+    salt += userin + passin + netidin
     pwd_context.encrypt(salt)
-    store_temp(salt)
+    store_temp(emailin, userin, passin, netidin, majorin, gradin, salt)
+
 
 
 def generate_salt(num):
