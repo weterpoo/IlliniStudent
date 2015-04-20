@@ -65,13 +65,13 @@ def check_id(idin):
                                "usermajor", "usergrad"), cond)
     if userinfo is None:
         return "Error -1: No user found"
+    if len(userinfo) > 1:
+        return "Error -2: Multiple users found"
 
-    print userinfo
+    user = login.create_login(userinfo[0][0], userinfo[0][1], userinfo[0][2],
+                              userinfo[0][3], userinfo[0][4], userinfo[0][5])
 
-    user = login.create_login(userinfo[0], userinfo[1], userinfo[2],
-                              userinfo[3], userinfo[4], userinfo[5])
-
-    send_thank_you(userinfo[1])
+    send_thank_you(userinfo[0][1])
 
     return user[1]
 
