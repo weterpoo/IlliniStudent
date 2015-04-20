@@ -61,7 +61,7 @@ def check_id(idin):
                    ("username", "useremail",
                     "userpass", "usernetid",
                     "usermajor", "usergrad"), cond)
-    if len(userinfo) == 0:
+    if userinfo is None:
         return "Error -1: No user found"
 
     user = login.create_login(userinfo[0], userinfo[1], userinfo[2],
