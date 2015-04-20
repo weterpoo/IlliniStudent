@@ -6,12 +6,12 @@ import random
 import time
 
 
-def send_confirm(emailin, userin, passin, netidin, majorin, gradin):
+def send_confirm(userin, emailin, passin, netidin, majorin, gradin):
     access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
 
-    cond = "username = \'%s\' or useremail = \'%s\' or usernetid = \'%s\'" % (un,
-                                                                              ue,
-                                                                              uid)
+    cond = "username = \'%s\' or useremail = \'%s\' or usernetid = \'%s\'" % (userin,
+                                                                              emailin,
+                                                                              netidin)
     result = access.find("userinfo", ('username', 'useremail', 'usernetid'), cond)
 
     if not (len(result) == 0):
@@ -22,7 +22,7 @@ def send_confirm(emailin, userin, passin, netidin, majorin, gradin):
     salt += userin + passin + netidin
     salt = pwd_context.encrypt(salt)
     passwd_final = pwd_context.encrypt(passin)
-    store_temp(emailin, userin, passwd_final, netidin, majorin, gradin, salt)
+    store_temp(userin, emailin, passwd_final, netidin, majorin, gradin, salt)
 
     # Creating the email message
     subject = "Welcome to IlliniStudent!"
@@ -42,7 +42,7 @@ def generate_salt(num):
     return salt
 
 
-def store_temp(emailin, userin, passin, netidin, majorin, gradin, salt):
+def store_temp(userin, emailin, passin, netidin, majorin, gradin, salt):
     access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
     now = time.strftime("%Y-%m-%d")
 
