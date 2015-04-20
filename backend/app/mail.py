@@ -40,4 +40,4 @@ def store_temp(emailin, userin, passin, netidin, majorin, gradin, salt):
 
 def send_email_to(email):
     print "sending email now!"
-    sm.send_mail("Hello, this is Shotaro.", "Testing", email)
+    sm("Hello, this is Shotaro.", "Testing", email)
