@@ -56,7 +56,7 @@ def check_id(idin):
     Checks for the id then creates the user.
     """
     access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
-    cond = "confirmid = %s" % (idin)
+    cond = "confirmid = \'%s\'" % (idin)
     userinfo = access.findall("temp",
                    ("username", "useremail",
                     "userpass", "usernetid",
