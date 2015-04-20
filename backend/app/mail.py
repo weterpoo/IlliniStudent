@@ -82,7 +82,7 @@ def send_thank_you(email):
     body += "We will be continuously adding features, "
     body += "and we hope you look forward to them!\n"
 
-    sm(subject, body, email)
+    sm(body, subject, email)
 
 
 def send_email_to(email):
