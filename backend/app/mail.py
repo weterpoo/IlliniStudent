@@ -66,6 +66,8 @@ def check_id(idin):
     if userinfo is None:
         return "Error -1: No user found"
 
+    print userinfo
+
     user = login.create_login(userinfo[0], userinfo[1], userinfo[2],
                               userinfo[3], userinfo[4], userinfo[5])
 
