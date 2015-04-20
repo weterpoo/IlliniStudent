@@ -12,6 +12,7 @@ def send_mail(message, subject, *email):
     if not message:
         raise InValidEmailError('No message passed')
 
+    subject = "$(echo -e \'%s\nContent-Type: text/html\')" % (subject)
     for mail in email:
         ech = subprocess.Popen(['echo', message], stdout=subprocess.PIPE)
         output = subprocess.check_output(['mail', '-s', subject, mail],

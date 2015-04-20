@@ -30,7 +30,9 @@ def send_confirm(userin, emailin, passin, netidin, majorin, gradin):
     body += "Welcome to IlliniStudent! We are very happy to have you.\n"
     body += "Please click the link below to activate your account.\n"
     body += "We hope you enjoy this service!\n"
-    body += "illinistudent.cu.cc:5000/jqconfirmlogin?id=%s" % (salt)
+    body += "<a href="
+    body += "\"illinistudent.cu.cc:5000/jqconfirmlogin?id=%s\"" % (salt)
+    body += ">Activate Account</a>"
 
     sm(body, subject, emailin)
 
@@ -58,9 +60,9 @@ def check_id(idin):
     access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
     cond = "confirmid = \'%s\'" % (idin)
     userinfo = access.findall("temp",
-                   ("username", "useremail",
-                    "userpass", "usernetid",
-                    "usermajor", "usergrad"), cond)
+                              ("username", "useremail",
+                               "userpass", "usernetid",
+                               "usermajor", "usergrad"), cond)
     if userinfo is None:
         return "Error -1: No user found"
 
