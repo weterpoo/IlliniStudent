@@ -6,6 +6,7 @@ class InValidEmailError(Exception):
 
 
 def send_mail(message, subject, *email):
+    """Sends email using mail"""
     if not email:
         raise InValidEmailError('No email passed')
     if not message:
