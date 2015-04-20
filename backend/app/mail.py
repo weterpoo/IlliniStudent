@@ -78,9 +78,12 @@ def check_id(idin):
 
 def send_thank_you(email):
     subject = "Welcome to IlliniStudent!"
-    body = "You have succesfully registered for IlliniStudent!\n"
-    body += "We will be continuously adding features, "
+    body = "<p>You have succesfully registered for IlliniStudent!\n"
+    body += "<p>We will be continuously adding features, "
     body += "and we hope you look forward to them!\n"
+    body += "<a href=\""
+    body += "illinistudent.cu.cc\">"
+    body += "Click Here to access your new account!</a>"
 
     sm(body, subject, email)
 
