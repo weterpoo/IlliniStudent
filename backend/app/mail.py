@@ -14,7 +14,7 @@ def send_confirm(userin, emailin, passin, netidin, majorin, gradin):
                                                                               netidin)
     result = access.find("userinfo", ('username', 'useremail', 'usernetid'), cond)
 
-    if not (len(result) == 0):
+    if result is not None:
         # return something when it already exists
         return "Error -1: user exists. Please contact for help."
 
