@@ -1,4 +1,4 @@
-import subprocess
+import os
 
 
 class InValidEmailError(Exception):
@@ -12,8 +12,11 @@ def send_mail(message, subject, *email):
         raise InValidEmailError('No message passed')
 
     for mail in email:
-        ech = subprocess.Popen(['echo', message], stdout=subprocess.PIPE)
-        output = subprocess.check_output(['mail', '-s', subject, mail],
-                                         stdin=ech.stdout)
-        ech.wait()
-        print output
+        cmd = "echo \"%s\"" % (message)
+        cmd += " | "
+        cmd += "mail -s "
+        cmd += "\"$(echo -e \"%s\nContent-Type: text/html\")\" "
+        cmd += "%s" % (mail)
+        # Sadly due to os.system, we lose error checking....
+        os.system(cmd)
+
