@@ -1,4 +1,4 @@
-###################################################################################
+###############################################################################
 # opendatabase.py
 # Dependencies, MySQLdb
 #
@@ -17,7 +17,7 @@
 # This module is written to be flexible as possible, please keep it that way.
 # If you do not understand how the module accesses/writes to the database, you
 # may want to look into MYSQL and how tables are created
-###################################################################################
+###############################################################################
 
 import MySQLdb as mdb
 import time

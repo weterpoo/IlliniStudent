@@ -1,3 +1,4 @@
+passw = 'lel'
 ##################################################################################
 # login.py
 # 
@@ -34,31 +35,17 @@ def login_jquery(other_authid):
     if u_info == None:
         return {}
     else:
-        return_dict = { "username": u_info[0], "authid": u_info[1]}
+        return_dict = {"username": u_info[0], "authid": u_info[1]}
 
     return return_dict
 
+
 def create_login(un, ue, up, uid, um, ug):
+
     access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
-    # Check for optional fields
-    if um == None:
-        um = "NULL"
-
-    # Hash password
-    user_p = pass_hasher(up)
-
-    # Hash ID
-    user_id = generate_encrypt_id(un, up)
-
-    cond = "username = \'%s\' or useremail = \'%s\' or usernetid = \'%s\'" % (un,
-                                                                              ue,
-                                                                              uid)
-    result = access.find("userinfo", ('username', 'useremail', 'usernetid'), cond)
-    if not (result == None):
-        # return something when it already exists
-        return "Error -1: user exists. Please contact for help."
+    authid = generate_encrypt_id(un, up)
     access.insert('userinfo', un, ue,
-                  user_p, uid, um, ug, user_id)
+                  up, uid, um, ug, authid)
     # When the user creates an account, there should be two databases created
     # for the user
     # <username>_schedule
@@ -91,7 +78,8 @@ def create_login(un, ue, up, uid, um, ug):
                       ('class_end', 'DATE')
                       )
     return login(un, up)
-    
+
+
 # Make a function to edit login info
 # Password recovery function
 # Find out to email
@@ -113,14 +101,14 @@ def delete_user(name=None):
     access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
     if name:
         schedule_table = "%s_schedule" % (name)
-        
+
         access.delete('userinfo', 'username', name)
         access.delete_table(name)
         access.delete_table(schedule_table)
         return "Success"
 
     return "No name of user specified."
-        
+
 
 
 # Test functions

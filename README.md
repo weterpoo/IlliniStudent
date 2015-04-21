@@ -36,11 +36,11 @@ aren't supposed to), which is why we have this guide!
 ```
 /jqlogin
 ```
-Takes in:
-      - *user: the username of the user
-      - *pass: the password of the user
-      - nothing: parameter to determine if the user likes to eat pies.
-</br>
+Takes in:<br>
+      - *user: the username of the user<br>
+      - *pass: the password of the user<br>
+      - nothing: parameter to determine if the user likes to eat pies.<br>
+<br>
 The stars (*) means that the columns are required. If you don't pass them in, there
 will be an error passed back to you. How you handle it is up to you.
 However, if there is no star (*) and the user doesn't put anything in the column, don't
@@ -55,70 +55,76 @@ should look like the above.
 ```
 /jqlogin
 ```
-Takes in:
-      - *user: the username of the user. password should not contain special symbols
-      - *pass: the password of the user. right now it should be in plain text.
-Note: This is not the preferred method for logging in. See /jqaddtask for more details.
+Takes in:<br>
+      - *user: the username of the user. password should not contain special symbols<br>
+      - *pass: the password of the user. right now it should be in plain text.<br>
+Note: This is not the preferred method for logging in. See /jqaddtask for more details.<br>
+<br>
 <br>
 ```
 /jqcreatelogin
 ```
-Takes in:
-      - *user: the username of the user. Should not contain special symbols.
-      - *pass: the password of the user. Should be in plaintext
-      - *email: the user's email. Make sure that it exists.
-      - *netid: the user's netid.
-      - major: the user's current major.
-      - grad: the user's graduation date.
+Takes in:<br>
+      - *user: the username of the user. Should not contain special symbols.<br>
+      - *pass: the password of the user. Should be in plaintext<br>
+      - *email: the user's email. Make sure that it exists.<br>
+      - *netid: the user's netid.<br>
+      - major: the user's current major.<br>
+      - grad: the user's graduation date.<br>
 
-</br>
+
+<br>
 <br>
 ```
 /jqaddtask
 ```
-Takes in:
-      - *id: the user's authentication id. It is returned in json as auth_id
-      - *assign: Assignment/activity name
-      - class: Class name. If there is none, it defaults to "Personal"
-      - desc: Description. If there is none, it defaults to a blank string.
-      - *dued: Due Date. Please send it in YYYY-MM-DD format.
-      - duet: Due Time. Please send it in as HH:MM:SS.
-      - tags: Tags that the user may specify. Defaults to a blank string.
-</br>
+Takes in:<br>
+      - *id: the user's authentication id. It is returned in json as auth_id<br>
+      - *assign: Assignment/activity name<br>
+      - class: Class name. If there is none, it defaults to "Personal"<br>
+      - desc: Description. If there is none, it defaults to a blank string.<br>
+      - *dued: Due Date. Please send it in YYYY-MM-DD format.<br>
+      - duet: Due Time. Please send it in as HH:MM:SS.<br>
+      - tags: Tags that the user may specify. Defaults to a blank string.<br>
+
+<br>
 <br>
 ```
 /jqedittask
 ```
 <em>This is not finished, Derek is working on it</em>
-</br>
+
+<br>
 <br>
 ```
 /jqtask
 ```
-Takes in:
-      - *id: The user's auth_id.
-Note: This is the preferred method for obtaining user information, or "logging in".
-</br>
+Takes in:<br>
+      - *id: The user's auth_id.<br>
+Note: This is the preferred method for obtaining user information, or "logging in".<br>
+
 <br>
 ```
 /jqschedule
 ```
 <em>This is not completely finished, there will bemore information soon.</em>
-</br>
+
+<br>
 <br>
 ```
 /jqsadboys
 ```
-Takes in:
-      - *id: The user's auth_id.
-Note: This deletes the user. We're sad they have to leave.
-</br>
+Takes in:<br>
+      - *id: The user's auth_id.<br>
+Note: This deletes the user. We're sad they have to leave.<br>
+
+<br>
 <br>
 ```
 /quickdel
 ```
-Takes in:
-      - *user: the username
+Takes in:<br>
+      - *user: the username<br>
 Note: This is the quick way to delete test cases. This will be removed in the final
-release.
-</br>
+release.<br>
+

@@ -58,7 +58,7 @@ def index():
 def testmail():
     email = str(request.args.get('email'))
     mail.send_email_to(email)
-    return "%r" % email 
+    return "%r" % email
 ###############################################################################
 # jquery related things go down here
 ###############################################################################
@@ -115,15 +115,23 @@ def jqcreatelogin():
         not (gradin.find('-') == 4)):
         return "grad is not in the right format."
 
-    user = login.create_login(userin, emailin, passin,
+    mail.send_confirm(userin, emailin, passin,
                        netidin, majorin, gradin)
-    if type(user) == str:
-        return user
+    return "Registered Successfully!"
+
+
+@app.route('/jqconfirmlogin')
+def jqconfirmlogin():
+    userid = request.args.get('id')
+
+    if not userid:
+        return "id required"
 
     global authid
-    authid = user[1]
+    authid = mail.check_id(userid)
 
     return return_json_task()
+
 
 @app.route('/jqaddtask')
 def jqaddtask():
@@ -307,6 +315,7 @@ def time_to_string(s):
     seconds_str += "%s" % (seconds)
 
     return ("%s:%s:%s" % (hours_str, minutes_str, seconds_str))
+
 
 def return_json_task():
     userin = login.login_jquery(authid)

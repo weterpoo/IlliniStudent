@@ -6,11 +6,13 @@ class InValidEmailError(Exception):
 
 
 def send_mail(message, subject, *email):
+    """Sends email using mail"""
     if not email:
         raise InValidEmailError('No email passed')
     if not message:
         raise InValidEmailError('No message passed')
 
+    subject = "\"%s\nContent-Type: text/html\"\"" % (subject)
     for mail in email:
         cmd = "echo \"%s\"" % (message)
         cmd += " | "
