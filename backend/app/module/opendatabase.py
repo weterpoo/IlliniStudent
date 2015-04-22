@@ -408,7 +408,7 @@ class ManageTable(object):
 
         with self.con:
            cur = self.con.cursor()
-           query = "UPDATE %s SET %s = %s WHERE (%s = %s)" % (tbl,
+           query = "UPDATE %s SET %s = %s WHERE %s = \'%s\'" % (tbl,
                                                               coloum,
                                                               replace,
                                                               coloum,
