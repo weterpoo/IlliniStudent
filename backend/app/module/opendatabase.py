@@ -399,7 +399,7 @@ class ManageTable(object):
         self.close_con()
         self.set_time()
     
-    def edit(self, tbl, coloum, content, replace):
+    def edit(self, tbl, coloum, replace, search, prev):
         """
         Edit certain cell
         """
@@ -411,8 +411,8 @@ class ManageTable(object):
            query = "UPDATE %s SET %s = %s WHERE %s = \'%s\'" % (tbl,
                                                               coloum,
                                                               replace,
-                                                              coloum,
-                                                              content)
+                                                              search,
+                                                                prev)
            cur.execute(query)
 
         self.close_con()
