@@ -128,6 +128,26 @@ def recover_message(name, email, link):
 
     sm(message, subject, email)
 
+###############################################################################
+# Reset password
+###############################################################################
+def reset_password(recover_id):
+    access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
+    cond = "recover_id = \'%s\'" % (recover_id)
+    user = access.find("recovery",
+                       ('username', 'useremail'),
+                cond)
+
+    new_pass = generate_salt()
+    new_encrypt = pwd_context.encrypt(new_pass)    
+    access.edit("userinfo", "userpass",
+                new_encrypt, "username", user[0][0])
+    new_auth = generate_salt()
+    new_auth = pwd_context(user[0][0]+user[0][1]+new_auth)
+    access.edit("userinfo", "authid",
+                new_auth, "username", user[0][0])
+
+    reset_message(user[0][0], user[0][1], new_pass)
 
 # Encryption Handlers
 def generate_salt():
