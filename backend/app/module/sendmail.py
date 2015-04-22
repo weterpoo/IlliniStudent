@@ -21,4 +21,3 @@ def send_mail(message, subject, *email):
         cmd += "%s" % (mail)
         # Sadly due to os.system, we lose error checking....
         os.system(cmd)
-
