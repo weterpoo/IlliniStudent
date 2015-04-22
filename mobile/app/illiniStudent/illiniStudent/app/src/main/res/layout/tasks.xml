@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#4183D7">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Task 1:"
+        android:id="@+id/textView"
+        android:enabled="true"
+        android:editable="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="39dp"
+        android:textSize="22dp"
+        android:textColor="#ffffffff"/>
+
+    <EditText
+        android:layout_width="311dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:text="Calc 2: Hw 11 due 3/3 @ 11:59 pm"
+        android:enabled="true"
+        android:textSize="32dp"
+        android:textColor="#ffffffff"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/editText3"
+        android:layout_alignStart="@+id/editText3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Task 2:"
+        android:id="@+id/textView2"
+        android:enabled="true"
+        android:editable="false"
+        android:textSize="22dp"
+        android:textColor="#ffffffff"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Task 3:"
+        android:id="@+id/textView3"
+        android:enabled="true"
+        android:editable="false"
+        android:textSize="22dp"
+        android:textColor="#ffffffff"
+        android:layout_below="@+id/editText3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="311dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText2"
+        android:text="Phys 211: Prelecture 13 due 3/4 @ 8:00 am"
+        android:enabled="true"
+        android:textSize="32dp"
+        android:textColor="#ffffffff"
+        android:layout_below="@+id/textView3"
+        android:layout_alignRight="@+id/button3"
+        android:layout_alignEnd="@+id/button3" />
+
+    <EditText
+        android:layout_width="311dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText3"
+        android:text="Phys 211: Checkpoint 13 due 3/4 @ 8:00 am"
+        android:enabled="true"
+        android:textSize="32dp"
+        android:textColor="#ffffffff"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calendar"
+        android:id="@+id/button3"
+        android:enabled="true"
+        android:textSize="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/editText3"
+        android:layout_alignEnd="@+id/editText3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:id="@+id/button4"
+        android:enabled="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3"
+        android:textSize="22dp" />
+</RelativeLayout>
