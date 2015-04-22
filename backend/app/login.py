@@ -8,6 +8,8 @@ passw = 'lel'
 from module.opendatabase import ManageTable as mt
 from passlib.apps import custom_app_context as pwd_context
 from module.sendmail import send_mail as sm
+import random
+import time
 
 salt = "not_so_random_salt"
 
@@ -100,11 +102,17 @@ def recover_login(email, netid):
         cond = "usernetid = \'%s\'" % (netid)
         
     result = access.find("userinfo",
-                         ('username', 'useremail', 'recover_id'),
+                         ('username', 'useremail'),
                          cond)
     name = result[0][0]
     email = result[0][1]
-    recover_id = result[0][2]
+
+    ok = generate_salt()
+    recover_id = pwd_context.encrypt(ok+name+email)
+
+    access.insert('recovery', name, email,
+                  recover_id, time.strftime("%Y-%m-%d"))
+    
     recover_message(name, email, recover_id)
 
 
@@ -122,6 +130,15 @@ def recover_message(name, email, link):
 
 
 # Encryption Handlers
+def generate_salt():
+    num = random.randint(7, 10)
+    salt = ''
+    for i in range(0, num):
+        o = random.randint(65, 122)
+        salt += chr(o)
+    return salt
+
+
 def generate_encrypt_id(user_name, password):
     # Generates a unique id to jquery with
     encrypt_str = (salt + user_name + password)
