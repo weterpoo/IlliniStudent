@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:background="#4183D7">
+    android:id="@+id/main"
+    android:background="#FFB300">
 
     <TextClock
         android:layout_width="wrap_content"
@@ -15,7 +16,7 @@
         android:textSize="40dp"
         android:layout_row="0"
         android:layout_column="0"
-        android:textColor="#FFB300" />
+        android:textColor="#4183D7" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,7 +28,7 @@
         android:layout_alignStart="@+id/textClock"
         android:layout_row="0"
         android:layout_column="1"
-        android:textColor="#FFB300" />
+        android:textColor="#4183D7" />
 
     <ImageButton
         android:id="@+id/ImageButton1"
@@ -37,8 +38,8 @@
         android:background="@android:color/transparent"
         android:layout_row="4"
         android:layout_column="0"
-        android:layout_marginTop="107dp"
-        android:layout_below="@+id/dateView"
+        android:layout_marginBottom="53dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/ImageButton2" />
 
     <ImageButton
@@ -50,54 +51,65 @@
         android:layout_row="4"
         android:layout_column="1"
         android:layout_gravity="center_horizontal|top"
-        android:layout_below="@+id/ImageButton1"
-        android:layout_toStartOf="@+id/ImageButton1" />
+        android:layout_below="@+id/ImageButton2"
+        android:layout_toEndOf="@+id/textClock" />
 
     <ImageButton
         android:id="@+id/ImageButton6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/settingsfinal"
+        android:src="@drawable/settings"
         android:background="@android:color/transparent"
         android:layout_row="3"
         android:layout_column="6"
         android:layout_gravity="right|top"
-        android:layout_below="@+id/ImageButton1"
-        android:layout_toEndOf="@+id/ImageButton2" />
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/ImageButton5" />
 
     <ImageButton
         android:id="@+id/ImageButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/calendarfinal"
+        android:src="@drawable/calendar"
         android:background="@android:color/transparent"
         android:layout_row="3"
         android:layout_column="1"
         android:layout_gravity="center"
-        android:layout_below="@+id/ImageButton5"
+        android:layout_marginBottom="48dp"
+        android:layout_above="@+id/ImageButton6"
         android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:id="@+id/ImageButton5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/professors"
+        android:src="@drawable/briefcase"
         android:background="@android:color/transparent"
         android:layout_row="3"
         android:layout_column="0"
         android:layout_gravity="left|center_vertical"
-        android:layout_below="@+id/ImageButton4"
-        android:layout_toEndOf="@+id/ImageButton2" />
+        android:layout_alignTop="@+id/ImageButton3"
+        android:layout_toStartOf="@+id/dateView" />
 
     <ImageButton
         android:id="@+id/ImageButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/schedule"
+        android:src = "@drawable/bell"
         android:background="@android:color/transparent"
         android:layout_row="2"
         android:layout_column="1"
         android:layout_gravity="right|center_vertical"
-        android:layout_below="@+id/ImageButton4"
-        android:layout_alignStart="@+id/ImageButton4" />
+        android:layout_above="@+id/ImageButton1"
+        android:layout_alignStart="@+id/ImageButton4"
+        android:layout_marginBottom="39dp" />
+
+    <ImageButton
+        android:id="@+id/ImageButton7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src = "@drawable/profile8"
+        android:background="@android:color/transparent"
+        android:layout_above="@+id/ImageButton3"
+        android:layout_alignEnd="@+id/dateView" />
 </RelativeLayout>
