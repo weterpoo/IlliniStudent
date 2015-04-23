@@ -12,7 +12,7 @@ def send_mail(message, subject, *email):
     if not message:
         raise InValidEmailError('No message passed')
 
-    subject = "\"%s\nContent-Type: text/html\"" % (subject)
+    subject = "\"%s\\nContent-Type: text/html\"" % (subject)
     for mail in email:
         cmd = "echo \"%s\"" % (message)
         cmd += " | "
