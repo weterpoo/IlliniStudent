@@ -17,7 +17,7 @@ def send_mail(message, subject, *email):
         cmd = "echo \'%s\'" % (message)
         cmd += " | "
         cmd += "mail -s "
-        cmd += "\"$(echo %s)\" " % (subject)
+        cmd += "%s " % (subject)
         cmd += "%s" % (mail)
         # Sadly due to os.system, we lose error checking....
         print subject
