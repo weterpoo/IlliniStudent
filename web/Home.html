@@ -79,6 +79,7 @@ function Login()
                         Cookies.json=true;
                        Cookies.set('user', data, {path: '/'});
                         console.log(Cookies.get());
+                        Cookies.set('name', user, {path: '/'});
                         window.location.href="Main.html";
                        // document.cookie="username=valid"
                         

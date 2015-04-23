@@ -68,6 +68,34 @@
         //alert("Hello!");
         window.location.href="Home.html";
     }
+        else
+        {
+            var b=Cookies.get('user');
+            console.log(Cookies.get('user'));
+            var auth=JSON.parse(Cookies.get('user')).authid;
+            console.log(auth);
+            var time=JSON.parse(Cookies.get('user')).TIME.UPDATED;
+            console.log(time);
+            var event=JSON.parse(Cookies.get('user')).IlliniTester;
+            console.log(event);
+            console.log(Cookies.get('name'));
+            var name=Cookies.get('name');
+            var named=JSON.parse(name);
+            var a=JSON.parse(Cookies.get('user'));
+            console.log(a);
+            console.log(a[named]);
+            var arr=new Array();
+            for (var i=0; i<a[named].length;i++)
+            {
+                var obj=a[named][i].assign_name;
+                var assign={title: obj};
+                arr[i]=assign;
+                //arr=obj;
+               // console.log(obj);
+                
+            }
+            console.log(arr);
+        }
         
     </script>
     
@@ -114,7 +142,19 @@
 <div id="tasks"></div>
     
  <script type="text/javascript">
+     var name=Cookies.get('name');
+    var named=JSON.parse(name);
+    var a=JSON.parse(Cookies.get('user'));
+     for (var i=0; i<a[named].length;i++)
+            {
+                var obj=a[named][i].assign_name;
+                var assign={title: obj, done: false};
+                arr[i]=assign;
+                
+            }
     $("#tasks").todoList({
+        
+        items: arr
   
     });</script>
 
