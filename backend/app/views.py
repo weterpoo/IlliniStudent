@@ -164,14 +164,14 @@ def jqaddtask():
     if not u_dued:
         return "dued is required"
     elif (not (len(u_dued) == 10) or
-        not (u_dued.rfind('-') == 7) or
-        not (u_dued.find('-') == 4)):
+          not (u_dued.rfind('-') == 7) or
+          not (u_dued.find('-') == 4)):
         return "dued is not valid (needs YYYY-MM-DD)"
     if not u_duet:
         u_duet = "00:00:00"
     elif (not (len(u_duet) == 8) or
-        not (u_duet.rfind('-') == 5) or
-        not (u_duet.find('-') == 2)):
+          not (u_duet.rfind('-') == 5) or
+          not (u_duet.find('-') == 2)):
         return "duet is not valid (needs HH:MM:SS)"
     if not u_tags:
         u_tags = ""
@@ -181,10 +181,12 @@ def jqaddtask():
 
     return return_json_task()
 
+
 @app.route('/jqedittask')
 def jqedittask():
     mesg = request.args.get('msg')
     return mesg
+
 
 ##############################
 # jquery to obtain user data
