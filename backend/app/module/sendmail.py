@@ -20,6 +20,6 @@ def send_mail(message, subject, *email):
         cmd += "%s " % (subject)
         cmd += "%s" % (mail)
         # Sadly due to os.system, we lose error checking....
-        print subject
-        print cmd
+        print "SUBJECT\n%r" % (subject)
+        print "CMD\n%r" % (cmd)
         os.system(cmd)
