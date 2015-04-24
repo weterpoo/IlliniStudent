@@ -78,7 +78,9 @@ def check_id(idin):
 
 def send_thank_you(email):
     subject = "Welcome to IlliniStudent"
-    body = "<b>Hello, user<br>"
+    body = "<b>Hello, %s</b><br>" % ('username')
+    body += "<p>Welcome to IlliniStudent! We hope you enjoy using our service.<br>"
+    body += "<p>Click the link below to activate your account."
     body += "<a href=\"www.google.com\">google</a>"
 
     sm(body, subject, email)
