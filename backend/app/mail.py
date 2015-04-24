@@ -81,7 +81,7 @@ def send_thank_you(email):
     body = "<b>Hello, %s</b><br>" % ('username')
     body += "<p>Welcome to IlliniStudent! We hope you enjoy using our service.<br>"
     body += "<p>Click the link below to activate your account.<br>"
-    body += "<a href=\"www.google.com/top\">ACTIVATE ACCOUNT</a>"
+    body += "<a href=\"illinistudent.cu.cc\">ACTIVATE ACCOUNT</a>"
 
     sm(body, subject, email)
 
