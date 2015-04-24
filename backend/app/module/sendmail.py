@@ -23,3 +23,7 @@ def send_mail(message, subject, *email):
         print "SUBJECT\n%r" % (subject)
         print "CMD\n%r" % (cmd)
         os.system(cmd)
+
+def test_mail():
+    cmd = 'echo \'<a href="www.google.com">google</a>\' | mail -s "TEST\nContent-Type: text/html" ikeda.shot@gmail.com'
+
