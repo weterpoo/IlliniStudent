@@ -25,7 +25,7 @@ def send_mail(message, subject, *email):
         os.system(cmd)
 
 def test_mail():
-    cmd = 'echo \'<a href="www.google.com">google</a>\' | mail -s "TEST\nContent-Type: text/html" ikeda.shot@gmail.com'
+    cmd = 'echo \'<a href="www.google.com">google</a><br>This is how you link google\' | mail -s "TEST\nContent-Type: text/html" ikeda.shot@gmail.com'
     os.system(cmd)
 
 
