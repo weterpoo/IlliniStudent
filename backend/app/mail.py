@@ -77,14 +77,9 @@ def check_id(idin):
 
 
 def send_thank_you(email):
-    subject = "Welcome to IlliniStudent! "
-    body = "<b>Hello %s, </b><br>" % ('nobody')
-    body += "Welcome to IlliniStudent! We are very happy to have you. <br>"
-    body += "Please click the link below to activate your account. <br>"
-    body += "We hope you enjoy this service! <br>"
-    body += "<a href="
-    body += "\"illinistudent.cu.cc:5000/jqconfirmlogin?id=%s\"" % ('test')
-    body += ">Activate Account</a>"
+    subject = "Welcome to IlliniStudent"
+    body = "<b>Hello, user<br>"
+    body += "<a href=\"www.google.com\">google</a>"
 
     sm(body, subject, email)
 
