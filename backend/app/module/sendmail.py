@@ -12,13 +12,11 @@ def send_mail(message, subject, *email):
     if not message:
         raise InValidEmailError('No message passed')
 
-    subject = "\"%s\nContent-Type: text/html\"" % (subject)
     for mail in email:
         cmd = "echo \'%s\'" % (message)
-        cmd += " | "
-        cmd += "mail -s "
-        cmd += "%s " % (subject)
-        cmd += "%s" % (mail)
+        cmd += " | mail -s "
+        cmd += ' \"%s\nContent-Type: text/html\" ' % (subject)
+        cmd += "%s" % (email)
         # Sadly due to os.system, we lose error checking....
         print "SUBJECT\n%r" % (subject)
         print "CMD\n%r" % (cmd)
