@@ -25,13 +25,13 @@ def send_confirm(userin, emailin, passin, netidin, majorin, gradin):
     store_temp(userin, emailin, passwd_final, netidin, majorin, gradin, salt)
 
     # Creating the email message
-    subject = "Welcome to IlliniStudent!"
+    subject = "Welcome to IlliniStudent"
     body = "<b>Hello %s,</b><br>" % (userin)
     body += "Welcome to IlliniStudent! We are very happy to have you.<br>"
     body += "Please click the link below to activate your account.<br>"
     body += "We hope you enjoy this service!<br>"
     body += "<a href="
-    body += "\"illinistudent.cu.cc:5000/jqconfirmlogin?id=%s\"" % (salt)
+    body += "\"www.illinistudent.cu.cc:5000/jqconfirmlogin?id=%s\"" % (salt)
     body += ">Activate Account</a>"
 
     sm(body, subject, emailin)
@@ -80,8 +80,8 @@ def send_thank_you(email):
     subject = "Welcome to IlliniStudent"
     body = "<b>Hello, %s</b><br>" % ('username')
     body += "<p>Welcome to IlliniStudent! We hope you enjoy using our service.<br>"
-    body += "<p>Click the link below to activate your account."
-    body += "<a href=\"www.google.com\">google</a>"
+    body += "<p>Click the link below to activate your account.<br>"
+    body += "<a href=\"www.illinistudent.cu.cc:5000/jqconfirmlogin?id=lol\">ACTIVATE ACCOUNT</a>"
 
     sm(body, subject, email)
 
