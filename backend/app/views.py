@@ -282,6 +282,31 @@ def taskapi():
     link = "/jqtask?id=%s" % (authid)
     return redirect(link)
 
+@app.route('/edittask')
+# editing a task
+def edittask():
+    userid = request.args.get('id')
+    userin = login.login_jquery(userid)
+
+    quick_user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+
+    if authid is None:
+        return "bad authid"
+
+    old_assign = request.args.get("old_assign")
+    assignnm = request.args.get("new_assign")
+    classnm = request.args.get("class")
+    desc = request.args.get("desc")
+    due_d = request.args.get("dued")
+    due_t = request.args.get("duet")
+    tags = request.args.get("tags")
+
+    main.edit_task(quick_user, old_assign, assignnm,
+                   classnm, desc, due_d, due_t, tags)
+
+
 ####################
 # Schedule Related
 ####################

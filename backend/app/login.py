@@ -137,6 +137,10 @@ def reset_password(recover_id):
     access.edit("userinfo", "authid",
                 new_auth, "username", user[0][0])
 
+    access.delete("recovery",
+                  "recover_id",
+                  recover_id)
+
     reset_message(user[0][0], user[0][1], new_pass)
     return new_auth
 
