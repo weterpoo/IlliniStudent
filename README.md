@@ -128,3 +128,23 @@ Takes in:<br>
 Note: This is the quick way to delete test cases. This will be removed in the final
 release.<br>
 
+<br>
+```
+/jqconfirmuser
+```
+Takes in:<br>
+	  - \*id: the id that the user will send to you<br>
+<br>
+```
+/jqresetpassword
+```
+	- email: the user's email<br>
+	- netid: the user's netid<br>
+Note: Please send at least one of the email or the netid. Both is fine, but would<br>
+prefer to give the user a email or a netid option to recover the email<br>
+
+<br>
+```
+/jqconfirmpassword
+```
+	- *id: the user's recovery_id that they will send you
