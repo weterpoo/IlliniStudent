@@ -26,7 +26,13 @@
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js">   </script>
     
-    <script>
+    
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    // page is now ready, initialize the calendar...
+        
     var nameb=Cookies.get('name');
     var namedb=JSON.parse(name);
     var ab=JSON.parse(Cookies.get('user'));
@@ -42,14 +48,6 @@
                 console.log(objcb);
             }
         console.log(arrb);
-    </script>
-    
-    
-    
-    <script type="text/javascript">
-    $(document).ready(function() {
-
-    // page is now ready, initialize the calendar...
 
     $('#calendar').fullCalendar({
         // put your options and callbacks here
