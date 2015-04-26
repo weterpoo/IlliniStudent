@@ -140,6 +140,20 @@ def jqconfirmlogin():
 
     return return_json_task()
 
+@app.route('/jqresetpassword')
+def jqresetpassword():
+    email = request.args.get('email')
+    netid = request.args.get('netid')
+
+    global authid
+    authid = login.recover_login(email, netid)
+    return return_json_task()
+
+@app.route('/jqconfirmpassword')
+def jqconfirmpassword():
+    recover_id = request.args.get('id')
+    login.reset_password(recover_id)
+
 
 @app.route('/jqaddtask')
 def jqaddtask():
