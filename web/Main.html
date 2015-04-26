@@ -202,8 +202,8 @@ function Refresh()
         $.ajax({
             contentType: "application/json",
             type: "GET",
-            url: "http://illinistudent.cu.cc:5000/jqlogin",
-            data:{user: "test", pass: "test"},
+            url: "http://illinistudent.cu.cc:5000/jqtask",
+            data:{id: authid},
             async: true,
         success:function(data)
         {
