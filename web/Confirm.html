@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<script src="js/js.cookie.js"></script>
+<script>
+    function getUrlVars()
+    {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+</script>
+<script>
+    function confirm(){
+        var getid = getUrlVars().id;
+        $.ajax({
+            // dataType:"jsonp",
+            contentType: "application/json",
+            async: true,
+            type: "GET",
+            url: "http://illinistudent.cu.cc:5000/jqconfirmuser",
+            data:{id:getid},
+
+
+            success:function(data) {
+                document.getElementById("confirm1").setAttribute('style','visibility:hidden');
+                document.getElementById("about1").setAttribute('style','visibility:hidden'');
+                var got = data;
+                console.log(cool);
+                if (data == "Error -1: No user found") {
+                    window.alert("Try registering again");
+                }
+                else if (data == "Error -2: Multiple users found") {
+                    window.alert("Contact SHITaro Ikeda");
+                }
+                else {
+                    document.getElementById("confirm1").setAttribute('style','visibility:visibile');
+                    document.getElementById("about1").setAttribute('style','visibility:visibile');
+                }
+            }
+    })
+    }
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>illiniStudent-about</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/flatlybootstrap.css">
+</head>
+
+<body onload = 'confirm()'>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="Home.html">illiniStudent</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="About.html">About</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="Resources.html">Resources</a></li>
+            </ul>
+        </div>
+</nav>
+
+<div class="jumbotron", align="center">
+
+    <div class="container">
+        <h1 id="confirm1">Your email have been confirmed!</h1>
+        <h2 id="about1">You are officially confirmed with illiniStudent, you may now log in.</h2>
+    </div>
+</div>
+
+
+
+</body>
+</html>
