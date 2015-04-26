@@ -92,7 +92,16 @@ Takes in:<br>
 ```
 /jqedittask
 ```
-<em>This is not finished, Derek is working on it</em>
+Takes in: <br>
+	  - \*id: the user's authid
+	  - \*old_assign: the old assignment name
+	  - new_assign: the new assignment name
+	  - class: the new class
+	  - desc: the new description
+	  - dued: the new due date
+	  - duet: the new due time
+	  - tags: the new tags
+Note: only the old assignment name is required. Otherwise pass in the things that changed
 
 <br>
 <br>
