@@ -152,7 +152,7 @@ Takes in: <br>
 	- email: the user's email<br>
 	- netid: the user's netid<br>
 Note: Please send at least one of the email or the netid. Both is fine, but would<br>
-prefer to give the user a email or a netid option to recover the email<br>
+prefer to give the user a email or a netid option to recover the password<br>
 
 <br>
 ```
