@@ -62,23 +62,13 @@ def create_login(un, ue, up, uid, um, ug):
                       ('due_date', 'DATE'), ('due_time', 'TIME'),
                       ('tags', 'VARCHAR(256)')
                       )
-    access.create_new(table2, ('class', 'VARCHAR(128) NOT NULL'),
-                      ('monday_start', 'TIME'),
-                      ('monday_end', 'TIME'),
-                      ('tuesday_start', 'TIME'),
-                      ('tuesday_end', 'TIME'),
-                      ('wednesday_start', 'TIME'),
-                      ('wednesday_end', 'TIME'),
-                      ('thursday_start', 'TIME'),
-                      ('thursday_end', 'TIME'),
-                      ('friday_start', 'TIME'),
-                      ('friday_end', 'TIME'),
-                      ('saturday_start', 'TIME'),
-                      ('saturday_end', 'TIME'),
-                      ('sunday_start', 'TIME'),
-                      ('sunday_end', 'TIME'),
-                      ('class_start', 'DATE'),
-                      ('class_end', 'DATE')
+    access.create_new(table2, ('class', 'VARCHAR(64) NOT NULL'),
+                      ('days', 'VARCHAR(17)'),
+                      ('day_start', 'DATE'),
+                      ('day_end', 'DATE'),
+                      ('time_start', 'TIME'),
+                      ('time_end', 'TIME'),
+                      ('room_id', 'VARCHAR(20)')
                       )
     return login(un, up)
 
@@ -148,6 +138,7 @@ def reset_password(recover_id):
                 new_auth, "username", user[0][0])
 
     reset_message(user[0][0], user[0][1], new_pass)
+    return new_auth
 
 def reset_message(username, useremail, new_pass):
     subject = "IlliniStudent New Password for %s" % (username)
