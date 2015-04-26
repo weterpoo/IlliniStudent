@@ -138,8 +138,18 @@
     
      
     
-
+<div class="container" id="rblock">
 <div id="tasks"></div>
+    
+<div class="form-group">
+    <input class="form-control" type="text" placeholder="Task Name" id="taskName"></input>
+    <input class="form-control" type="text" placeholder="Description" id="description"></input>
+    <input class="form-control" type="text" placeholder="Due Date YYYY-MM-DD" id="dueD"></input>
+    <input class="form-control" type="text" placeholder="Due Time HH:MM:SS" id="dueT"></input>
+    <button type="button" id="addtask" class="btn btn-success btn-block" onclick="AddTask(); Refresh();">Add Task</button>
+</div>
+</div>
+            
     
  <script type="text/javascript">
      var name=Cookies.get('name');
@@ -160,6 +170,52 @@
         items: arr
   
     });</script>
+
+<script>
+function AddTask()
+        {
+            var authid=auth;
+            var taskName=$("#taskName").val();
+            var description=$("#description").val();
+            var dueD=$("#dueD").val();
+            var dueT=$("#dueT").val();
+            $.ajax({
+                contentType: "application/json",
+                type: "GET",
+                url: "http://illinistudent.cu.cc:5000/jqaddtask",
+                data:{id:authid, assign:taskName, desc: description, dued:dueD, duet:dueT},
+                async: true
+           
+              
+                
+            });
+           
+        }
+        
+</script>
+
+
+<script>
+function Refresh()
+    {
+        var authid=auth;
+        $.ajax({
+            contentType: "application/json",
+            type: "GET",
+            url: "http://illinistudent.cu.cc:5000/jqlogin",
+            data:{user: "test", pass: "test"},
+            async: true,
+        success:function(data)
+        {
+             Cookies.json=true;
+             Cookies.set('user', data, {path: '/'});
+            console.log(Cookies.get('user'));
+             window.location.href="Main.html";
+        }
+        });
+    }
+
+</script>
 
     
     

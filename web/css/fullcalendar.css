@@ -23,10 +23,12 @@ body .fc { /* extra precedence to overcome jqui */
     display:inline-block;
 }
 
-#tasks{
+#rblock{
     width: 50%;
     float:right;
 }
+
+
 
 
 /* Colors
