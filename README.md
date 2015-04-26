@@ -37,13 +37,13 @@ aren't supposed to), which is why we have this guide!
 /jqlogin
 ```
 Takes in:<br>
-      - *user: the username of the user<br>
-      - *pass: the password of the user<br>
+      - \*user: the username of the user<br>
+      - \*pass: the password of the user<br>
       - nothing: parameter to determine if the user likes to eat pies.<br>
 <br>
-The stars (*) means that the columns are required. If you don't pass them in, there
+The stars (\*) means that the columns are required. If you don't pass them in, there
 will be an error passed back to you. How you handle it is up to you.
-However, if there is no star (*) and the user doesn't put anything in the column, don't
+However, if there is no star (\*) and the user doesn't put anything in the column, don't
 send any query! That means that if the user made the MyUserName account, the query
 should look like the above.
 
@@ -56,8 +56,8 @@ should look like the above.
 /jqlogin
 ```
 Takes in:<br>
-      - *user: the username of the user. password should not contain special symbols<br>
-      - *pass: the password of the user. right now it should be in plain text.<br>
+      - \*user: the username of the user. password should not contain special symbols<br>
+      - \*pass: the password of the user. right now it should be in plain text.<br>
 Note: This is not the preferred method for logging in. See /jqaddtask for more details.<br>
 <br>
 <br>
@@ -65,10 +65,10 @@ Note: This is not the preferred method for logging in. See /jqaddtask for more d
 /jqcreatelogin
 ```
 Takes in:<br>
-      - *user: the username of the user. Should not contain special symbols.<br>
-      - *pass: the password of the user. Should be in plaintext<br>
-      - *email: the user's email. Make sure that it exists.<br>
-      - *netid: the user's netid.<br>
+      - \*user: the username of the user. Should not contain special symbols.<br>
+      - \*pass: the password of the user. Should be in plaintext<br>
+      - \*email: the user's email. Make sure that it exists.<br>
+      - \*netid: the user's netid.<br>
       - major: the user's current major.<br>
       - grad: the user's graduation date.<br>
 
@@ -79,11 +79,11 @@ Takes in:<br>
 /jqaddtask
 ```
 Takes in:<br>
-      - *id: the user's authentication id. It is returned in json as auth_id<br>
-      - *assign: Assignment/activity name<br>
+      - \*id: the user's authentication id. It is returned in json as auth_id<br>
+      - \*assign: Assignment/activity name<br>
       - class: Class name. If there is none, it defaults to "Personal"<br>
       - desc: Description. If there is none, it defaults to a blank string.<br>
-      - *dued: Due Date. Please send it in YYYY-MM-DD format.<br>
+      - \*dued: Due Date. Please send it in YYYY-MM-DD format.<br>
       - duet: Due Time. Please send it in as HH:MM:SS.<br>
       - tags: Tags that the user may specify. Defaults to a blank string.<br>
 
@@ -100,7 +100,7 @@ Takes in:<br>
 /jqtask
 ```
 Takes in:<br>
-      - *id: The user's auth_id.<br>
+      - \*id: The user's auth_id.<br>
 Note: This is the preferred method for obtaining user information, or "logging in".<br>
 
 <br>
@@ -115,7 +115,7 @@ Note: This is the preferred method for obtaining user information, or "logging i
 /jqsadboys
 ```
 Takes in:<br>
-      - *id: The user's auth_id.<br>
+      - \*id: The user's auth_id.<br>
 Note: This deletes the user. We're sad they have to leave.<br>
 
 <br>
@@ -124,7 +124,7 @@ Note: This deletes the user. We're sad they have to leave.<br>
 /quickdel
 ```
 Takes in:<br>
-      - *user: the username<br>
+      - \*user: the username<br>
 Note: This is the quick way to delete test cases. This will be removed in the final
 release.<br>
 
