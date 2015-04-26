@@ -133,7 +133,7 @@ def jqconfirmlogin():
     userid = request.args.get('id')
 
     if not userid:
-        return "id required"
+        return "login_id required"
 
     global authid
     authid = mail.check_id(userid)

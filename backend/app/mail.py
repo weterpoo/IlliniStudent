@@ -31,7 +31,7 @@ def send_confirm(userin, emailin, passin, netidin, majorin, gradin):
     body += "Please click the link below to activate your account.<br>"
     body += "We hope you enjoy this service!<br>"
     body += "<a href="
-    body += "\"www.illinistudent.cu.cc:5000/jqconfirmlogin?id=%s\"" % (salt)
+    body += "\"illinistudent.cu.cc/confirm.html?id=%s\"" % (salt)
     body += ">Activate Account</a>"
 
     sm(body, subject, emailin)
@@ -71,15 +71,16 @@ def check_id(idin):
     user = login.create_login(userinfo[0][0], userinfo[0][1], userinfo[0][2],
                               userinfo[0][3], userinfo[0][4], userinfo[0][5])
 
-    send_thank_you(userinfo[0][1])
+    access.delete("temp", "username", userinfo[0][0])
 
+    send_thank_you(userinfo[0][1], userinfo[0][0])
 
     return user[1]
 
 
-def send_thank_you(email):
+def send_thank_you(email, username):
     subject = "Welcome to IlliniStudent"
-    body = "<b>Hello, %s</b><br>" % ('username')
+    body = "<b>Hello, %s</b><br>" % (username)
     body += "<p>Welcome to IlliniStudent! We hope you enjoy using our service.<br>"
     body += "<p>Click the link below to activate your account.<br>"
     body += "<a href=\"illinistudent.cu.cc\">ACTIVATE ACCOUNT</a>"
