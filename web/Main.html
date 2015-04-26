@@ -26,6 +26,26 @@
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js">   </script>
     
+    <script>
+    var nameb=Cookies.get('name');
+    var namedb=JSON.parse(name);
+    var ab=JSON.parse(Cookies.get('user'));
+    var arrb=new Array();
+     for (var j=0; j<ab[namedb].length;j++)
+            {
+                var objab=ab[namedb][j].assign_name;
+                var objbb=ab[namedb][j].description;
+                var objcb=ab[namedb][j].due_date;
+                var objdb=ab[namedb][j].due_time;
+                var calen={title: objab, start: objcb};
+                arrb[j]=calen;
+                console.log(objcb);
+            }
+        console.log(arrb);
+    </script>
+    
+    
+    
     <script type="text/javascript">
     $(document).ready(function() {
 
@@ -39,16 +59,7 @@
             right:'month,agendaWeek,agendaDay'
         },
         
-        events:[
-            {
-                title:'CS125 MP4',
-                start:'2015-03-09'
-            },
-            {
-                title:'CS125 MP5',
-                start:'2015-04-13'
-            }
-        ]
+        events: arrb
         
         
     })
