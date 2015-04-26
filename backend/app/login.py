@@ -149,6 +149,15 @@ def reset_password(recover_id):
 
     reset_message(user[0][0], user[0][1], new_pass)
 
+def reset_message(username, useremail, new_pass):
+    subject = "IlliniStudent New Password for %s" % (username)
+    message = "Hello, %s<br>" % (username)
+    message += "Your password has been reset to %s<br>" % (new_pass)
+    message += "You can login using this password now.<br>"
+    message += "Thank you for using IlliniStudent."
+
+    sm(message, subject, useremail)
+
 # Encryption Handlers
 def generate_salt():
     num = random.randint(7, 10)

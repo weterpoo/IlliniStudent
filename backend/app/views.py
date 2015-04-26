@@ -119,6 +119,14 @@ def jqcreatelogin():
                        netidin, majorin, gradin)
     return "Registered Successfully!"
 
+@app.route('/jqconfirmuser')
+def jqconfirmuser():
+    """Confirms the user using jquery"""
+    input_id = request.args.get('id')
+    global authid
+    authid = mail.check_id(input_id)
+
+    return return_json_task()
 
 @app.route('/jqconfirmlogin')
 def jqconfirmlogin():
