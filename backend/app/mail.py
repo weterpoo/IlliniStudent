@@ -31,7 +31,7 @@ def send_confirm(userin, emailin, passin, netidin, majorin, gradin):
     body += "Please click the link below to activate your account.<br>"
     body += "We hope you enjoy this service!<br>"
     body += "<a href="
-    body += "\"illinistudent.cu.cc/confirm.html?id=%s\"" % (salt)
+    body += "\"illinistudent.cu.cc/Confirm.html?id=%s\"" % (salt)
     body += ">Activate Account</a>"
 
     sm(body, subject, emailin)
@@ -82,8 +82,8 @@ def send_thank_you(email, username):
     subject = "Welcome to IlliniStudent"
     body = "<b>Hello, %s</b><br>" % (username)
     body += "<p>Welcome to IlliniStudent! We hope you enjoy using our service.<br>"
-    body += "<p>Click the link below to activate your account.<br>"
-    body += "<a href=\"illinistudent.cu.cc\">ACTIVATE ACCOUNT</a>"
+    body += "<p>Click the link below to login!<br>"
+    body += "<a href=\"illinistudent.cu.cc\">Login</a>"
 
     sm(body, subject, email)
 
