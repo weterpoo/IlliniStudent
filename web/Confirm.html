@@ -17,30 +17,31 @@
 </script>
 <script>
     function confirm(){
-        var getid = getUrlVars().id;
+        document.getElementById("confirm1").setAttribute('style','visibility:hidden');
+        document.getElementById("about1").setAttribute('style','visibility:hidden');
+        var getid = getUrlVars();
         $.ajax({
             // dataType:"jsonp",
             contentType: "application/json",
             async: true,
             type: "GET",
-            url: "http://illinistudent.cu.cc:5000/jqconfirmuser",
-            data:{id:getid},
+            url: "http://illinistudent.cu.cc:5000/confirmfromemail",
+            data:{id:getid.id},
 
 
             success:function(data) {
-                document.getElementById("confirm1").setAttribute('style','visibility:hidden');
-                document.getElementById("about1").setAttribute('style','visibility:hidden'');
                 var got = data;
-                console.log(cool);
-                if (data == "Error -1: No user found") {
-                    window.alert("Try registering again");
-                }
-                else if (data == "Error -2: Multiple users found") {
-                    window.alert("Contact SHITaro Ikeda");
-                }
-                else {
+                console.log(got);
+                if (data == "success") {
                     document.getElementById("confirm1").setAttribute('style','visibility:visibile');
                     document.getElementById("about1").setAttribute('style','visibility:visibile');
+                    document.getElementById("confirm2").setAttribute('style','display:none');
+                }
+                else if (data == "Error -1: No user found") {
+                    alert("Try registering again");
+                }
+                else (data == "Error -2: Multiple users found"){
+                    alert("Contact SHITaro Ikeda");
                 }
             }
     })
@@ -80,6 +81,7 @@
 <div class="jumbotron", align="center">
 
     <div class="container">
+        <h2 id="confirm2">There was an error confirming your email, please check it again.</h2>
         <h1 id="confirm1">Your email have been confirmed!</h1>
         <h2 id="about1">You are officially confirmed with illiniStudent, you may now log in.</h2>
     </div>
