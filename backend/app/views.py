@@ -124,7 +124,7 @@ def jqauthidlogin():
     """Confirms the user using jquery"""
     input_id = request.args.get('id')
     global authid
-    authid = mail.check_id(input_id)
+    authid = login.login_jquery(input_id)
 
     return return_json_task()
 
