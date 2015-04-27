@@ -4,20 +4,20 @@
     android:layout_height="match_parent"
     android:background="#4183D7">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Will eventually have websites that are helpful to the student"
-        android:id="@+id/textView6"
-        android:textSize="40dp"
-        android:textColor="#ffffff"
-        android:layout_centerVertical="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Home"
         android:id="@+id/button7"
-        android:layout_below="@+id/textView6"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <WebView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/webView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/button7" />
 </RelativeLayout>
