@@ -153,28 +153,35 @@ def reset_message(username, useremail, new_pass):
 
     sm(message, subject, useremail)
 
-def change_password(new_pass, auth_id):
+def change_password(old_pass, new_pass, auth_id):
     access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
     cond = "auth_id = \'%s\'" % (auth_id)
     user = access.find("userinfo",
-                       ('username', 'useremail'),
+                       ('username', 'useremail', 'userpass'),
                 cond)
 
-    new_pass = generate_salt()
-    new_encrypt = pwd_context.encrypt(new_pass)    
+    if not old_pass == new_pass:
+        return "Wrong password"
+
+    new_encrypt = pwd_context.encrypt(new_pass)
     access.edit("userinfo", "userpass",
                 new_encrypt, "username", user[0][0])
-    new_auth = generate_salt()
-    new_auth = pwd_context(user[0][0]+user[0][1]+new_auth)
+    new_auth = generate_encrypt_id(user[0][0], new_pass)
     access.edit("userinfo", "authid",
                 new_auth, "username", user[0][0])
 
-    access.delete("recovery",
-                  "recover_id",
-                  recover_id)
-
-    reset_message(user[0][0], user[0][1], new_pass)
+    change_message(user[0][0], user[0][1])
     return new_auth
+
+def change_message(username, useremail):
+    subject = "IlliniStudent: Changed Password"
+    message = "Hello, %s<br>" % (username)
+    message += "This is an automated message saying you have"
+    message += " changed your password.<br>"
+    message += "If this was not you, reset your password immediately.<br>"
+    message += "Thank you."
+    sm(message, subject, useremail)
+
 # Encryption Handlers
 def generate_salt():
     num = random.randint(7, 10)

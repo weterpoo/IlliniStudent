@@ -149,6 +149,15 @@ def jqresetpassword():
     authid = login.recover_login(email, netid)
     return return_json_task()
 
+@app.route('/jqchangepassword')
+def jqchangepassword():
+    userin = request.args.get('id')
+    new_pass = request.args.get('new_pass')
+    old_pass = request.args.get('old_pass')
+
+    return login.change_password(old_pass, new_pass, userin)
+
+
 @app.route('/jqconfirmpassword')
 def jqconfirmpassword():
     recover_id = request.args.get('id')
