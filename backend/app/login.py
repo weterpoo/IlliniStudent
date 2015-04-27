@@ -153,6 +153,28 @@ def reset_message(username, useremail, new_pass):
 
     sm(message, subject, useremail)
 
+def change_password(new_pass, auth_id):
+    access = mt('localhost', 'authorized', 'aCep0ted0dd', 'studentdb')
+    cond = "auth_id = \'%s\'" % (auth_id)
+    user = access.find("userinfo",
+                       ('username', 'useremail'),
+                cond)
+
+    new_pass = generate_salt()
+    new_encrypt = pwd_context.encrypt(new_pass)    
+    access.edit("userinfo", "userpass",
+                new_encrypt, "username", user[0][0])
+    new_auth = generate_salt()
+    new_auth = pwd_context(user[0][0]+user[0][1]+new_auth)
+    access.edit("userinfo", "authid",
+                new_auth, "username", user[0][0])
+
+    access.delete("recovery",
+                  "recover_id",
+                  recover_id)
+
+    reset_message(user[0][0], user[0][1], new_pass)
+    return new_auth
 # Encryption Handlers
 def generate_salt():
     num = random.randint(7, 10)
