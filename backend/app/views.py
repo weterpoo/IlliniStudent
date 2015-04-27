@@ -239,7 +239,7 @@ def jqdeletetask():
         return "no task name"
 
     main.delete_task(userin.get("username"), deletetask)
-    return return_json_task
+    return return_json_task()
 
 
 ##############################
