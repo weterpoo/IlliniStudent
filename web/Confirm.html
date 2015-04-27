@@ -30,8 +30,8 @@
 
 
             success:function(data) {
-                var got = data;
-                console.log(got);
+
+                console.log(data);
                 if (data == "success") {
                     document.getElementById("confirm1").setAttribute('style','visibility:visibile');
                     document.getElementById("about1").setAttribute('style','visibility:visibile');
@@ -40,7 +40,7 @@
                 else if (data == "Error -1: No user found") {
                     alert("Try registering again");
                 }
-                else (data == "Error -2: Multiple users found"){
+                else {
                     alert("Contact SHITaro Ikeda");
                 }
             }
