@@ -58,6 +58,9 @@ def edit_task(user, old_assign, assignnm, classnm, desc, due_d, due_t, tags):
     access.insert(user, assignnm, classnm, desc,
                          due_d, due_t, tags)
 
+def delete_task(user, task_name):
+    access.delete(user, "assign_name", task_name)
+
 
 ##################################################################################
 #

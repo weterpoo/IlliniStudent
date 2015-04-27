@@ -206,8 +206,40 @@ def jqaddtask():
 
 @app.route('/jqedittask')
 def jqedittask():
-    mesg = request.args.get('msg')
-    return mesg
+    userid = request.args.get('id')
+    userin = login.login_jquery(userid)
+
+    quick_user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+
+    if authid is None:
+        return "bad authid"
+
+    old_assign = request.args.get("old_assign")
+    assignnm = request.args.get("new_assign")
+    classnm = request.args.get("class")
+    desc = request.args.get("desc")
+    due_d = request.args.get("dued")
+    due_t = request.args.get("duet")
+    tags = request.args.get("tags")
+
+    main.edit_task(quick_user, old_assign, assignnm,
+                   classnm, desc, due_d, due_t, tags)
+
+@app.route('/jqdeletetask')
+def jqdeletetask():
+    userid = request.args.get('id')
+    deletetask = request.args.get('name')
+    userin = login.login_jquery(userid)
+
+    if userin is None:
+        return "bad id"
+    if deletetask is None:
+        return "no task name"
+
+    main.delete_task(userin.get("username"), deletetask)
+    return return_json_task
 
 
 ##############################
@@ -224,20 +256,10 @@ def jqtask():
 @app.route('/jqschedule')
 # Handles automated schedule fetching
 def jqschedule():
-    authid = request.args.get('id')
-    userin = login.login_jquery(authid)
-
-    global user
-    user = userin.get("username")
     global authid
-    authid = userin.get("authid")
+    authid = request.args.get('id')
 
-    if user:
-        dictout = main.getapi_schedule(user)
-        dictout.update({"authid": authid})
-        return json.dumps(dictout, default=date_handler)
-    else:
-        return "Error: no id found"
+    return return_json_schedule()
 
 ##################################################################################
 # DANGER ZONE!
@@ -376,6 +398,23 @@ def return_json_task():
 
     if user:
         dictout = main.getapi_task(user)
+        dictout.update({"authid": authid})
+        data = json.dumps(dictout, default=date_handler)
+        resp = Response(response=data, status=200, mimetype="application/json")
+        return resp
+    else:
+        return "Error: no id found"
+
+def return_json_schedule():
+    userin = login.login_jquery(authid)
+
+    global user
+    user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+
+    if user:
+        dictout = main.getapi_schedule(user)
         dictout.update({"authid": authid})
         data = json.dumps(dictout, default=date_handler)
         resp = Response(response=data, status=200, mimetype="application/json")
