@@ -157,6 +157,10 @@
     <input class="form-control" type="text" placeholder="Due Time HH:MM:SS" id="dueT"></input>
     <button type="button" id="addtask" class="btn btn-success btn-block" onclick="AddTask(); Refresh();">Add Task</button>
 </div>
+
+<div class="form-group">
+    <input class="form-control" type="text" placeholder="Name of Task to Delete" id="taskDelName"></input>
+    <button type="button" id="deletetask" class="btn btn-danger btn-block" onclick="DeleteTask(); Refresh();">Delete Task</button>
 </div>
             
     
@@ -221,6 +225,22 @@ function Refresh()
             console.log(Cookies.get('user'));
              window.location.href="Main.html";
         }
+        });
+    }
+
+</script>
+
+<script>
+function DeleteTask()
+    {
+        var authid=auth;
+        var taskDelName=$("#taskDelName").val();
+        $.ajax({
+            contentType: "application/json",
+            type: "GET",
+            url: "http://illinistudent.cu.cc:5000/jqdeletetask",
+            data:{id:authid, name: taskDelName},
+            async: true
         });
     }
 
