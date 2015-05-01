@@ -36,6 +36,32 @@ def add_task(u_name, u_assign, u_class, u_desc, u_dued, u_duet,
     access.insert(u_name, u_assign, u_class, u_desc, u_dued, u_duet,
                   u_tags)
 
+def edit_task(user, old_assign, assignnm, classnm, desc, due_d, due_t, tags):
+    cond = "assign_name = \'%s\'" %(assignnm)
+    task = access.find(user, ('assign_name', 'class_name',
+                       'description', 'due_date',
+                       'due_time', 'tags'), cond)
+    if assignnm is None:
+        assignnm = task[0][0]
+    if classnm is None:
+        classnm = task[0][1]
+    if desc is None:
+        desc = task[0][2]
+    if due_d is None:
+        due_d = task[0][3]
+    if due_t is None:
+        due_t = task[0][4]
+    if tags is None:
+        tags = task[0][5]
+
+    access.delete(user, "assign_name", old_assign)
+    access.insert(user, assignnm, classnm, desc,
+                         due_d, due_t, tags)
+
+def delete_task(user, task_name):
+    access.delete(user, "assign_name", task_name)
+
+
 ##################################################################################
 #
 # Schedule handling

@@ -58,7 +58,7 @@ def index():
 def testmail():
     email = str(request.args.get('email'))
     mail.send_email_to(email)
-    return "%r" % email 
+    return "%r" % email
 ###############################################################################
 # jquery related things go down here
 ###############################################################################
@@ -115,15 +115,54 @@ def jqcreatelogin():
         not (gradin.find('-') == 4)):
         return "grad is not in the right format."
 
-    user = login.create_login(userin, emailin, passin,
+    mail.send_confirm(userin, emailin, passin,
                        netidin, majorin, gradin)
-    if type(user) == str:
-        return user
+    return "Registered Successfully!"
 
+@app.route('/jqauthidlogin')
+def jqauthidlogin():
+    """Confirms the user using jquery"""
+    input_id = request.args.get('id')
     global authid
-    authid = user[1]
+    authid = login.login_jquery(input_id)
 
     return return_json_task()
+
+@app.route('/confirmfromemail')
+def confirmfromemail():
+    userid = request.args.get('id')
+
+    if not userid:
+        return "login_id required"
+
+    global authid
+    authid = mail.check_id(userid)
+
+    return "success"
+
+@app.route('/jqresetpassword')
+def jqresetpassword():
+    email = request.args.get('email')
+    netid = request.args.get('netid')
+
+    global authid
+    authid = login.recover_login(email, netid)
+    return return_json_task()
+
+@app.route('/jqchangepassword')
+def jqchangepassword():
+    userin = request.args.get('id')
+    new_pass = request.args.get('new_pass')
+    old_pass = request.args.get('old_pass')
+
+    return login.change_password(old_pass, new_pass, userin)
+
+
+@app.route('/jqconfirmpassword')
+def jqconfirmpassword():
+    recover_id = request.args.get('id')
+    login.reset_password(recover_id)
+
 
 @app.route('/jqaddtask')
 def jqaddtask():
@@ -156,14 +195,14 @@ def jqaddtask():
     if not u_dued:
         return "dued is required"
     elif (not (len(u_dued) == 10) or
-        not (u_dued.rfind('-') == 7) or
-        not (u_dued.find('-') == 4)):
+          not (u_dued.rfind('-') == 7) or
+          not (u_dued.find('-') == 4)):
         return "dued is not valid (needs YYYY-MM-DD)"
     if not u_duet:
         u_duet = "00:00:00"
     elif (not (len(u_duet) == 8) or
-        not (u_duet.rfind('-') == 5) or
-        not (u_duet.find('-') == 2)):
+          not (u_duet.rfind(':') == 5) or
+          not (u_duet.find(':') == 2)):
         return "duet is not valid (needs HH:MM:SS)"
     if not u_tags:
         u_tags = ""
@@ -173,10 +212,45 @@ def jqaddtask():
 
     return return_json_task()
 
+
 @app.route('/jqedittask')
 def jqedittask():
-    mesg = request.args.get('msg')
-    return mesg
+    userid = request.args.get('id')
+    userin = login.login_jquery(userid)
+
+    quick_user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+
+    if authid is None:
+        return "bad authid"
+
+    old_assign = request.args.get("old_assign")
+    assignnm = request.args.get("new_assign")
+    classnm = request.args.get("class")
+    desc = request.args.get("desc")
+    due_d = request.args.get("dued")
+    due_t = request.args.get("duet")
+    tags = request.args.get("tags")
+
+    main.edit_task(quick_user, old_assign, assignnm,
+                   classnm, desc, due_d, due_t, tags)
+
+
+@app.route('/jqdeletetask')
+def jqdeletetask():
+    userid = request.args.get('id')
+    deletetask = request.args.get('name')
+    userin = login.login_jquery(userid)
+
+    if userin is None:
+        return "bad id"
+    if deletetask is None:
+        return "no task name"
+
+    main.delete_task(userin.get("username"), deletetask)
+    return return_json_task()
+
 
 ##############################
 # jquery to obtain user data
@@ -189,27 +263,19 @@ def jqtask():
 
     return return_json_task()
 
+
 @app.route('/jqschedule')
 # Handles automated schedule fetching
 def jqschedule():
-    authid = request.args.get('id')
-    userin = login.login_jquery(authid)
-
-    global user
-    user = userin.get("username")
     global authid
-    authid = userin.get("authid")
+    authid = request.args.get('id')
 
-    if user:
-        dictout = main.getapi_schedule(user)
-        dictout.update({"authid": authid})
-        return json.dumps(dictout, default=date_handler)
-    else:
-        return "Error: no id found"
+    return return_json_schedule()
 
-##################################################################################
+
+###############################################################################
 # DANGER ZONE!
-##################################################################################
+###############################################################################
 @app.route('/jqsadboys')
 # Deletes the user. Good bye :(
 def jqsadboys():
@@ -217,15 +283,16 @@ def jqsadboys():
     userin = login.login_jquery(authid)
     return login.delete_user(userin.get("username"))
 
+
 @app.route('/quickdel')
 def quickdel():
     quick_user = request.args.get('user')
     return login.delete_user(quick_user)
-    
 
-##################################################################################
+
+###############################################################################
 # Manual, user inputted pages
-##################################################################################
+###############################################################################
 
 ####################
 # Task related
@@ -244,11 +311,38 @@ def taskview():
         flash("Log in before looking at tasks!")
         return redirect(url_for('index'))
 
+
 @app.route('/taskapi')
 # Get to the api manually
 def taskapi():
     link = "/jqtask?id=%s" % (authid)
     return redirect(link)
+
+
+@app.route('/edittask')
+# editing a task
+def edittask():
+    userid = request.args.get('id')
+    userin = login.login_jquery(userid)
+
+    quick_user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+
+    if authid is None:
+        return "bad authid"
+
+    old_assign = request.args.get("old_assign")
+    assignnm = request.args.get("new_assign")
+    classnm = request.args.get("class")
+    desc = request.args.get("desc")
+    due_d = request.args.get("dued")
+    due_t = request.args.get("duet")
+    tags = request.args.get("tags")
+
+    main.edit_task(quick_user, old_assign, assignnm,
+                   classnm, desc, due_d, due_t, tags)
+
 
 ####################
 # Schedule Related
@@ -308,6 +402,7 @@ def time_to_string(s):
 
     return ("%s:%s:%s" % (hours_str, minutes_str, seconds_str))
 
+
 def return_json_task():
     userin = login.login_jquery(authid)
 
@@ -318,6 +413,23 @@ def return_json_task():
 
     if user:
         dictout = main.getapi_task(user)
+        dictout.update({"authid": authid})
+        data = json.dumps(dictout, default=date_handler)
+        resp = Response(response=data, status=200, mimetype="application/json")
+        return resp
+    else:
+        return "Error: no id found"
+
+def return_json_schedule():
+    userin = login.login_jquery(authid)
+
+    global user
+    user = userin.get("username")
+    global authid
+    authid = userin.get("authid")
+
+    if user:
+        dictout = main.getapi_schedule(user)
         dictout.update({"authid": authid})
         data = json.dumps(dictout, default=date_handler)
         resp = Response(response=data, status=200, mimetype="application/json")
