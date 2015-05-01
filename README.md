@@ -3,7 +3,7 @@
 Terminal:
 To run the script you must have three arguments
 ```
-/python scrapeHW.py <File Name>  <Site Url>
+/python scrapeHW.py <File Name> <Site Url>
 ```
 File Name: AnyNameYouWant.json
 
