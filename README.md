@@ -9,7 +9,7 @@ To run the script you must have three arguments
 ```
 File Name: AnyNameYouWant.json
 
-Site Url: it only works for the follow websites
+Site Url: it only works for the following
 http://www.math.uiuc.edu/~schenck/M241S15_files/schedule2.html#current
 https://courses.physics.illinois.edu/phys212/syllabus.asp
 https://courses.physics.illinois.edu/phys214/sp2015/syllabus.asp
