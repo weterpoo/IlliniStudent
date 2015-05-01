@@ -104,6 +104,14 @@ Takes in: <br>
 Note: only the old assignment name is required. Otherwise pass in the things that changed<br>
 
 <br>
+```
+/jqdeletetask
+```
+Takes in: <br>
+	  - \*id: user's authid<br>
+	  - \*name: the task name that was inputted<br>
+
+<br>
 <br>
 ```
 /jqtask

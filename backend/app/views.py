@@ -236,6 +236,7 @@ def jqedittask():
     main.edit_task(quick_user, old_assign, assignnm,
                    classnm, desc, due_d, due_t, tags)
 
+
 @app.route('/jqdeletetask')
 def jqdeletetask():
     userid = request.args.get('id')
@@ -262,6 +263,7 @@ def jqtask():
 
     return return_json_task()
 
+
 @app.route('/jqschedule')
 # Handles automated schedule fetching
 def jqschedule():
@@ -270,9 +272,10 @@ def jqschedule():
 
     return return_json_schedule()
 
-##################################################################################
+
+###############################################################################
 # DANGER ZONE!
-##################################################################################
+###############################################################################
 @app.route('/jqsadboys')
 # Deletes the user. Good bye :(
 def jqsadboys():
@@ -280,15 +283,16 @@ def jqsadboys():
     userin = login.login_jquery(authid)
     return login.delete_user(userin.get("username"))
 
+
 @app.route('/quickdel')
 def quickdel():
     quick_user = request.args.get('user')
     return login.delete_user(quick_user)
-    
 
-##################################################################################
+
+###############################################################################
 # Manual, user inputted pages
-##################################################################################
+###############################################################################
 
 ####################
 # Task related
@@ -307,11 +311,13 @@ def taskview():
         flash("Log in before looking at tasks!")
         return redirect(url_for('index'))
 
+
 @app.route('/taskapi')
 # Get to the api manually
 def taskapi():
     link = "/jqtask?id=%s" % (authid)
     return redirect(link)
+
 
 @app.route('/edittask')
 # editing a task
