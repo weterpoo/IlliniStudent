@@ -48,9 +48,9 @@
                 else
                 {var calen={title: objab, start: objcb+"T"+objdb+"-06:00"};}
                 arrb[j]=calen;
-                console.log(objcb);
+               // console.log(objcb);
             }
-        console.log(arrb);
+       // console.log(arrb);
 
     $('#calendar').fullCalendar({
         // put your options and callbacks here
@@ -80,26 +80,26 @@
     {
         //alert("Hello");
        // window.location.href="Home.html";
-        console.log(Cookies.get());
+       // console.log(Cookies.get());
         //alert("Hello!");
         window.location.href="Home.html";
     }
         else
         {
             var b=Cookies.get('user');
-            console.log(Cookies.get('user'));
+            //console.log(Cookies.get('user'));
             var auth=JSON.parse(Cookies.get('user')).authid;
-            console.log(auth);
+            //console.log(auth);
             var time=JSON.parse(Cookies.get('user')).TIME.UPDATED;
-            console.log(time);
+            //console.log(time);
             var event=JSON.parse(Cookies.get('user')).IlliniTester;
-            console.log(event);
-            console.log(Cookies.get('name'));
+            //console.log(event);
+            //console.log(Cookies.get('name'));
             var name=Cookies.get('name');
             var named=JSON.parse(name);
             var a=JSON.parse(Cookies.get('user'));
-            console.log(a);
-            console.log(a[named]);
+            //console.log(a);
+            //console.log(a[named]);
             var arr=new Array();
             for (var i=0; i<a[named].length;i++)
             {
@@ -110,7 +110,7 @@
                // console.log(obj);
                 
             }
-            console.log(arr);
+            //console.log(arr);
         }
         
     </script>
@@ -233,7 +233,7 @@ function Refresh()
         {
              Cookies.json=true;
              Cookies.set('user', data, {path: '/'});
-            console.log(Cookies.get('user'));
+            //console.log(Cookies.get('user'));
              window.location.href="Main.html";
         }
         });
