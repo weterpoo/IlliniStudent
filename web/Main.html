@@ -43,7 +43,10 @@
                 var objbb=ab[namedb][j].description;
                 var objcb=ab[namedb][j].due_date;
                 var objdb=ab[namedb][j].due_time;
-                var calen={title: objab, start: objcb};
+                if(objdb=="00:00:00")
+                {var calen={title: objab, start: objcb};}
+                else
+                {var calen={title: objab, start: objcb+"T"+objdb+"-06:00"};}
                 arrb[j]=calen;
                 console.log(objcb);
             }
@@ -174,7 +177,10 @@
                 var objb=a[named][i].description;
                 var objc=a[named][i].due_date;
                 var objd=a[named][i].due_time;
-                var assign={title: obj+' - '+objb+ ' - Due: '+objc+ ' - At: '+objd, done: false};
+                if(objd == "00:00:00")
+                {var assign={title: obj+' - '+objb+ ' - Due: '+objc, done: false};}
+                else
+                {var assign={title: obj+' - '+objb+ ' - Due: '+objc+ ' - At: '+objd, done: false};}
                 arr[i]=assign;
                 
             }
