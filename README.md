@@ -1,6 +1,8 @@
 #IlliniStudent
 <em>How use the scraping script</em>
+
 Terminal:
+
 To run the script you must have three arguments
 ```
 /python scrapeHW.py <File Name> <Site Url>
