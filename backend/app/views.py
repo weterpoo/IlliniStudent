@@ -201,8 +201,8 @@ def jqaddtask():
     if not u_duet:
         u_duet = "00:00:00"
     elif (not (len(u_duet) == 8) or
-          not (u_duet.rfind('-') == 5) or
-          not (u_duet.find('-') == 2)):
+          not (u_duet.rfind(':') == 5) or
+          not (u_duet.find(':') == 2)):
         return "duet is not valid (needs HH:MM:SS)"
     if not u_tags:
         u_tags = ""
