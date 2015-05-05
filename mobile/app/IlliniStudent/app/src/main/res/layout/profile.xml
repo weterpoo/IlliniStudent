@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#4183D7">
+    android:background="#FFB300">
 
     <TextView
         android:layout_width="wrap_content"
@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
-        android:textSize="24dp" />
+        android:textSize="32dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -19,33 +19,109 @@
         android:text="Home"
         android:id="@+id/button12"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="74dp" />
+        android:layout_alignStart="@+id/textView12" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username:"
         android:id="@+id/textView13"
+        android:layout_marginTop="70dp"
         android:layout_below="@+id/textView12"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="65dp" />
+        android:textColor="#4183D7"
+        android:textSize="22dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NetId:"
         android:id="@+id/textView14"
-        android:layout_below="@+id/textView13"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="71dp" />
+        android:layout_below="@+id/textView15"
+        android:layout_alignEnd="@+id/textView15"
+        android:layout_marginTop="45dp"
+        android:textColor="#4183D7"
+        android:textSize="22dp" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Grad Year:"
+        android:text="Email:"
         android:id="@+id/textView15"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/textView17"
+        android:layout_alignEnd="@+id/textView15"
+        android:layout_marginTop="45dp"
+        android:textColor="#4183D7"
+        android:textSize="22dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView16"
+        android:layout_alignBottom="@+id/textView13"
+        android:layout_alignEnd="@+id/textView12" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView17"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/textView13"
+        android:layout_alignParentStart="true"
+        android:text="Grad Year:"
+        android:textColor="#4183D7"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Major"
+        android:id="@+id/textView18"
+        android:layout_below="@+id/textView14"
+        android:layout_alignEnd="@+id/textView15"
+        android:layout_marginTop="45dp"
+        android:textColor="#4183D7"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView19"
+        android:layout_alignTop="@+id/textView17"
+        android:layout_alignStart="@+id/textView16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView20"
+        android:layout_above="@+id/textView14"
+        android:layout_alignStart="@+id/textView19" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView21"
+        android:layout_above="@+id/textView18"
+        android:layout_alignStart="@+id/textView20" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView22"
+        android:layout_alignTop="@+id/textView18"
+        android:layout_alignStart="@+id/textView21" />
+
 
 </RelativeLayout>

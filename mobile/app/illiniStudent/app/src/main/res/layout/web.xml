@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4183D7">
+    android:background="#FFB300">
 
     <Button
         android:layout_width="wrap_content"
@@ -12,12 +12,92 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <WebView
+    <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/webView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/button7" />
+        android:text="Piazza"
+        android:id="@+id/radioButton"
+        android:checked="false"
+        android:layout_above="@+id/radioButton2"
+        android:layout_alignStart="@+id/radioButton2"
+        android:textColor="#4183D7"
+        android:textSize="22dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Compass/Blackboard"
+        android:id="@+id/radioButton2"
+        android:checked="false"
+        android:layout_above="@+id/radioButton3"
+        android:layout_alignStart="@+id/radioButton3"
+        android:textSize="22dp"
+        android:textColor="#4183D7" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enterprise"
+        android:id="@+id/radioButton3"
+        android:checked="false"
+        android:layout_above="@+id/radioButton4"
+        android:layout_alignStart="@+id/radioButton4"
+        android:textColor="#4183D7"
+        android:textSize="22dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Moodle"
+        android:id="@+id/radioButton4"
+        android:checked="false"
+        android:layout_alignStart="@+id/radioButton5"
+        android:layout_above="@+id/radioButton5"
+        android:textSize="22dp"
+        android:textColor="#4183D7" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LON-CAPA"
+        android:id="@+id/radioButton5"
+        android:checked="false"
+        android:layout_above="@+id/radioButton6"
+        android:layout_alignEnd="@+id/button7"
+        android:textColor="#4183D7"
+        android:textSize="22dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WebAssign"
+        android:id="@+id/radioButton6"
+        android:checked="false"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/radioButton5"
+        android:textColor="#4183D7"
+        android:textSize="22dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ALEKS"
+        android:id="@+id/radioButton7"
+        android:checked="false"
+        android:layout_below="@+id/radioButton6"
+        android:layout_alignStart="@+id/radioButton6"
+        android:textSize="22dp"
+        android:textColor="#4183D7" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:id="@+id/radioButton8"
+        android:checked="false"
+        android:layout_below="@+id/radioButton7"
+        android:layout_alignStart="@+id/radioButton7"
+        android:textColor="#4183D7"
+        android:textSize="22dp" />
+
 </RelativeLayout>

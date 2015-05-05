@@ -1,10 +1,9 @@
 package com.example.jessicamedintz.illinistudent;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-//import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,18 +26,22 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+
         date = (TextView) findViewById(R.id.dateView);
 
         long d = System.currentTimeMillis();
 
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd, yyyy");
         String dateString = sdf.format(d);
-        date.setText(dateString);
+        date.setText(dateString);//sets the current date onto the app
 
         tasksB = (ImageButton) findViewById(R.id.ImageButton1);
         tasksB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Tasks.class);
+                Intent i = new Intent(MainActivity.this,Tasks.class);//once clicked will change to the task layout.Allows the pages to be chnaged
                 startActivity(i);
 
             }
@@ -47,7 +50,7 @@ public class MainActivity extends Activity {
         calB = (ImageButton) findViewById(R.id.ImageButton2);
         calB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Cal.class);
+                Intent i = new Intent(MainActivity.this,Cal.class);//once clicked will change to the cal layout.Allows the pages to be chnaged
                 startActivity(i);
 
             }
@@ -56,7 +59,7 @@ public class MainActivity extends Activity {
         webB = (ImageButton) findViewById(R.id.ImageButton4);
         webB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Web.class);
+                Intent i = new Intent(MainActivity.this,Web.class);//once clicked will change to the web layout.Allows the pages to be chnaged
                 startActivity(i);
 
             }
@@ -65,7 +68,7 @@ public class MainActivity extends Activity {
         professorsB = (ImageButton) findViewById(R.id.ImageButton5);
         professorsB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Professors.class);
+                Intent i = new Intent(MainActivity.this,Professors.class);//once clicked will change to the professors layout.Allows the pages to be chnaged
                 startActivity(i);
 
             }
@@ -74,7 +77,7 @@ public class MainActivity extends Activity {
         schedB = (ImageButton) findViewById(R.id.ImageButton3);
         schedB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Schedule.class);
+                Intent i = new Intent(MainActivity.this,Schedule.class);//once clicked will change to the schedule layout.Allows the pages to be chnaged
                 startActivity(i);
 
             }
@@ -83,7 +86,7 @@ public class MainActivity extends Activity {
         settingsB = (ImageButton) findViewById(R.id.ImageButton6);
         settingsB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Settings.class);
+                Intent i = new Intent(MainActivity.this,Settings.class);//once clicked will change to the settings layout.Allows the pages to be chnaged
                 startActivity(i);
 
             }
@@ -92,13 +95,11 @@ public class MainActivity extends Activity {
         profile = (ImageButton) findViewById(R.id.ImageButton7);
         profile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Profile.class);
+                Intent i = new Intent(MainActivity.this,Profile.class);//once clicked will change to the profile layout.Allows the pages to be chnaged
                 startActivity(i);
 
             }
         });
-        ServerRequest sr = new ServerRequest();
-        //sr.sendJSON();
     }
 
 

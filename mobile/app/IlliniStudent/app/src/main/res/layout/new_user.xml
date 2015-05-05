@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4183D7"
+    android:background="#FFB300"
     android:id="@+id/user">
 
     <TextView
@@ -14,7 +14,7 @@
         android:textSize="24dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:textColor="#FFB300" />
+        android:textColor="#4183D7" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
         android:text="Password"
         android:id="@+id/textView5"
         android:textSize="24dp"
-        android:textColor="#FFB300"
+        android:textColor="#4183D7"
         android:layout_below="@+id/editText"
         android:layout_alignStart="@+id/textView9" />
 
@@ -32,7 +32,7 @@
         android:text="NetId"
         android:id="@+id/textView7"
         android:textSize="24dp"
-        android:textColor="#FFB300"
+        android:textColor="#4183D7"
         android:layout_alignBottom="@+id/editText10"
         android:layout_marginBottom="-5dp"
         android:layout_alignEnd="@+id/textView3" />
@@ -82,7 +82,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textSize="42dp"
-        android:textColor="#ffffff" />
+        android:textColor="#4183D7" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:text="Grad Year"
         android:id="@+id/textView9"
-        android:textColor="#FFB300"
+        android:textColor="#4183D7"
         android:textSize="24dp"
         android:layout_below="@+id/editText6"
         android:layout_alignEnd="@+id/textView10" />
@@ -109,7 +109,7 @@
         android:text="Major"
         android:id="@+id/textView10"
         android:textSize="24dp"
-        android:textColor="#FFb300"
+        android:textColor="#4183D7"
         android:layout_alignBottom="@+id/editText8"
         android:layout_alignStart="@+id/textView7" />
 
@@ -128,7 +128,7 @@
         android:text="Email"
         android:id="@+id/textView11"
         android:textSize="24dp"
-        android:textColor="#FFB300"
+        android:textColor="#4183D7"
         android:layout_centerVertical="true"
         android:layout_alignEnd="@+id/textView5" />
 

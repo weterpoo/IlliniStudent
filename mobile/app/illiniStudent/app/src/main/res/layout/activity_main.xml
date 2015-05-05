@@ -63,8 +63,8 @@
         android:layout_row="3"
         android:layout_column="6"
         android:layout_gravity="right|top"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/ImageButton5" />
+        android:layout_alignStart="@+id/ImageButton5"
+        android:layout_above="@+id/ImageButton7" />
 
     <ImageButton
         android:id="@+id/ImageButton2"
@@ -110,6 +110,6 @@
         android:layout_height="wrap_content"
         android:src = "@drawable/profile8"
         android:background="@android:color/transparent"
-        android:layout_above="@+id/ImageButton3"
-        android:layout_alignEnd="@+id/dateView" />
+        android:layout_above="@+id/ImageButton5"
+        android:layout_alignEnd="@+id/ImageButton1" />
 </RelativeLayout>

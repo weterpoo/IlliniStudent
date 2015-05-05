@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/settings"
-    android:background="#4183D7">
+    android:background="#FFB300">
 
     <Button
         android:layout_width="wrap_content"

@@ -67,7 +67,10 @@ public class Tasks extends Activity {
         tSpec.setIndicator("Tasks");
         thost.addTab(tSpec);
 
-        addTasks("Phys 211 Midterm Review","4/21/2015","Phys 211","can't fail this midterm");
+        addTasks("Submit Video","2015-05-03","Personal","CS196");
+        populate();
+
+        addTasks("Presentation", "2015-05-05", "Personal", "CS196");
         populate();
 
         /*result = st.getTasksAlreadyCreated();
@@ -77,7 +80,7 @@ public class Tasks extends Activity {
         result = result.substring(d.length() +1);
         String c = result;
 
-        addTasks(a.toString(),d.toString(),c.toString(),"need to pass");
+        addTasks(a.toString(),d.toString(),"CS196","need to pass");
         populate();*/
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +135,12 @@ public class Tasks extends Activity {
     private void addTasks(String name, String date, String subject, String description){
         myTasks.add(new TaskClass(name, date, subject, description));
 
-
+        UploadTaks up = new UploadTaks();
+        try {
+            up.sendTasks();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
