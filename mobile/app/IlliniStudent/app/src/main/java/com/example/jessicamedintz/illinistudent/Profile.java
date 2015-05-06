@@ -32,10 +32,11 @@ public class Profile  extends Activity {
         });
 
         e1 = (EditText) findViewById(R.id.editText);//gets the new user username
-        t1 = (TextView) findViewById(R.id.textView14);
-        t1.setText(e1.getText());//sets the text box for the username with what is passed in
+        t1 = (TextView) findViewById(R.id.textView16);
+        //t1.setText(e1.getText());//sets the text box for the username with what is passed in
+        t1.setText("admin");
 
-        e2 = (EditText) findViewById(R.id.editText9);//gets the new user grad year
+        /*e2 = (EditText) findViewById(R.id.editText9);//gets the new user grad year
         t2 = (TextView) findViewById(R.id.textView19);
         t2.setText(e2.getText());//sets the grad year
 
@@ -49,7 +50,7 @@ public class Profile  extends Activity {
 
         e5 = (EditText) findViewById(R.id.editText10);//gets the new user major
         t5 = (TextView) findViewById(R.id.textView21);
-        t5.setText(e5.getText());//sets the major
+        t5.setText(e5.getText());//sets the major*/
 
     }
 }

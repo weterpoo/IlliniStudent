@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#FFB300">
+    android:background="#FFB300"
+    android:id="@+id/">
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,7 +92,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:id="@+id/textView19"
         android:layout_alignTop="@+id/textView17"
         android:layout_alignStart="@+id/textView16" />
@@ -100,7 +100,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:id="@+id/textView20"
         android:layout_above="@+id/textView14"
         android:layout_alignStart="@+id/textView19" />
@@ -109,19 +108,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:id="@+id/textView21"
         android:layout_above="@+id/textView18"
         android:layout_alignStart="@+id/textView20" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textView22"
-        android:layout_alignTop="@+id/textView18"
-        android:layout_alignStart="@+id/textView21" />
 
 
 </RelativeLayout>

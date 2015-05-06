@@ -36,7 +36,7 @@
                     <CheckBox
                         android:layout_width="330dp"
                         android:layout_height="50dp"
-                        android:text="Task 1"
+                        android:text="Presentation"
                         android:id="@+id/checkBox"
                         android:checked="false" />
 
@@ -51,7 +51,7 @@
                     <CheckBox
                         android:layout_width="330dp"
                         android:layout_height="50dp"
-                        android:text="Task 2"
+                        android:text="Submit Video"
                         android:id="@+id/checkBox2"
                         android:checked="false" />
 
@@ -62,22 +62,6 @@
                         android:text="Detail"
                         android:id="@+id/button2"
                         android:layout_gravity="center_horizontal" />
-
-                    <CheckBox
-                        android:layout_width="330dp"
-                        android:layout_height="50dp"
-                        android:text="Task 3"
-                        android:id="@+id/checkBox3"
-                        android:checked="false" />
-
-                    <Button
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="fill_parent"
-                        android:layout_height="35dp"
-                        android:text="Detail"
-                        android:id="@+id/button3"
-                        android:layout_gravity="center_horizontal" />
-
 
 
                 </LinearLayout>

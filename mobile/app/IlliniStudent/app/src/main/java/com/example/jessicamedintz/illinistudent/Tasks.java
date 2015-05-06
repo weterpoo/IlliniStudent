@@ -90,8 +90,8 @@ public class Tasks extends Activity {
                 populate();
 
 
-
                 Toast.makeText(getApplicationContext(), "Task has been added!", Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -129,18 +129,18 @@ public class Tasks extends Activity {
         ArrayAdapter<TaskClass> adapter = new TaskListAdapter();
         taskView.setAdapter(adapter);
 
-
-    }
-
-    private void addTasks(String name, String date, String subject, String description){
-        myTasks.add(new TaskClass(name, date, subject, description));
-
         UploadTaks up = new UploadTaks();
         try {
             up.sendTasks();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+    }
+
+    private void addTasks(String name, String date, String subject, String description){
+        myTasks.add(new TaskClass(name, date, subject, description));
 
 
     }

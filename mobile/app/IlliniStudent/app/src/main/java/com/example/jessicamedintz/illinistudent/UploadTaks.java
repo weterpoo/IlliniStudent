@@ -23,7 +23,7 @@ import static java.lang.System.out;
 public class UploadTaks extends Activity
 {
     EditText e1, e2, e3, e4;
-    static String a,d,c,des;
+    static String a,d,c,des,id;
 
     // Buffer to readUrl. I think you can also use this to create users, since that also returns a json array
     private static String readUrl(String urlString) throws Exception {
@@ -92,10 +92,13 @@ static class Page {
         d = e2.getText().toString();
         c = e3.getText().toString();
         des = e4.getText().toString();
+        id = "$6$rounds=105845$xdT9IytYZTn7nURD$N/XLRlXD6.QPVA6mu2cdbZTMudIHKHV1UbvKyPBhpQH1ZIix7IC1qyFa4KOZa4Xg8FOKUAelUZtNYK0F3ph.6/";
 
         try {
+
+
             String json = readUrl("http://illinistudent.cu.cc:5000/" +
-                    "jqaddtask?assign_name=" + a.toString() + "&due_date=" + d.toString() + "&class_name=" + c.toString() + "&description=" + des.toString());
+                    "jqaddtask?assign=" + a.toString() + "&dued=" + d.toString() + "&class=" + c.toString() + "&desc=" + des.toString() + "id=" + id.toString());
 
             Gson gson = new Gson();
             Page page = gson.fromJson(json, Page.class);
